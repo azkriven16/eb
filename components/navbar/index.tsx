@@ -5,7 +5,6 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  Link,
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
@@ -13,18 +12,17 @@ import {
 import { Button } from "../ui/button";
 import AnimatedTabs from "./tabs";
 import Logo from "../logo";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuItems = ["Home", "Works", "Bio"];
-
+  const router = useRouter();
+  console.log(isMenuOpen);
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen} isBlurred={false}>
       <NavbarContent>
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        />
         <NavbarBrand className="space-x-2">
           <Logo />
         </NavbarBrand>
@@ -35,26 +33,24 @@ export default function App() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <Button variant="default">Contact me</Button>
+          <Link href="#contact">
+            <Button variant="default">Contact me</Button>
+          </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2
-                  ? "primary"
-                  : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
-              className="w-full"
-              href="#"
+            <Button
+              onClick={() => {
+                setIsMenuOpen(true);
+                router.push(`#${item.toLocaleLowerCase()}`);
+              }}
               size="lg"
+              variant="ghost"
             >
               {item}
-            </Link>
+            </Button>
           </NavbarMenuItem>
         ))}
       </NavbarMenu>
