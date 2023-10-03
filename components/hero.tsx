@@ -2,10 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import { Social } from "@/constants/social";
+import { useState } from "react";
 import Typewriter from "typewriter-effect";
-import Image from "next/image";
-
 export default function Hero() {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <section
       id="home"
@@ -41,12 +42,29 @@ export default function Hero() {
       </div>
 
       <div className="w-1/2 md:w-2/3">
-        <Image
-          alt="Hero Image"
-          src="/laptop-guy.svg"
-          height={500}
-          width={500}
-        />
+        <div
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className="relative"
+        >
+          {isHovered ? (
+            <img
+              alt="Hero Image"
+              src={"/laptop-error.svg"}
+              height={500}
+              width={500}
+              className="transition duration-300 ease-in-out transform hover:scale-105"
+            />
+          ) : (
+            <img
+              alt="Hero Image"
+              src={"/laptop-guy.svg"}
+              height={500}
+              width={500}
+              className="transition duration-300 ease-in-out transform hover:scale-105"
+            />
+          )}
+        </div>
       </div>
     </section>
   );
