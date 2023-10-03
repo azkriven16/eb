@@ -26,6 +26,7 @@ export default function Hero() {
               strings: [
                 "Greetings, fellow sapiens! 💻😄",
                 "Welcome to my portfolio! 🌐👨‍💻",
+                "Im glad your here! 🤗",
               ],
               autoStart: true,
               loop: true,

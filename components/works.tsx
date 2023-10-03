@@ -15,7 +15,7 @@ import { Projects } from "@/constants/projects";
 
 export default function Works() {
   return (
-    <section className="p-5 md:p-10 space-y-5">
+    <section className="p-5 md:p-10 space-y-5 mt-5 md:mt-10">
       <div className="flex w-full flex-col">
         <h1 className="font-semibold text-xl md:text-2xl whitespace-nowrap">
           Skills
@@ -30,7 +30,7 @@ export default function Works() {
               </div>
             }
           >
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 pt-2 pb-20">
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 pt-2 pb-10 md:pb-20">
               {Frontend.map((skill) => (
                 <Card
                   key={skill.text}
