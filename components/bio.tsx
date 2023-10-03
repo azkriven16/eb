@@ -14,10 +14,7 @@ export default function Bio() {
       <p>
         During my career, I've had the opportunity to work with several
         companies that follow agile methodologies in their development
-        processes.
-      </p>
-      <p>
-        This experience has provided me with valuable insights into
+        processes. This experience has provided me with valuable insights into
         collaborative and adaptive software development practices.
       </p>
       <p>
