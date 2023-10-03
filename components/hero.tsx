@@ -1,5 +1,8 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin } from "lucide-react";
+import { Social } from "@/constants/social";
+import Typewriter from "typewriter-effect";
 import Image from "next/image";
 
 export default function Hero() {
@@ -16,15 +19,24 @@ export default function Hero() {
         <p className="text-md md:text-xl">
           Harnessing the Power of Coding to Build Seamless Web Applications
         </p>
-        <div className="flex gap-2 self-center md:self-start my-5">
-          <Button>
-            <Github className="mr-2 h-4 w-4" />
-            Github
-          </Button>
-          <Button variant="secondary">
-            <Linkedin className="mr-2 h-4 w-4" />
-            LinkedIn
-          </Button>
+        <p className="text-xs md:text-sm">
+          <Typewriter
+            options={{
+              strings: [
+                "Greetings, fellow sapiens! 💻😄",
+                "Welcome to my portfolio! 🌐👨‍💻",
+              ],
+              autoStart: true,
+              loop: true,
+            }}
+          />
+        </p>
+        <div className="flex gap-2 self-center md:self-start">
+          {Social.map((social) => (
+            <Button size="icon" variant="ghost">
+              <social.icon className="h-4 w-4" />
+            </Button>
+          ))}
         </div>
       </div>
 

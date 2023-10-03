@@ -44,7 +44,10 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="p-5 md:p-10 space-y-5 flex gap-10">
+    <section
+      id="contact"
+      className="p-5 md:p-10 space-y-5 flex flex-col md:flex-row gap-10"
+    >
       <div className="space-y-2 flex-1 mt-10">
         <h1 className="font-semibold text-xl md:text-2xl whitespace-nowrap">
           Let's Work Together

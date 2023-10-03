@@ -14,10 +14,10 @@ import AnimatedTabs from "./tabs";
 import Logo from "../logo";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { menuItems } from "@/constants/navItems";
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuItems = ["Home", "Works", "Bio"];
   const router = useRouter();
   console.log(isMenuOpen);
   return (
