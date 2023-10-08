@@ -25,7 +25,7 @@ export default function App() {
           <p className="hidden md:inline font-black font-sans text-xl">EUG.</p>
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <BiMenuAltLeft className="h-8 w-8" />
+              <BiMenuAltLeft className="h-8 w-8 inline md:hidden" />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuItem>
