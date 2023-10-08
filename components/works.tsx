@@ -9,9 +9,7 @@ import Skills from "./skills";
 
 export default function Works() {
   return (
-    <section className="p-5 md:p-10 space-y-5 mt-5 md:mt-10">
-      <Skills />
-
+    <section className="p-5 md:p-10 space-y-5" id="works">
       <h1 className="font-semibold text-xl md:text-2xl whitespace-nowrap pt-2">
         Works
       </h1>

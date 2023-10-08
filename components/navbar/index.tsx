@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import {
   Navbar,
   NavbarBrand,
@@ -12,7 +11,6 @@ import { Button } from "../ui/button";
 import AnimatedTabs from "./tabs";
 import Logo from "../logo";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { menuItems } from "@/constants/navItems";
 
 export default function App() {
@@ -32,9 +30,9 @@ export default function App() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <Link href="#contact">
+          <a href="#contact">
             <Button variant="default">Contact me</Button>
-          </Link>
+          </a>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
