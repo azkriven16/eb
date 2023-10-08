@@ -19,7 +19,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="flex flex-col md:flex-row items-center gap-5 md:gap-10 p-5 md:p-10"
+      className="flex flex-col md:flex-row items-center gap-5 md:gap-10 p-5 md:p-10 mt-10"
     >
       <div className="sm:w-3/4 md:w-2/3 text-center md:text-left flex flex-col gap-2 md:gap-5">
         <h1 className="font-bold text-3xl md:text-5xl whitespace-nowrap">
