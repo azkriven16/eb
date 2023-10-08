@@ -2,8 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import { Social } from "@/constants/social";
+import Link from "next/link";
 import { useState } from "react";
-import Typewriter from "typewriter-effect";
+import Terminal from "./terminal";
 export default function Hero() {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -25,27 +26,16 @@ export default function Hero() {
           Web Developer / <br />
           Software Engineer
         </h1>
-        <p className="text-md md:text-xl">
-          Harnessing the Power of Coding to Build Seamless Web Applications
-        </p>
-        <p className="text-xs md:text-sm">
-          <Typewriter
-            options={{
-              strings: [
-                "Greetings, fellow sapiens! 💻😄",
-                "Welcome to my portfolio! 🌐👨‍💻",
-                "Im glad your here! 🤗",
-              ],
-              autoStart: true,
-              loop: true,
-            }}
-          />
-        </p>
+
+        <Terminal />
+
         <div className="flex gap-2 self-center md:self-start">
           {Social.map((social) => (
-            <Button size="icon" variant="ghost">
-              <social.icon className="h-4 w-4" />
-            </Button>
+            <Link key={social.text} href={social.href} target="_blank">
+              <Button size="icon" variant="ghost">
+                <social.icon className="h-4 w-4" />
+              </Button>
+            </Link>
           ))}
         </div>
       </div>
