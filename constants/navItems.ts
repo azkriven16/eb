@@ -1,1 +1,1 @@
-export const menuItems = ["Home", "Works", "Bio"];
+export const menuItems = ["Home", "Works", "Bio", "Certificates"];

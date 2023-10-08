@@ -37,7 +37,7 @@ const certData = [
 
 export default function Certs() {
   return (
-    <section id="bio" className="p-5 md:p-10 space-y-5">
+    <section id="certs" className="p-5 md:p-10 space-y-5">
       <div className="my-10"></div>
       <div className="flex flex-col">
         <h1 className="font-semibold text-xl md:text-2xl whitespace-nowrap">

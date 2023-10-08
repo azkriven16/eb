@@ -1,27 +1,52 @@
-import { useState } from "react";
 import {
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  NavbarMenu,
+  Link,
   NavbarMenuItem,
+  NavbarMenu,
 } from "@nextui-org/react";
 import { Button } from "../ui/button";
 import AnimatedTabs from "./tabs";
-import Logo from "../logo";
-import { useRouter } from "next/navigation";
-import { menuItems } from "@/constants/navItems";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { BiMenuAltLeft } from "react-icons/bi";
 
 export default function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const router = useRouter();
-  console.log(isMenuOpen);
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} isBlurred={false}>
+    <Navbar>
       <NavbarContent>
-        <NavbarBrand className="space-x-2">
-          <Logo />
+        <NavbarBrand>
+          <p className="hidden md:inline font-black font-sans text-xl">EUG.</p>
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <BiMenuAltLeft className="h-8 w-8" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>
+                <Link href={`#home`}>Home</Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem>
+                <Link href={`#works`}>Works</Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem>
+                <Link href={`#bio`}>Bio</Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem>
+                <Link href={`#certs`}>Certs</Link>
+              </DropdownMenuItem>
+
+              <DropdownMenuItem></DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </NavbarBrand>
       </NavbarContent>
 
@@ -35,22 +60,6 @@ export default function App() {
           </a>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Button
-              onClick={() => {
-                setIsMenuOpen(true);
-                router.push(`#${item.toLocaleLowerCase()}`);
-              }}
-              size="lg"
-              variant="ghost"
-            >
-              {item}
-            </Button>
-          </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
     </Navbar>
   );
 }
