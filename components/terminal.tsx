@@ -22,7 +22,6 @@ export default function Terminal() {
                 "I'm excited to have you here! 🎉",
                 "Let's explore my work together! 🚀",
                 "Passionate about code and design. ❤️",
-                "Building web experiences since 2010. 🕒",
                 "Let's create something amazing! 🌟",
               ],
               autoStart: true,

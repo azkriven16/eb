@@ -15,6 +15,7 @@ import Logo from "../logo";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { menuItems } from "@/constants/navItems";
+import { motion } from "framer-motion";
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,9 +34,11 @@ export default function App() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <Link href="#contact">
-            <Button variant="default">Contact me</Button>
-          </Link>
+          <motion.div whileHover={{ scale: 1.1 }}>
+            <Link href="#contact">
+              <Button variant="default">Contact me</Button>
+            </Link>
+          </motion.div>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
