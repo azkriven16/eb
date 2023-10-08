@@ -7,6 +7,14 @@ import Typewriter from "typewriter-effect";
 export default function Hero() {
   const [isHovered, setIsHovered] = useState(false);
 
+  function getHeroImage() {
+    if (isHovered) {
+      return "/laptop-error.svg";
+    } else {
+      return "/laptop-guy.svg";
+    }
+  }
+
   return (
     <section
       id="home"
@@ -48,23 +56,13 @@ export default function Hero() {
           onMouseLeave={() => setIsHovered(false)}
           className="relative"
         >
-          {isHovered ? (
-            <img
-              alt="Hero Image"
-              src={"/laptop-error.svg"}
-              height={500}
-              width={500}
-              className="transition duration-300 ease-in-out transform hover:scale-105"
-            />
-          ) : (
-            <img
-              alt="Hero Image"
-              src={"/laptop-guy.svg"}
-              height={500}
-              width={500}
-              className="transition duration-300 ease-in-out transform hover:scale-105"
-            />
-          )}
+          <img
+            alt="Hero Image"
+            src={getHeroImage()}
+            height={500}
+            width={500}
+            className="transition duration-300 ease-in-out transform hover:scale-105"
+          />
         </div>
       </div>
     </section>
