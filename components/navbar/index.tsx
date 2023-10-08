@@ -5,7 +5,6 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
 } from "@nextui-org/react";
@@ -15,7 +14,6 @@ import Logo from "../logo";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { menuItems } from "@/constants/navItems";
-import { motion } from "framer-motion";
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -34,11 +32,9 @@ export default function App() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>
-          <motion.div whileHover={{ scale: 1.1 }}>
-            <Link href="#contact">
-              <Button variant="default">Contact me</Button>
-            </Link>
-          </motion.div>
+          <Link href="#contact">
+            <Button variant="default">Contact me</Button>
+          </Link>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
