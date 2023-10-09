@@ -27,24 +27,21 @@ export default function App() {
             <DropdownMenuTrigger>
               <BiMenuAltLeft className="h-8 w-8 inline md:hidden" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem>
-                <Link href={`#home`}>Home</Link>
-              </DropdownMenuItem>
+            <DropdownMenuContent className="ml-5">
+              <Link href={`#home`} className="w-full p-2">
+                Home
+              </Link>
+              <Link href={`#works`} className="w-full p-2">
+                Works
+              </Link>
 
-              <DropdownMenuItem>
-                <Link href={`#works`}>Works</Link>
-              </DropdownMenuItem>
+              <Link href={`#bio`} className="w-full p-2">
+                Bio
+              </Link>
 
-              <DropdownMenuItem>
-                <Link href={`#bio`}>Bio</Link>
-              </DropdownMenuItem>
-
-              <DropdownMenuItem>
-                <Link href={`#certs`}>Certs</Link>
-              </DropdownMenuItem>
-
-              <DropdownMenuItem></DropdownMenuItem>
+              <Link href={`#certs`} className="w-full p-2">
+                Certs
+              </Link>
             </DropdownMenuContent>
           </DropdownMenu>
         </NavbarBrand>
