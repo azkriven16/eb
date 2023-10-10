@@ -3,19 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { Social } from "@/constants/social";
 import Link from "next/link";
-import { useState } from "react";
 import Terminal from "./terminal";
 export default function Hero() {
-  const [isHovered, setIsHovered] = useState(false);
-
-  function getHeroImage() {
-    if (isHovered) {
-      return "/laptop-error.svg";
-    } else {
-      return "/laptop-guy.svg";
-    }
-  }
-
   return (
     <>
       <div id="home" className=" my-5 md:my-10 text-background">
@@ -42,14 +31,10 @@ export default function Hero() {
         </div>
 
         <div className="w-1/2 md:w-2/3">
-          <div
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            className="relative"
-          >
+          <div className="relative">
             <img
               alt="Hero Image"
-              src={getHeroImage()}
+              src={"/laptop-guy.svg"}
               height={500}
               width={500}
               className="transition duration-300 ease-in-out transform hover:scale-105"

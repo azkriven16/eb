@@ -1,39 +1,14 @@
 "use client";
 
+import { certData } from "@/constants/certs";
 import { Button } from "./ui/button";
-import { BiSolidFileHtml } from "react-icons/bi";
 import Link from "next/link";
-import { SiCreatereactapp } from "react-icons/si";
-import { TbBrandTypescript } from "react-icons/tb";
-import { RiJavascriptFill } from "react-icons/ri";
+
 interface certDataProps {
   href: string;
   icon: any;
   text: string;
 }
-
-const certData = [
-  {
-    href: "https://www.testdome.com/certificates/5faeb9a601474a2a906f712f40dfab6f",
-    icon: BiSolidFileHtml,
-    text: "HTML / CSS",
-  },
-  {
-    href: "https://www.testdome.com/certificates/530156ebb39f43c5a407bb157b414413",
-    icon: RiJavascriptFill,
-    text: "Javascript",
-  },
-  {
-    href: "https://www.testdome.com/certificates/b42958b8c828498782f72c304e0f7d24",
-    icon: TbBrandTypescript,
-    text: "Typescript",
-  },
-  {
-    href: "https://www.testdome.com/certificates/da2507e9432941068913931a9ce1dc47",
-    icon: SiCreatereactapp,
-    text: "React",
-  },
-];
 
 export default function Certs() {
   return (
