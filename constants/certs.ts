@@ -8,7 +8,12 @@ export const certData = [
   {
     href: "https://www.testdome.com/certificates/5faeb9a601474a2a906f712f40dfab6f",
     icon: BiSolidFileHtml,
-    text: "HTML / CSS",
+    text: "HTML",
+  },
+  {
+    href: "https://www.testdome.com/certificates/5faeb9a601474a2a906f712f40dfab6f",
+    icon: BiSolidFileHtml,
+    text: "CSS",
   },
   {
     href: "https://www.testdome.com/certificates/530156ebb39f43c5a407bb157b414413",

@@ -3,7 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { Social } from "@/constants/social";
 import Link from "next/link";
-import Terminal from "./terminal";
+import dynamic from "next/dynamic";
+
+// Dynamically import the Terminal component
+const Terminal = dynamic(() => import("./terminal"), {
+  ssr: false, // Disable server-side rendering for this component
+});
+
 export default function Hero() {
   return (
     <>
