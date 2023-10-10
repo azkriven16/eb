@@ -18,20 +18,16 @@ export default function Works() {
       <div className="grid grid-cols-1 gap-5 pt-2">
         {Projects.map((project) => (
           <Card key={project.text}>
-            <div className="flex flex-col md:flex-row p-5">
+            <div className="flex flex-col-reverse sm:flex-row p-5">
               <div className="flex-1 space-y-2 md:space-y-4">
                 {project.libs.map((lib) => (
-                  <Chip key={lib} size="sm" className="mr-2">
+                  <Chip key={lib} size="md" className="mr-2 hidden md:inline">
                     {lib}
                   </Chip>
                 ))}
-                <h3 className="font-bold text-2xl">Ani10</h3>
-                <p className="text-sm">
-                  Watching or streaming anime, it has the following features:
-                  searching for anime, watching episodes, and accessing detailed
-                  information about the anime series.
-                </p>
-                <div className="flex gap-5">
+                <h3 className="font-bold text-2xl">{project.text}</h3>
+                <p className="text-xs sm:text-sm">{project.description}</p>
+                <div className="flex flex-row gap-5">
                   <Link href={project.href} target="_blank">
                     <Button>
                       <BiLinkExternal className="mr-2 h-4 w-4" /> Live Site
@@ -45,14 +41,19 @@ export default function Works() {
                   </Link>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  Created at : 2021
+                  Year : {project.createdAt}
                 </p>
               </div>
-              <div className="flex items-center">
+              <div className="flex-1 flex items-center justify-end">
                 <img
-                  src={project.img}
+                  src={project.img2}
                   alt=""
-                  className="hidden md:block h-[220px] object-cover"
+                  className="hidden sm:block h-[220px] object-cover"
+                />
+                <img
+                  src={project.img1}
+                  alt=""
+                  className="block sm:hidden w-full object-cover"
                 />
               </div>
             </div>

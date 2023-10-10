@@ -5,7 +5,7 @@ export default function Bio() {
     <section id="bio" className="p-5 md:p-10 space-y-5">
       <div className="my-10"></div>
       <h1 className="font-semibold text-xl md:text-2xl whitespace-nowrap">
-        Bio
+        About Me
       </h1>
       <p>
         Hello, I'm <strong>Euger Bonete</strong>, a web developer with years of
