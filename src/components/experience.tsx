@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 
-import { Hero } from "./hero";
+// import { Hero } from "./hero";
+import { Hero2 } from "./hero2";
 
 export const Experience = () => {
   return (
@@ -15,9 +16,10 @@ export const Experience = () => {
           ease: [0.4, 0, 0.2, 1],
         },
       }}
-      className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center"
+      className="bg-black text-white"
     >
-      <Hero />
+      <Hero2 />
+      {/* <Hero /> */}
     </motion.div>
   );
 };
