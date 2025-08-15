@@ -2,12 +2,6 @@ import { motion } from "motion/react";
 import { ASSETS } from "../App";
 import { NumberTicker } from "./magicui/number-ticker";
 
-const urls = [
-  "https://picsum.photos/200/300?random=1",
-  //   "https://picsum.photos/200/300?random=2",
-  //   "https://picsum.photos/200/300?random=3",
-];
-
 interface Props {
   progress: number;
   loadedCount: number;
