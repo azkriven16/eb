@@ -68,12 +68,12 @@ export const Hero2 = () => {
         <div className="imagesdiv relative h-full w-full">
           <img
             className="absolute sky scale-[1.5] rotate-[-20deg] top-0 left-0 w-full h-full object-cover"
-            src="./images/sky.png"
+            src="/images/sky.png"
             alt=""
           />
           <img
             className="absolute scale-[1.8] rotate-[-3deg] bg top-0 left-0 w-full h-full object-cover"
-            src="./images/bg.png"
+            src="/images/bg.png"
             alt=""
           />
           <div className="text text-white flex flex-col gap-3 absolute top-20 left-1/2 -translate-x-1/2 scale-[1.4] rotate-[-10deg]">
@@ -84,7 +84,7 @@ export const Hero2 = () => {
 
           <img
             className="absolute object-cover md:object-contain character bottom-0 left-1/2 -translate-x-1/2 scale-[4] sm:scale-[5] md:scale-[3] rotate-[-20deg] md:-bottom-[25%] overflow-hidden max-w-[90vw] sm:max-w-[70vw] lg:max-w-[50vw]"
-            src={"./images/biblegirlsmall.png"}
+            src={"/images/biblegirlsmall.png"}
             alt=""
           />
         </div>
