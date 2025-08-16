@@ -30,7 +30,7 @@ export const Hero2 = () => {
 
     gsap.to(".character", {
       scale: is4kScreen ? 1.5 : 1,
-      x: "-50%",
+      x: "0%",
       bottom: isMobile ? "0%" : is4kScreen ? "0%" : "-25%",
       rotate: 0,
       duration: 2,
