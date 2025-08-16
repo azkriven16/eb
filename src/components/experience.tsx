@@ -1,7 +1,8 @@
 import { motion } from "motion/react";
 
 // import { Hero } from "./hero";
-import { Hero2 } from "./hero2";
+import { Hero } from "./hero";
+import { Header } from "./header";
 
 export const Experience = () => {
   return (
@@ -18,7 +19,8 @@ export const Experience = () => {
       }}
       className="bg-black text-white"
     >
-      <Hero2 />
+      <Header />
+      <Hero />
       <div className="h-[200vh]"></div>
       {/* <Hero /> */}
     </motion.div>

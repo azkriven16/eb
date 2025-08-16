@@ -2,9 +2,10 @@ import { AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
 import { Experience } from "./components/experience";
 import { Loader } from "./components/loader";
+import { Button } from "./components/ui/button";
 
 export const ASSETS = [
-  // "https://picsum.photos/200/300?random=1",
+  "https://eta.vgmtreasurechest.com/soundtracks/pokemon-ruby-sapphire-music-super-complete/feakhimw/1-05.%20Littleroot%20Town.mp3",
   "/images/sky.png",
   "/images/bg.png",
   "/images/biblegirlsmall.png",
@@ -31,7 +32,7 @@ export default function App() {
   const allImagesLoaded = loadedCount >= ASSETS.length;
 
   useEffect(() => {
-    handleContinue();
+    // handleContinue();
   }, [allImagesLoaded]);
 
   return (
@@ -47,6 +48,13 @@ export default function App() {
         )}
 
         {showExperience && <Experience key="experience" />}
+        <Button
+          disabled={!allImagesLoaded || progress !== 100}
+          className="absolute bottom-0 z-50"
+          onClick={handleContinue}
+        >
+          Continue
+        </Button>
       </AnimatePresence>
     </main>
   );
