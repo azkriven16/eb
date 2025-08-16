@@ -7,7 +7,6 @@ export const Header = () => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const [scrollDirection, setScrollDirection] = useState<"up" | "down">("up");
   const [isVisible, setIsVisible] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const lastScrollY = useRef(0);
@@ -16,12 +15,10 @@ export const Header = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Determine scroll direction
+      // Hide header when scrolling down, show when scrolling up
       if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-        setScrollDirection("down");
         setIsVisible(false);
       } else {
-        setScrollDirection("up");
         setIsVisible(true);
       }
 
