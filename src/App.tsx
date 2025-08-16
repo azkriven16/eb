@@ -5,8 +5,9 @@ import { Loader } from "./components/loader";
 
 export const ASSETS = [
   // "https://picsum.photos/200/300?random=1",
-  //   "https://picsum.photos/200/300?random=2",
-  //   "https://picsum.photos/200/300?random=3",
+  "/images/sky.png",
+  "/images/bg.png",
+  "/images/biblegirlsmall.png",
 ];
 
 export default function App() {
