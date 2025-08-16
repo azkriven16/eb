@@ -6,6 +6,8 @@ export const Hero2 = () => {
     useDeviceBreakpoints();
 
   useGSAP(() => {
+    if (!is4kScreen && !isLaptop && !isMobile && !isPc && !isTablet) return;
+
     gsap.to(".main", {
       scale: 1,
       rotate: 0,
@@ -51,8 +53,11 @@ export const Hero2 = () => {
     main?.addEventListener("mousemove", function (e: Event) {
       const mouseEvent = e as MouseEvent;
       const xMove = (mouseEvent.clientX / window.innerWidth - 0.5) * 10;
-      gsap.to(".main .text", {
-        x: `${xMove * 0.4}%`,
+      //   gsap.to(".main", {
+      //     x: `${xMove * 0.4}%`,
+      //   });
+      gsap.to(".text", {
+        x: `${xMove * 0.5}%`,
       });
       gsap.to(".sky", {
         x: xMove,
@@ -76,10 +81,9 @@ export const Hero2 = () => {
             src="/images/bg.png"
             alt=""
           />
-          <div className="text text-white flex flex-col gap-3 absolute top-20 left-1/2 -translate-x-1/2 scale-[1.4] rotate-[-10deg]">
-            <h1 className="text-9xl md:text-[10rem] lg:text-[15rem] xl:text-[16rem] leading-none">
-              WELCOME
-            </h1>
+          <div className="text text-white col-center gap-3 absolute inset-0 sm:top-10 left-1/2 right-1/2 scale-[1.4] rotate-[-10deg] font-bold uppercase text-7xl sm:text-7xl md:text-9xl lg:text-[10rem] xl:text-[15rem] 2xl:text-[20rem]">
+            <h1 className="">hello</h1>
+            <h1 className="">there</h1>
           </div>
 
           <img
