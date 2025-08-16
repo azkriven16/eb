@@ -1,6 +1,8 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useDeviceBreakpoints } from "../hooks/use-ismobile";
+import { Button } from "./ui/button";
+import CircularText from "./ui/CircularText/CircularText";
 export const Hero2 = () => {
   const { is4kScreen, isLaptop, isMobile, isPc, isTablet } =
     useDeviceBreakpoints();
@@ -58,6 +60,7 @@ export const Hero2 = () => {
       //   });
       gsap.to(".text", {
         x: `${xMove * 0.5}%`,
+        stagger: 0.5,
       });
       gsap.to(".sky", {
         x: xMove,
@@ -68,7 +71,7 @@ export const Hero2 = () => {
     });
   }, [is4kScreen, isLaptop, isMobile, isPc, isTablet]);
   return (
-    <div className="main w-full rotate-[-10deg] scale-[1.7]">
+    <div className="main w-full rotate-[-10deg] scale-[1.7] overflow-hidden">
       <div className="landing h-screen">
         <div className="imagesdiv relative h-full w-full">
           <img
@@ -81,17 +84,32 @@ export const Hero2 = () => {
             src="/images/bg.png"
             alt=""
           />
-          <div className="text text-white col-center gap-3 absolute inset-0 sm:top-10 left-1/2 right-1/2 scale-[1.4] rotate-[-10deg] font-bold uppercase text-7xl sm:text-7xl md:text-9xl lg:text-[10rem] xl:text-[15rem] 2xl:text-[20rem]">
-            <h1 className="">hello</h1>
-            <h1 className="">there</h1>
+          <div className="text text-[#ff6347] text-wrap flex flex-col justify-center absolute inset-0 scale-[1.4] rotate-[-10deg] font-bold uppercase h-screen">
+            <h1 className="block md:hidden text-[clamp(4rem,20vw,30rem)] font-bold text-center leading-none select-none">
+              welcome
+            </h1>
+            <h1 className="text-[clamp(4rem,20vw,30rem)] font-bold text-center leading-none select-none">
+              welcome
+            </h1>
+            <h1 className="text-[clamp(4rem,20vw,30rem)] font-bold text-center leading-none select-none">
+              welcome
+            </h1>
           </div>
-
           <img
             className="absolute object-cover md:object-contain character bottom-0 left-1/2 -translate-x-1/2 scale-[4] sm:scale-[5] md:scale-[3] rotate-[-20deg] md:-bottom-[25%] overflow-hidden max-w-[90vw] sm:max-w-[70vw] lg:max-w-[50vw]"
             src={"/images/biblegirlsmall.png"}
             alt=""
           />
         </div>
+        <div className="absolute bottom-0 md:bottom-10 left-0 md:left-10 z-10">
+          <CircularText
+            text="SCROLL*DOWN*PLEASE*"
+            onHover="speedUp"
+            spinDuration={20}
+            className="scale-50 md:scale-100"
+          />
+        </div>
+        <div className="btmbar text-white absolute bottom-0 left-0 w-full py-15 px-10 bg-gradient-to-t from-black to-transparent"></div>
       </div>
     </div>
   );

@@ -19,6 +19,7 @@ export const Experience = () => {
       className="bg-black text-white"
     >
       <Hero2 />
+      <div className="h-[200vh]"></div>
       {/* <Hero /> */}
     </motion.div>
   );

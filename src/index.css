@@ -129,6 +129,14 @@
   --shadow-opacity: var(--shadow-opacity);
   --color-shadow-color: var(--shadow-color);
   --color-destructive-foreground: var(--destructive-foreground);
+  @keyframes pulse {
+  0%, 100% {
+    boxShadow: 0 0 0 0 var(--pulse-color);
+    }
+  50% {
+    boxShadow: 0 0 0 8px var(--pulse-color);
+    }
+  }
 }
 
 :root {
