@@ -180,15 +180,15 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
           x: rect.left - cursorCenterX - borderWidth,
           y: rect.top - cursorCenterY - borderWidth,
         };
-        let trOffset = {
+        const trOffset = {
           x: rect.right - cursorCenterX + borderWidth - cornerSize,
           y: rect.top - cursorCenterY - borderWidth,
         };
-        let brOffset = {
+        const brOffset = {
           x: rect.right - cursorCenterX + borderWidth - cornerSize,
           y: rect.bottom - cursorCenterY + borderWidth - cornerSize,
         };
-        let blOffset = {
+        const blOffset = {
           x: rect.left - cursorCenterX - borderWidth,
           y: rect.bottom - cursorCenterY + borderWidth - cornerSize,
         };

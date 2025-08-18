@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Noise from "./components/ui/noise";
 import ClickSpark from "./components/ui/click-spark";
+import Noise from "./components/ui/noise";
 import TargetCursor from "./components/ui/target-cursor";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,14 +28,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Noise
-          patternSize={250}
-          patternScaleX={1}
-          patternScaleY={1}
-          patternRefreshInterval={2}
-          patternAlpha={15}
-        />
-        <TargetCursor spinDuration={2} hideDefaultCursor={true} />
         <ClickSpark
           sparkColor="#fff"
           sparkSize={10}
@@ -45,6 +37,14 @@ export default function RootLayout({
         >
           {children}
         </ClickSpark>
+        <Noise
+          patternSize={250}
+          patternScaleX={1}
+          patternScaleY={1}
+          patternRefreshInterval={2}
+          patternAlpha={15}
+        />
+        <TargetCursor spinDuration={2} hideDefaultCursor={true} />
       </body>
     </html>
   );
