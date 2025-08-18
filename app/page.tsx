@@ -1,5 +1,3 @@
-import Noise from "./components/ui/noise";
-
 export default function Page() {
   return (
     <div className="bg-red-500">
