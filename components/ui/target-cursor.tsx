@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import { gsap } from "gsap";
+import { useMediaQuery } from "react-responsive";
 
 export interface TargetCursorProps {
   targetSelector?: string;
@@ -342,6 +343,10 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
       });
     }
   }, [spinDuration]);
+
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+
+  if (isTabletOrMobile) return null;
 
   return (
     <div
