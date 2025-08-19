@@ -1,6 +1,14 @@
 "use client";
 
-import { ElementType, useEffect, useRef, useState, createElement } from "react";
+import {
+  ElementType,
+  useEffect,
+  useRef,
+  useState,
+  createElement,
+  useCallback,
+  useMemo,
+} from "react";
 import { gsap } from "gsap";
 
 interface TextTypeProps {
@@ -53,18 +61,15 @@ const TextType = ({
   const cursorRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLElement>(null);
 
-  const textArray = Array.isArray(text) ? text : [text];
+  const textArray = useMemo(() => {
+    return Array.isArray(text) ? text : [text];
+  }, [text]);
 
-  const getRandomSpeed = () => {
+  const getRandomSpeed = useCallback(() => {
     if (!variableSpeed) return typingSpeed;
     const { min, max } = variableSpeed;
     return Math.random() * (max - min) + min;
-  };
-
-  //   const getCurrentTextColor = () => {
-  //     if (textColors.length === 0) return "#ffffff";
-  //     return textColors[currentTextIndex % textColors.length];
-  //   };
+  }, [variableSpeed, typingSpeed]);
 
   useEffect(() => {
     if (!startOnVisible || !containerRef.current) return;
@@ -168,6 +173,7 @@ const TextType = ({
     reverseMode,
     variableSpeed,
     onSentenceComplete,
+    getRandomSpeed, // ✅ now stable
   ]);
 
   const shouldHideCursor =

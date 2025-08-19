@@ -12,6 +12,7 @@ import {
   RapierRigidBody,
 } from "@react-three/rapier";
 import { MeshLineGeometry, MeshLineMaterial } from "meshline";
+import { useMediaQuery } from "react-responsive";
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
@@ -141,9 +142,11 @@ export default function Band({ maxSpeed = 50, minSpeed = 10 }) {
   curve.curveType = "chordal";
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+
   return (
     <>
-      <group position={[0, 4.6, 0]}>
+      <group position={[isTabletOrMobile ? 0 : 2, 4.6, 0]}>
         <RigidBody ref={fixed} {...segmentProps} type="fixed" />
         <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps}>
           <BallCollider args={[0.1]} />

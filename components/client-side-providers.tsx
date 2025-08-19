@@ -7,6 +7,7 @@ import Noise from "./ui/noise";
 import { ScrollProgress } from "./ui/scroll-progress";
 import TargetCursor from "./ui/target-cursor";
 import { ThemeProvider } from "./ui/theme-provider";
+import ClickSfx from "./ui/click-sfx";
 
 export const ClientSideProviders = ({ children }: PropsWithChildren) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -39,6 +40,11 @@ export const ClientSideProviders = ({ children }: PropsWithChildren) => {
         />
         <TargetCursor spinDuration={2} hideDefaultCursor={true} />
         <ScrollProgress />
+        <ClickSfx
+          volume={0.5}
+          // soundUrl="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"
+          enabled={true}
+        />
       </ThemeProvider>
     </>
   );

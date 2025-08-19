@@ -67,6 +67,9 @@ const DATA = {
     { href: "#", icon: HomeIcon, label: "Home" },
     { href: "#", icon: VscArchive, label: "Archive" },
     { href: "#", icon: VscAccount, label: "Profile" },
+    { href: "#", icon: HomeIcon, label: "Home2" },
+    { href: "#", icon: VscArchive, label: "Archive2" },
+    { href: "#", icon: VscAccount, label: "Profile2" },
   ],
   // contact: {
   //   social: {
@@ -91,9 +94,9 @@ const DATA = {
 
 export function BottomNav() {
   return (
-    <nav className="fixed bottom-10 left-0 right-0">
+    <nav className="fixed bottom-5 md:bottom-10 left-0 right-0">
       <TooltipProvider>
-        <Dock direction="middle">
+        <Dock direction="middle" className="z-[100] bg-secondary">
           {DATA.navbar.map((item) => (
             <DockIcon key={item.label}>
               <Tooltip>
@@ -138,18 +141,6 @@ export function BottomNav() {
             </DockIcon>
           ))} */}
           {/* <Separator orientation="vertical" className="h-full py-2" /> */}
-          <DockIcon className="h-full w-full">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <div>
-                  <ModeToggle className="rounded-full h-full w-full" />
-                </div>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Theme</p>
-              </TooltipContent>
-            </Tooltip>
-          </DockIcon>
         </Dock>
       </TooltipProvider>
     </nav>

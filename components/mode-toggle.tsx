@@ -46,8 +46,12 @@ export const ModeToggle = ({ className }: props) => {
     );
   };
   return (
-    <button ref={buttonRef} onClick={changeTheme} className={cn(className)}>
-      {isDarkMode ? <SunDim className="size-4" /> : <Moon className="size-4" />}
+    <button ref={buttonRef} onClick={changeTheme}>
+      {isDarkMode ? (
+        <SunDim className={cn(className)} />
+      ) : (
+        <Moon className={cn(className)} />
+      )}
     </button>
   );
 };

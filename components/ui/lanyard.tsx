@@ -1,5 +1,5 @@
 "use client";
-import { Canvas, extend } from "@react-three/fiber";
+import { Canvas, extend, useThree } from "@react-three/fiber";
 import {
   useGLTF,
   useTexture,
@@ -10,12 +10,15 @@ import { Physics } from "@react-three/rapier";
 import { MeshLineGeometry, MeshLineMaterial } from "meshline";
 import Band from "./band";
 import { useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 useGLTF.preload("/assets/3d/card.glb");
 useTexture.preload("/assets/images/tag_texture.png");
 
 export default function Lanyard() {
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -26,11 +29,13 @@ export default function Lanyard() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {}, [isTabletOrMobile]);
   return (
-    <div className="relative h-[60vh] lg:h-screen w-full">
+    <div className="absolute right-0 left-0 lg:left-auto top-0 h-[500px] w-full">
       <div className="flex h-full w-full ">
         <Canvas
-          camera={{ position: [0, 0, 13], fov: 25 }}
+          camera={{ position: [0, 0, 13], fov: isTabletOrMobile ? 15 : 20 }}
           style={{ backgroundColor: "transparent" }}
         >
           <ambientLight intensity={Math.PI} />
