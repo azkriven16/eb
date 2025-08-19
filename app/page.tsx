@@ -1,14 +1,15 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Highlighter } from "@/components/ui/highlighter";
+import Lanyard from "@/components/ui/lanyard";
 import { SparklesText } from "@/components/ui/sparkles-text";
 import TextType from "@/components/ui/type-text";
 
 export default function Page() {
   return (
-    <div className="container mx-auto py-30 px-4">
-      <div className="flex flex-col md:flex-row h-full w-full">
-        <div className="flex-1 space-y-5">
+    <div className="container mx-auto px-4">
+      <div className="flex flex-col-reverse lg:flex-row h-full w-full">
+        <div className="flex-1 space-y-5 py-30 mt-[30vh] lg:mt-0">
           <Button variant="secondary" className="cursor-target">
             Welcome to my corner of the web!
           </Button>
@@ -21,7 +22,7 @@ export default function Page() {
               </h1>
             </div>
           </div>
-          <div className="heading flex bg-primary text-primary-foreground rounded-md p-2 md:p-5 md:w-fit w-full">
+          <div className="heading flex bg-primary text-primary-foreground rounded-md p-2 lg:p-5 lg:w-fit w-full">
             <TextType
               text={["ReactJS", "NextJS", "Fullstack"]}
               typingSpeed={150}
@@ -45,14 +46,9 @@ export default function Page() {
               <br />
             </p>
           </div>
-
-          <p></p>
         </div>
-        <div className="bg-lime-500 flex-1 h-[200vh]">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae sequi
-          eos nobis? At, obcaecati cumque? Dolorum error dignissimos sapiente
-          beatae accusamus, obcaecati officia. Explicabo cupiditate error
-          molestiae quibusdam, fugiat quae.
+        <div className="flex-1 absolute inset-0 lg:relative">
+          <Lanyard />
         </div>
       </div>
     </div>
