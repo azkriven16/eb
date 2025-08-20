@@ -17,7 +17,7 @@ useGLTF.preload("/assets/3d/card.glb");
 useTexture.preload("/assets/images/tag_texture.png");
 
 export default function Lanyard() {
-  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+  // const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,12 +30,12 @@ export default function Lanyard() {
     };
   }, []);
 
-  useEffect(() => {}, [isTabletOrMobile]);
+  // useEffect(() => {}, [isTabletOrMobile]);
   return (
-    <div className="absolute right-0 left-0 lg:left-auto top-0 h-[500px] w-full">
+    <div className="absolute right-0 left-0 lg:left-auto top-0 aspect-square w-full">
       <div className="flex h-full w-full ">
         <Canvas
-          camera={{ position: [0, 0, 13], fov: isTabletOrMobile ? 15 : 20 }}
+          camera={{ position: [0, 0, 12], fov: 15 }}
           style={{ backgroundColor: "transparent" }}
         >
           <ambientLight intensity={Math.PI} />

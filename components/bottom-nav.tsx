@@ -94,7 +94,7 @@ const DATA = {
 
 export function BottomNav() {
   return (
-    <nav className="fixed bottom-5 md:bottom-10 left-0 right-0">
+    <nav className="fixed bottom-5 md:bottom-10 left-0 right-0 z-[100]">
       <TooltipProvider>
         <Dock direction="middle" className="z-[100] bg-secondary">
           {DATA.navbar.map((item) => (

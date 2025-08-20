@@ -71,12 +71,6 @@ export const TopNav: React.FC = () => {
               <AvatarImage src="https://github.com/shadcn.png" alt="Profile" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            {/* {!isScrolled && (
-              <div className="ml-3 opacity-100 transition-opacity duration-300">
-                <h2 className="text-sm font-medium text-gray-900">John Doe</h2>
-                <p className="text-xs text-gray-500">Developer</p>
-              </div>
-            )} */}
           </div>
 
           {/* Right side - Music Button */}

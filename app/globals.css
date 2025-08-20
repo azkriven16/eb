@@ -135,4 +135,7 @@
   .heading {
     @apply text-4xl md:text-5xl font-semibold;
   }
+  .subheading {
+    @apply text-muted-foreground leading-relaxed text-base tracking-wide;
+  }
 }

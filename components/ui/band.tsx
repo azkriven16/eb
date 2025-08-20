@@ -146,7 +146,7 @@ export default function Band({ maxSpeed = 50, minSpeed = 10 }) {
 
   return (
     <>
-      <group position={[isTabletOrMobile ? 0 : 2, 4.6, 0]}>
+      <group position={[0, isTabletOrMobile ? 4.6 : 4.2, 0]}>
         <RigidBody ref={fixed} {...segmentProps} type="fixed" />
         <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps}>
           <BallCollider args={[0.1]} />

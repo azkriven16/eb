@@ -33,7 +33,7 @@ export function Highlighter({
   action = "highlight",
   color = "#ffd1dc", // Default pink color
   strokeWidth = 1.5,
-  animationDuration = 600,
+  animationDuration = 3000,
   iterations = 2,
   padding = 2,
   multiline = true,
