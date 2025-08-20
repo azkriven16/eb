@@ -187,7 +187,7 @@ const TextType = ({
       className: `inline-block whitespace-pre-wrap tracking-tight ${className}`,
       ...props,
     },
-    <span className="inline text-primary-foreground">{displayedText}</span>,
+    <span className="inline">{displayedText}</span>,
     showCursor && (
       <span
         ref={cursorRef}

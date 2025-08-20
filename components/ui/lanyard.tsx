@@ -47,7 +47,7 @@ export default function Lanyard() {
           >
             <Band />
           </Physics>
-          <Environment blur={0.75}>
+          {/* <Environment blur={0.75}>
             <Lightformer
               intensity={2}
               color="white"
@@ -76,7 +76,7 @@ export default function Lanyard() {
               rotation={[0, Math.PI / 2, Math.PI / 3]}
               scale={[100, 10, 1]}
             />
-          </Environment>
+          </Environment> */}
         </Canvas>
       </div>
     </div>

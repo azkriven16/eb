@@ -56,14 +56,14 @@ export const TopNav: React.FC = () => {
 
       {/* Header */}
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out flex items-center justify-between h-14 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out flex items-center justify-between h-14  ${
           isScrolled
-            ? "top-4 left-1/2 transform -translate-x-1/2 w-80 backdrop-blur-lg rounded-full shadow-lg border"
+            ? "top-4 left-1/2 transform -translate-x-1/2 w-80 backdrop-blur-lg rounded-full shadow-lg"
             : "w-full backdrop-blur-sm "
         }`}
       >
         <div
-          className={`w-full flex items-center justify-between transition-all duration-300 ${"px-4 py-4 max-w-7xl mx-auto"}`}
+          className={`w-full flex items-center justify-between transition-all duration-300 ${"px-4 py-4 max-w-6xl mx-auto"}`}
         >
           {/* Left side - Avatar */}
           <div className="flex items-center">
