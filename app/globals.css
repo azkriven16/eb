@@ -136,6 +136,9 @@
     @apply text-4xl md:text-5xl font-semibold;
   }
   .subheading {
-    @apply text-muted-foreground leading-relaxed text-base tracking-wide;
+    @apply text-muted-foreground leading-[1.5] text-base md:text-lg tracking-wide;
+  }
+  .external-link {
+    @apply font-semibold text-foreground hover:text-blue-400;
   }
 }

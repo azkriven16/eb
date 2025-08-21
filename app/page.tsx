@@ -1,4 +1,3 @@
-"use client";
 import { HeroSection } from "@/components/sections/hero";
 import { ProfileSection } from "@/components/sections/profile";
 import { TechStack } from "@/components/sections/techstack";
@@ -9,9 +8,8 @@ export default function Page() {
     <main className="container mx-auto px-4 max-w-6xl mb-52">
       <HeroSection />
       <ProfileSection />
-      <Separator />
+      {/* <Separator /> */}
       <TechStack />
-      <Separator />
     </main>
   );
 }

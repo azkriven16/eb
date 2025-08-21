@@ -1,7 +1,6 @@
 "use client";
 import { PropsWithChildren, useEffect, useState } from "react";
-import { BottomNav } from "./bottom-nav";
-import { TopNav } from "./top-nav";
+import { TopNav } from "./navbar/top-nav";
 import ClickSpark from "./ui/click-spark";
 import Noise from "./ui/noise";
 import { ScrollProgress } from "./ui/scroll-progress";
@@ -29,7 +28,6 @@ export const ClientSideProviders = ({ children }: PropsWithChildren) => {
         >
           <TopNav />
           {children}
-          <BottomNav />
         </ClickSpark>
         <Noise
           patternSize={250}

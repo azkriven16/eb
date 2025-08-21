@@ -13,11 +13,11 @@ import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 
 extend({ MeshLineGeometry, MeshLineMaterial });
-useGLTF.preload("/assets/3d/card.glb");
-useTexture.preload("/assets/images/tag_texture.png");
+useGLTF.preload("/assets/card.glb");
+useTexture.preload("/assets/lanyard.png");
 
 export default function Lanyard() {
-  // const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,12 +30,12 @@ export default function Lanyard() {
     };
   }, []);
 
-  // useEffect(() => {}, [isTabletOrMobile]);
+  useEffect(() => {}, [isTabletOrMobile]);
   return (
     <div className="absolute right-0 left-0 lg:left-auto top-0 aspect-square w-full">
       <div className="flex h-full w-full ">
         <Canvas
-          camera={{ position: [0, 0, 12], fov: 15 }}
+          camera={{ position: [0, 0, 12], fov: isTabletOrMobile ? 20 : 15 }}
           style={{ backgroundColor: "transparent" }}
         >
           <ambientLight intensity={Math.PI} />

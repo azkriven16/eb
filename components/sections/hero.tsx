@@ -9,7 +9,7 @@ export const HeroSection = () => {
   return (
     <section className="flex flex-col lg:flex-row gap-10">
       <Hero />
-      <div className="md:flex-1 space-y-5 md:pt-20 md:mt-[350px] lg:mt-0">
+      <div className="md:flex-1 space-y-5 lg:pt-20 lg:mt-[350px] xl:mt-0">
         <Compare
           firstImage="https://assets.aceternity.com/code-problem.png"
           secondImage="https://assets.aceternity.com/code-solution.png"
@@ -25,14 +25,14 @@ export const HeroSection = () => {
 
 function Hero() {
   return (
-    <div className="flex-1 space-y-5 pt-20 md:mt-[350px] lg:mt-0">
+    <div className="flex-1 space-y-5 pt-20 lg:mt-[350px] xl:mt-0">
       <div className="px-3 py-2 hidden sm:block bg-green-500/20 rounded-[6px] w-max font-medium dark:text-green-300 text-green-500 border border-green-500/20 animate-wiggle duration-1000 cursor-target">
         🕸️ Welcome to my corner of the web!
       </div>
       <div className="flex flex-col gap-2 relative">
         <p className="heading">Hello,</p>
         <div className="px-3 py-2 hidden sm:block absolute top-0 left-16 sm:left-32 bg-red-500/20 rounded-[6px] w-max font-medium dark:text-red-300 text-red-500 border border-red-500/20 animate-wiggle duration-1000 cursor-target">
-          🐦 Stranger
+          🗿 Stranger
         </div>
         <div className="px-3 py-2 hidden sm:block absolute top-5 right-0 sm:right-20 bg-yellow-500/20 rounded-[6px] w-max font-medium dark:text-yellow-300 text-yellow-500 border border-yellow-500/20 animate-wiggle duration-1000">
           🌍 Iloilo, Philippines
@@ -95,7 +95,7 @@ function Hero() {
           action="box"
           color="oklch(63.7% 0.237 25.331)"
         >
-          frontend development
+          fullstack development
         </Highlighter>
         , crafting beautiful and interactive digital experiences from creative
         concepts and business ideas. I leverage{" "}
@@ -104,9 +104,9 @@ function Hero() {
           action="underline"
           color="oklch(79.5% 0.184 86.047)"
         >
-          React, Next.js, and Tailwind
+          React, Next.js, and Typescript
         </Highlighter>{" "}
-        to write clean and maintainable code 💻✨
+        to write clean and maintainable code 🌻.
         <br />
       </p>
     </div>
