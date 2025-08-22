@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { FadeIn } from "@/animations/fade-in";
 import { Highlighter } from "@/components/ui/highlighter";
 import { SparklesText } from "@/components/ui/sparkles-text";
 import TextType from "@/components/ui/type-text";
@@ -7,31 +7,33 @@ import { Compare } from "../ui/compare";
 
 export const HeroSection = () => {
   return (
-    <section className="flex flex-col lg:flex-row gap-10">
-      <Hero />
-      <div className="md:flex-1 space-y-5 lg:pt-20 lg:mt-[350px] xl:mt-0">
-        <Compare
-          firstImage="https://assets.aceternity.com/code-problem.png"
-          secondImage="https://assets.aceternity.com/code-solution.png"
-          firstImageClassName="object-cover object-left-top"
-          secondImageClassname="object-cover object-left-top"
-          className="md:h-full md:w-full aspect-video"
-          slideMode="hover"
-        />
-      </div>
-    </section>
+    <FadeIn>
+      <section className="flex flex-col lg:flex-row gap-10">
+        <Hero />
+        <div className="md:flex-1 space-y-5 lg:pt-20 lg:mt-[350px] xl:mt-0">
+          <Compare
+            firstImage="https://assets.aceternity.com/code-problem.png"
+            secondImage="https://assets.aceternity.com/code-solution.png"
+            firstImageClassName="object-cover object-left-top"
+            secondImageClassname="object-cover object-left-top"
+            className="md:h-full md:w-full aspect-video"
+            slideMode="hover"
+          />
+        </div>
+      </section>
+    </FadeIn>
   );
 };
 
 function Hero() {
   return (
     <div className="flex-1 space-y-5 pt-20 lg:mt-[350px] xl:mt-0">
-      <div className="px-3 py-2 hidden sm:block bg-green-500/20 rounded-[6px] w-max font-medium dark:text-green-300 text-green-500 border border-green-500/20 animate-wiggle duration-1000 cursor-target">
+      <div className="px-3 py-2 hidden sm:block bg-green-500/20 rounded-[6px] w-max font-medium dark:text-green-300 text-green-500 border border-green-500/20 animate-wiggle duration-1000 ">
         🕸️ Welcome to my corner of the web!
       </div>
       <div className="flex flex-col gap-2 relative">
         <p className="heading">Hello,</p>
-        <div className="px-3 py-2 hidden sm:block absolute top-0 left-16 sm:left-32 bg-red-500/20 rounded-[6px] w-max font-medium dark:text-red-300 text-red-500 border border-red-500/20 animate-wiggle duration-1000 cursor-target">
+        <div className="px-3 py-2 hidden sm:block absolute top-0 left-16 sm:left-32 bg-red-500/20 rounded-[6px] w-max font-medium dark:text-red-300 text-red-500 border border-red-500/20 animate-wiggle duration-1000 ">
           🗿 Stranger
         </div>
         <div className="px-3 py-2 hidden sm:block absolute top-5 right-0 sm:right-20 bg-yellow-500/20 rounded-[6px] w-max font-medium dark:text-yellow-300 text-yellow-500 border border-yellow-500/20 animate-wiggle duration-1000">
@@ -39,7 +41,7 @@ function Hero() {
         </div>
         <div className="flex gap-2 items-center">
           <p className="heading">I&apos;m</p>
-          <h1 className="heading cursor-target">
+          <h1 className="heading ">
             <SparklesText>Euger Bonete</SparklesText>
           </h1>
         </div>
