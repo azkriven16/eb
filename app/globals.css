@@ -133,7 +133,7 @@
 
 @layer utilities {
   .heading {
-    @apply text-4xl md:text-5xl font-semibold;
+    @apply text-3xl md:text-5xl font-semibold bg-secondary w-fit p-4;
   }
   .subheading {
     @apply text-muted-foreground leading-[1.5] text-base md:text-lg tracking-wide;

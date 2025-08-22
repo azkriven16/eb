@@ -16,7 +16,7 @@ export const HeroSection = () => {
             secondImage="https://assets.aceternity.com/code-solution.png"
             firstImageClassName="object-cover object-left-top"
             secondImageClassname="object-cover object-left-top"
-            className="md:h-full md:w-full aspect-video"
+            className="md:h-full md:w-full aspect-video hover:shadow-[16px_16px_32px_#bebebe,-16px_-16px_32px_#ffffff] transition-all duration-500 ease-out rounded-2xl"
             slideMode="hover"
           />
         </div>
@@ -28,20 +28,20 @@ export const HeroSection = () => {
 function Hero() {
   return (
     <div className="flex-1 space-y-5 pt-20 lg:mt-[350px] xl:mt-0">
-      <div className="px-3 py-2 hidden sm:block bg-green-500/20 rounded-[6px] w-max font-medium dark:text-green-300 text-green-500 border border-green-500/20 animate-wiggle duration-1000 ">
+      <div className="px-3 py-2 hidden sm:block bg-green-500/20 rounded-[6px] w-max font-medium dark:text-green-300 text-green-500 border border-green-500/20">
         🕸️ Welcome to my corner of the web!
       </div>
       <div className="flex flex-col gap-2 relative">
         <p className="heading">Hello,</p>
-        <div className="px-3 py-2 hidden sm:block absolute top-0 left-16 sm:left-32 bg-red-500/20 rounded-[6px] w-max font-medium dark:text-red-300 text-red-500 border border-red-500/20 animate-wiggle duration-1000 ">
+        <div className="px-3 py-2 hidden sm:block absolute top-0 left-16 sm:left-42 bg-red-500/20 rounded-[6px] w-max font-medium dark:text-red-300 text-red-500 border border-red-500/20 ">
           🗿 Stranger
         </div>
-        <div className="px-3 py-2 hidden sm:block absolute top-5 right-0 sm:right-20 bg-yellow-500/20 rounded-[6px] w-max font-medium dark:text-yellow-300 text-yellow-500 border border-yellow-500/20 animate-wiggle duration-1000">
+        <div className="px-3 py-2 hidden sm:block absolute top-5 right-0 sm:right-20 bg-yellow-500/20 rounded-[6px] w-max font-medium dark:text-yellow-300 text-yellow-500 border border-yellow-500/20">
           🌍 Iloilo, Philippines
         </div>
         <div className="flex gap-2 items-center">
           <p className="heading">I&apos;m</p>
-          <h1 className="heading ">
+          <h1 className="heading">
             <SparklesText>Euger Bonete</SparklesText>
           </h1>
         </div>

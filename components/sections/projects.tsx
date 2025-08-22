@@ -1,70 +1,91 @@
+"use client";
+
 import { FadeIn } from "@/animations/fade-in";
-import { Highlighter } from "../ui/highlighter";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import ScrollVelocity from "../ui/scroll-velocity";
 
+// --- Mock Projects ---
+const projects = [
+  {
+    src: "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif",
+    title: "Portfolio Website",
+    description: "A modern portfolio built with Next.js + Tailwind",
+    category: "frontend",
+  },
+  {
+    src: "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif",
+    title: "Anime App",
+    description: "Discover and stream anime effortlessly",
+    category: "fullstack",
+  },
+  {
+    src: "https://media.giphy.com/media/l0HlQ7LRal6rQ9XEA/giphy.gif",
+    title: "AI Assistant",
+    description: "Chatbot powered by OpenAI GPT",
+    category: "backend",
+  },
+  {
+    src: "https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif",
+    title: "Design System",
+    description: "Reusable components with Shadcn/UI",
+    category: "frontend",
+  },
+  {
+    src: "https://media.giphy.com/media/l0HlQ7LRal6rQ9XEA/giphy.gif",
+    title: "E-Commerce Platform",
+    description: "Fullstack shop with payments",
+    category: "fullstack",
+  },
+  {
+    src: "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif",
+    title: "API Service",
+    description: "REST + GraphQL backend",
+    category: "backend",
+  },
+];
+
+// --- Available filters ---
+const categories = ["all", "frontend", "fullstack", "backend"];
+
 export const ProjectsSection = () => {
+  const [activeCategory, setActiveCategory] = useState("all");
+
+  const filteredProjects =
+    activeCategory === "all"
+      ? projects
+      : projects.filter((p) => p.category === activeCategory);
+
   return (
     <FadeIn>
       <section>
-        <div className="space-y-10 my-20">
+        <div className="space-y-10 my-12">
           <ScrollVelocity
-            texts={["Scroll Down 👇", "Projects Section👇"]}
+            texts={["Scroll Down 👇", "Projects Section ✦"]}
             velocity={100}
             className="custom-scroll-text text-foreground"
           />
-          <p className="subheading">
-            I specialize in{" "}
-            <Highlighter
-              className="px-1 text-foreground"
-              action="box"
-              color="oklch(63.7% 0.237 25.331)"
-            >
-              fullstack development
-            </Highlighter>
-            , crafting beautiful and interactive digital experiences from
-            creative concepts and business ideas. I leverage{" "}
-            <Highlighter
-              className="text-foreground"
-              action="underline"
-              color="oklch(79.5% 0.184 86.047)"
-            >
-              React, Next.js, and Typescript
-            </Highlighter>{" "}
-            to write clean and maintainable code 🌻.
-            <br />
-          </p>
+
+          {/* --- Filter Buttons --- */}
+          <div className="flex gap-3 flex-wrap">
+            {categories.map((cat) => (
+              <Button
+                key={cat}
+                variant={activeCategory === cat ? "default" : "outline"}
+                onClick={() => setActiveCategory(cat)}
+                className="capitalize"
+              >
+                {cat}
+              </Button>
+            ))}
+          </div>
         </div>
+
+        {/* --- Project Grid --- */}
         <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-5">
-          <ProjectCard
-            src="https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif"
-            title="Portfolio Website"
-            description="A modern portfolio built with Next.js + Tailwind"
-          />
-          <ProjectCard
-            src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"
-            title="Anime App"
-            description="Discover and stream anime effortlessly"
-          />
-          <ProjectCard
-            src="https://media.giphy.com/media/l0HlQ7LRal6rQ9XEA/giphy.gif"
-            title="AI Assistant"
-            description="Chatbot powered by OpenAI GPT"
-          />
-          <ProjectCard
-            src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif"
-            title="Design System"
-            description="Reusable components with Shadcn/UI"
-          />
-          <ProjectCard
-            src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif"
-            title="Design System"
-            description="Reusable components with Shadcn/UI"
-          />
-          <ProjectCard
-            src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif"
-            title="Design System"
-            description="Reusable components with Shadcn/UI"
-          />
+          {filteredProjects.map((project, i) => (
+            <ProjectCard key={i} {...project} />
+          ))}
         </div>
       </section>
     </FadeIn>
@@ -81,7 +102,7 @@ function ProjectCard({
   description: string;
 }) {
   return (
-    <div className="col-span-2 aspect-square border-2 rounded-md overflow-hidden relative group cursor-target">
+    <div className="col-span-2 aspect-square border-2 rounded-md overflow-hidden relative group cursor-pointer">
       {/* Image */}
       <img
         src={src}

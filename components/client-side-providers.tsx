@@ -7,6 +7,7 @@ import { ScrollProgress } from "./ui/scroll-progress";
 import TargetCursor from "./ui/target-cursor";
 import { ThemeProvider } from "./ui/theme-provider";
 import ClickSfx from "./ui/click-sfx";
+import { Footer } from "./footer";
 
 export const ClientSideProviders = ({ children }: PropsWithChildren) => {
   const [isMounted, setIsMounted] = useState(false);
@@ -28,6 +29,7 @@ export const ClientSideProviders = ({ children }: PropsWithChildren) => {
         >
           <TopNav />
           {children}
+          <Footer />
         </ClickSpark>
         <Noise
           patternSize={250}

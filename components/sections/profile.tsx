@@ -1,7 +1,12 @@
 "use client";
 
 import { FadeIn } from "@/animations/fade-in";
-import { FaFacebookMessenger, FaXTwitter } from "react-icons/fa6";
+import {
+  FaEnvelope,
+  FaFacebookMessenger,
+  FaLinkedinIn,
+  FaXTwitter,
+} from "react-icons/fa6";
 import { Highlighter } from "../ui/highlighter";
 import Lanyard from "../ui/lanyard";
 
@@ -11,7 +16,7 @@ export function ProfileSection() {
       <section className="flex flex-col-reverse lg:flex-row h-full w-full">
         <div className="flex-1 pt-[350px] sm:pt-[450px] md:pt-[700px] lg:pt-20">
           <div className="space-y-5">
-            <h1 className="heading">
+            <h1 className="heading bg-secondary w-fit p-4">
               A short <strong>introduction</strong>
             </h1>
             <p className="subheading">
@@ -25,18 +30,10 @@ export function ProfileSection() {
               >
                 {new Date().getFullYear() - 2021} years ago
               </Highlighter>{" "}
-              — and recently graduated with an Bachelor of Science in
-              Information Technology degree in 2025 . Over the years, I’ve
-              gained experience through internships and part-time work at
-              companies like{" "}
-              <Highlighter
-                action="box"
-                color="oklch(72.3% 0.219 149.579)"
-                className="text-foreground"
-              >
-                Digipay , Rocketshyft
-              </Highlighter>
-              , and others.
+              — and recently graduated with a Bachelor of Science in Information
+              Technology degree in 2025. Over the years, I’ve gained hands-on
+              experience through internships and part-time roles at various tech
+              companies and startups.
             </p>
 
             <div className="space-y-2">
@@ -105,7 +102,7 @@ export function ProfileSection() {
                 <p>Twitter @ EugerBonete</p>
               </a>
               <a
-                href="https://x.com/EugerBonete"
+                href="https://www.facebook.com/euger.bonete.9/"
                 target="_blank"
                 className="flex gap-5 subheading external-link cursor-target w-fit"
               >
@@ -113,6 +110,26 @@ export function ProfileSection() {
                   <FaFacebookMessenger />
                 </div>
                 <p>Facebook @ euger.bonete.9</p>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/euger-bonete/"
+                target="_blank"
+                className="flex gap-5 subheading external-link cursor-target w-fit"
+              >
+                <div className="flex items-center justify-center">
+                  <FaLinkedinIn />
+                </div>
+                <p>LinkedIn @ euger.bonete.9</p>
+              </a>
+              <a
+                href="mailto:eugerbone@email.com"
+                target="_blank"
+                className="flex gap-5 subheading external-link cursor-target w-fit"
+              >
+                <div className="flex items-center justify-center">
+                  <FaEnvelope />
+                </div>
+                <p>Email @ euger.bonete.9</p>
               </a>
             </div>
           </div>
