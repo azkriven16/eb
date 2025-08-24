@@ -1,6 +1,6 @@
+import { Providers } from "@/components/providers";
 import type { Metadata } from "next";
 import "./globals.css";
-import { ClientSideProviders } from "@/components/client-side-providers";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="relative antialiased">
-        <ClientSideProviders>{children}</ClientSideProviders>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

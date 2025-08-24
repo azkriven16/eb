@@ -21,9 +21,16 @@ export const Footer = () => {
 
   return (
     <footer className="shell mb-10 md:mb-20 border-t relative">
-      <p className="subheading mt-10 md:mt-20">
-        © 2025 Euger Bonete Jr. All rights reserved.
-      </p>
+      <div className="flex flex-col-reverse md:flex-row justify-between">
+        <p className="subheading mt-10 md:mt-20">
+          © 2025 Euger Bonete Jr. All rights reserved.
+        </p>
+        <div className="subheading mt-10 md:mt-20 space-x-5">
+          <a href="">Guestbook</a>
+          <a href="">Sitemap</a>
+          <a href="">Github</a>
+        </div>
+      </div>
 
       {showButton && (
         <Button

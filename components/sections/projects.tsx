@@ -3,44 +3,50 @@
 import { FadeIn } from "@/animations/fade-in";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import Link from "next/link";
 
-// --- Mock Projects ---
-const projects = [
+const projectsData = [
   {
-    src: "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif",
+    slug: "portfolio-website",
     title: "Portfolio Website",
     description: "A modern portfolio built with Next.js + Tailwind",
     category: "frontend",
+    src: "/modern-portfolio-website-desktop-mockup.png",
   },
   {
-    src: "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif",
-    title: "Anime App",
+    slug: "anime-app",
+    title: "Anime Discovery App",
     description: "Discover and stream anime effortlessly",
     category: "fullstack",
+    src: "/anime-discovery-app-desktop-interface.png",
   },
   {
-    src: "https://media.giphy.com/media/l0HlQ7LRal6rQ9XEA/giphy.gif",
-    title: "AI Assistant",
+    slug: "ai-assistant",
+    title: "AI Assistant Chatbot",
     description: "Chatbot powered by OpenAI GPT",
     category: "backend",
+    src: "/ai-chatbot-interface-desktop.png",
   },
   {
-    src: "https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif",
-    title: "Design System",
+    slug: "design-system",
+    title: "Component Design System",
     description: "Reusable components with Shadcn/UI",
     category: "frontend",
+    src: "/design-system-component-library-desktop.png",
   },
   {
-    src: "https://media.giphy.com/media/l0HlQ7LRal6rQ9XEA/giphy.gif",
+    slug: "e-commerce-platform",
     title: "E-Commerce Platform",
     description: "Fullstack shop with payments",
     category: "fullstack",
+    src: "/e-commerce-platform-desktop-interface.png",
   },
   {
-    src: "https://media.giphy.com/media/xT9IgzoKnwFNmISR8I/giphy.gif",
-    title: "API Service",
+    slug: "api-service",
+    title: "REST & GraphQL API Service",
     description: "REST + GraphQL backend",
     category: "backend",
+    src: "/api-documentation-interface-desktop.png",
   },
 ];
 
@@ -52,8 +58,8 @@ export const ProjectsSection = () => {
 
   const filteredProjects =
     activeCategory === "all"
-      ? projects
-      : projects.filter((p) => p.category === activeCategory);
+      ? projectsData
+      : projectsData.filter((p) => p.category === activeCategory);
 
   return (
     <FadeIn>
@@ -89,16 +95,24 @@ function ProjectCard({
   src,
   title,
   description,
+  slug,
 }: {
   src: string;
   title: string;
   description: string;
+  slug: string;
 }) {
   return (
-    <div className="col-span-2 aspect-square border-2 rounded-md overflow-hidden relative group cursor-pointer">
+    <Link
+      href={`/projects/${slug}`}
+      className="col-span-2 aspect-square border-2 rounded-md overflow-hidden relative group cursor-pointer block"
+    >
       {/* Image */}
       <img
-        src={src}
+        src={
+          src ||
+          "/placeholder.svg?height=400&width=400&query=project placeholder"
+        }
         alt={title}
         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 group-hover:blur-sm"
       />
@@ -116,6 +130,6 @@ function ProjectCard({
         <h3 className="text-base font-semibold">{title}</h3>
         <p className="text-sm text-muted-foreground">{description}</p>
       </div>
-    </div>
+    </Link>
   );
 }

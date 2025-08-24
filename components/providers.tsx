@@ -8,8 +8,9 @@ import TargetCursor from "./ui/target-cursor";
 import { ThemeProvider } from "./ui/theme-provider";
 import ClickSfx from "./ui/click-sfx";
 import { Footer } from "./footer";
+import { Toaster } from "./ui/sonner";
 
-export const ClientSideProviders = ({ children }: PropsWithChildren) => {
+export const Providers = ({ children }: PropsWithChildren) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -40,6 +41,7 @@ export const ClientSideProviders = ({ children }: PropsWithChildren) => {
         />
         <TargetCursor spinDuration={2} hideDefaultCursor={true} />
         <ScrollProgress />
+        <Toaster />
         <div className="hidden md:block">
           <ClickSfx
             volume={0.5}

@@ -16,6 +16,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { CircularRevealHeading } from "@/components/ui/circular-reveal";
+import { Guestbook } from "@/components/guestbook";
 
 const items = [
   {
@@ -128,6 +129,7 @@ export default function ContactPage() {
           </p>
         </div>
       </div>
+      <Guestbook />
     </main>
   );
 }
