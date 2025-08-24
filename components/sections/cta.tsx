@@ -10,16 +10,17 @@ import Image from "next/image";
 export const CtaSection = () => {
   return (
     <FadeIn>
-      <section className="h-full w-full mt-28 flex flex-col md:flex-row justify-between gap-12 mb-22">
+      <section className="h-full w-full py-10 md:py-20 flex flex-col md:flex-row justify-between gap-12">
         {/* Left Side */}
         <div className="flex flex-col items-center md:items-start space-y-6">
           <div className="flex gap-10">
             <Image
               src="https://media.tenor.com/8qupEQSIsCsAAAAi/hidamari-sketch-miyako.gif"
+              // src="https://media.tenor.com/Qm68f5zQrakAAAAj/dance-cute.gif"
               alt="CTA Gif"
               width={180}
               height={180}
-              className="grayscale"
+              className="grayscale object-contain"
               draggable={false}
             />
 
@@ -62,7 +63,7 @@ export const CtaSection = () => {
           </div>
           <p className="subheading md:max-w-2xl">
             I’d love to hear from you — whether it’s about projects, ideas, or
-            just to say hi. Drop me a message or follow me on my socials below!
+            just to say hi. Drop me a message or follow me on my socials above!
           </p>
         </div>
 

@@ -4,6 +4,7 @@ import { Moon, SunDim } from "lucide-react";
 import { useState, useRef } from "react";
 import { flushSync } from "react-dom";
 import { cn } from "@/lib/utils";
+import { Button } from "./ui/button";
 
 type props = {
   className?: string;
@@ -46,12 +47,12 @@ export const ModeToggle = ({ className }: props) => {
     );
   };
   return (
-    <button ref={buttonRef} onClick={changeTheme}>
+    <Button variant="ghost" size="sm" ref={buttonRef} onClick={changeTheme}>
       {isDarkMode ? (
-        <SunDim className={cn(className)} />
+        <SunDim className={cn("size-5", className)} />
       ) : (
-        <Moon className={cn(className)} />
+        <Moon className={cn("size-5", className)} />
       )}
-    </button>
+    </Button>
   );
 };

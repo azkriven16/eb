@@ -4,17 +4,20 @@ import { FadeIn } from "@/animations/fade-in";
 export function TechStackSection() {
   return (
     <FadeIn>
-      <section className="h-full w-full mt-22 space-y-10">
+      <section className="h-full w-full pt-10 md:pt-20 space-y-10">
         <div className="flex flex-col-reverse lg:flex-row">
           <div className="space-y-5">
-            <h1 className="heading">
-              A bit of my <strong>craft</strong> 🪔
-            </h1>
-            <p className="subheading max-w-2xl">
+            <div className="space-x-2">
+              <span className="heading">🪔</span>
+              <span className="heading">
+                A bit of my <strong>craft</strong>
+              </span>
+            </div>
+            <p className="subheading max-w-2xl pt-5">
               These are the core tools and technologies I use to build, design,
               and ship projects—from frontend experiences to backend systems.
             </p>
-            <div className="flex flex-col md:flex-row gap-5 mt-10">
+            <div className="flex flex-col md:flex-row gap-5 mt-5 md:mt-10">
               {/* Frontend */}
               <div className="flex-1">
                 <h3 className="text-xl font-bold">Frontend</h3>

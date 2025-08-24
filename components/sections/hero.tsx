@@ -74,7 +74,9 @@ function Hero() {
         <div className="p-2 lg:p-4 font-mono">
           {/* Main typing animation - single line */}
           <div className="text-sm lg:text-base font-bold">
-            <span className={""}>ɛʊɢɛʀ == </span>
+            <span>
+              const <span className="text-yellow-500">EUGER</span> =={" "}
+            </span>
             <span className={""}>
               <TextType
                 className="text-green-500"
@@ -84,7 +86,7 @@ function Hero() {
                 showCursor={true}
                 cursorCharacter="|"
               />
-              <span className="ml-1">Developer</span>
+              <span className="ml-1">Developer || Coder</span>
             </span>
           </div>
         </div>

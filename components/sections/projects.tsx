@@ -3,7 +3,6 @@
 import { FadeIn } from "@/animations/fade-in";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import ScrollVelocity from "../ui/scroll-velocity";
 
 // --- Mock Projects ---
 const projects = [
@@ -59,13 +58,7 @@ export const ProjectsSection = () => {
   return (
     <FadeIn>
       <section>
-        <div className="space-y-10 my-12">
-          <ScrollVelocity
-            texts={["Scroll Down 👇", "Projects Section ✦"]}
-            velocity={100}
-            className="custom-scroll-text text-foreground"
-          />
-
+        <div className="space-y-10 py-5 md:py-10">
           {/* --- Filter Buttons --- */}
           <div className="flex gap-3 flex-wrap">
             {categories.map((cat) => (

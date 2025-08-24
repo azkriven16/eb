@@ -40,11 +40,13 @@ export const ClientSideProviders = ({ children }: PropsWithChildren) => {
         />
         <TargetCursor spinDuration={2} hideDefaultCursor={true} />
         <ScrollProgress />
-        <ClickSfx
-          volume={0.5}
-          // soundUrl="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"
-          enabled={true}
-        />
+        <div className="hidden md:block">
+          <ClickSfx
+            volume={0.5}
+            // soundUrl="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"
+            enabled={true}
+          />
+        </div>
       </ThemeProvider>
     </>
   );
