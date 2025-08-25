@@ -19,7 +19,7 @@ export default function AboutPage() {
               alt="Dancing Gif"
               width={200}
               height={200}
-              className="grayscale object-contain"
+              className="grayscale object-cover"
               draggable={false}
             />
           </div>
@@ -89,7 +89,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <p className="subheading max-w-2xl mb-10 mt-20">
+      <p className="subheading max-w-2xl mb-10 mt-10 md:mt-20">
         I also like to code with calming music or listen to programming
         podcasts. Every now and then, I mix in some J-Pop for a little extra
         energy.

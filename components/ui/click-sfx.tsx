@@ -1,23 +1,24 @@
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
+import { useMediaQuery } from "react-responsive";
 
 interface ClickSfxProps {
   /** Volume level from 0 to 1 */
   volume?: number;
-  /** Custom sound URL (optional) */
-  soundUrl?: string;
   /** Whether to enable the sound effect */
   enabled?: boolean;
 }
 
 const ClickSfx: React.FC<ClickSfxProps> = ({
   volume = 0.3,
-  soundUrl,
   enabled = true,
 }) => {
   const audioContextRef = useRef<AudioContext | null>(null);
   const audioBufferRef = useRef<AudioBuffer | null>(null);
+
+  // detect mobile
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   // Generate a simple click sound using Web Audio API
   const generateClickSound = async (): Promise<AudioBuffer> => {
@@ -42,26 +43,15 @@ const ClickSfx: React.FC<ClickSfxProps> = ({
     return audioBuffer;
   };
 
-  // Load custom sound from URL
-  const loadCustomSound = async (url: string): Promise<AudioBuffer | null> => {
-    if (!audioContextRef.current) return null;
-
-    try {
-      const response = await fetch(url);
-      const arrayBuffer = await response.arrayBuffer();
-      const audioBuffer = await audioContextRef.current.decodeAudioData(
-        arrayBuffer
-      );
-      return audioBuffer;
-    } catch (error) {
-      console.warn("Failed to load custom sound:", error);
-      return null;
-    }
-  };
-
   // Play the click sound
   const playClickSound = useCallback(() => {
-    if (!enabled || !audioContextRef.current || !audioBufferRef.current) return;
+    if (
+      !enabled ||
+      isMobile ||
+      !audioContextRef.current ||
+      !audioBufferRef.current
+    )
+      return;
 
     try {
       const source = audioContextRef.current.createBufferSource();
@@ -77,10 +67,10 @@ const ClickSfx: React.FC<ClickSfxProps> = ({
     } catch (error) {
       console.warn("Failed to play click sound:", error);
     }
-  }, [enabled, volume]);
+  }, [enabled, isMobile, volume]);
 
   useEffect(() => {
-    if (!enabled) return;
+    if (!enabled || isMobile) return;
 
     // Initialize Audio Context
     const initAudio = async () => {
@@ -92,20 +82,15 @@ const ClickSfx: React.FC<ClickSfxProps> = ({
             }
           ).webkitAudioContext)();
 
-        // Load sound
-        if (soundUrl) {
-          const customBuffer = await loadCustomSound(soundUrl);
-          audioBufferRef.current = customBuffer || (await generateClickSound());
-        } else {
-          audioBufferRef.current = await generateClickSound();
-        }
+        // Always generate the click sound (no external URL)
+        audioBufferRef.current = await generateClickSound();
       } catch (error) {
         console.warn("Failed to initialize audio context:", error);
       }
     };
 
     // Event handler for clicks/taps
-    const handleInteraction = (event: Event) => {
+    const handleInteraction = () => {
       // Resume audio context if suspended (required by browsers)
       if (audioContextRef.current?.state === "suspended") {
         audioContextRef.current.resume();
@@ -113,7 +98,6 @@ const ClickSfx: React.FC<ClickSfxProps> = ({
       playClickSound();
     };
 
-    // Add event listeners for various interaction types
     const events = ["click", "touchstart"];
 
     events.forEach((eventType) => {
@@ -122,10 +106,8 @@ const ClickSfx: React.FC<ClickSfxProps> = ({
       });
     });
 
-    // Initialize audio when component mounts
     initAudio();
 
-    // Cleanup
     return () => {
       events.forEach((eventType) => {
         document.removeEventListener(eventType, handleInteraction);
@@ -135,9 +117,8 @@ const ClickSfx: React.FC<ClickSfxProps> = ({
         audioContextRef.current.close();
       }
     };
-  }, [enabled, volume, soundUrl, playClickSound]);
+  }, [enabled, isMobile, playClickSound]);
 
-  // This component doesn't render anything visible
   return null;
 };
 

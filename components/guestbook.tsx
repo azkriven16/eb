@@ -124,7 +124,7 @@ export function Guestbook() {
             </form>
           </CardContent>
         </Card>
-        <div className=" mt-13 hidden md:flex items-center justify-center bg-secondary rounded-2xl">
+        <div className="h-40 mt-3 hidden md:flex items-center justify-center bg-secondary rounded-2xl">
           <Image
             src="https://media.tenor.com/Qm68f5zQrakAAAAj/dance-cute.gif"
             alt="Dancing Gif"

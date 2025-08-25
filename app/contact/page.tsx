@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import { CircularRevealHeading } from "@/components/ui/circular-reveal";
 import { Guestbook } from "@/components/guestbook";
+import { socialLinks } from "@/constants/projects";
 
 const items = [
   {
@@ -43,7 +44,7 @@ const items = [
 
 export default function ContactPage() {
   return (
-    <main className="shell mt-30 md:mt-40 pb-20">
+    <main className="shell mt-30 pb-20">
       <div className="flex flex-col md:flex-row justify-between">
         {/* Left Side */}
         <div className="flex-1 flex flex-col items-center md:items-start space-y-6">
@@ -65,39 +66,17 @@ export default function ContactPage() {
 
             <div className="space-y-2">
               <h3 className="text-xl font-bold">On the web</h3>
-
-              <a
-                href="https://x.com/EugerBonete"
-                target="_blank"
-                className="flex gap-5 subheading external-link cursor-target w-fit"
-              >
-                <FaXTwitter />
-                <p>Twitter @ EugerBonete</p>
-              </a>
-              <a
-                href="https://www.facebook.com/euger.bonete.9/"
-                target="_blank"
-                className="flex gap-5 subheading external-link cursor-target w-fit"
-              >
-                <FaFacebookMessenger />
-                <p>Facebook @ euger.bonete.9</p>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/euger-bonete/"
-                target="_blank"
-                className="flex gap-5 subheading external-link cursor-target w-fit"
-              >
-                <FaLinkedinIn />
-                <p>LinkedIn @ euger.bonete.9</p>
-              </a>
-              <a
-                href="mailto:eugerbone@email.com"
-                target="_blank"
-                className="flex gap-5 subheading external-link cursor-target w-fit"
-              >
-                <FaEnvelope />
-                <p>Email @ euger.bonete.9</p>
-              </a>
+              {socialLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  className="flex items-center gap-5 subheading external-link cursor-target w-fit"
+                >
+                  {link.icon}
+                  <p>{link.label}</p>
+                </a>
+              ))}
             </div>
           </div>
         </div>

@@ -6,7 +6,7 @@ import { TechStackSection } from "@/components/sections/techstack";
 
 export default function Page() {
   return (
-    <main className="shell">
+    <main className="shell pt-10">
       <HeroSection />
       <ProfileSection />
       <ProjectsSection />

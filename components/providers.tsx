@@ -39,16 +39,10 @@ export const Providers = ({ children }: PropsWithChildren) => {
           patternRefreshInterval={2}
           patternAlpha={15}
         />
-        <TargetCursor spinDuration={2} hideDefaultCursor={true} />
+        {/* <TargetCursor spinDuration={2} hideDefaultCursor={true} /> */}
         <ScrollProgress />
         <Toaster />
-        <div className="hidden md:block">
-          <ClickSfx
-            volume={0.5}
-            // soundUrl="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav"
-            enabled={true}
-          />
-        </div>
+        <ClickSfx volume={0.5} enabled={true} />
       </ThemeProvider>
     </>
   );

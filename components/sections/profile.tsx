@@ -87,54 +87,9 @@ export function ProfileSection() {
                 </p>
               </div>
             </div>
-
-            <div className="space-y-2">
-              <h3 className="text-xl font-bold">On the web</h3>
-
-              <a
-                href="https://x.com/EugerBonete"
-                target="_blank"
-                className="flex gap-5 subheading external-link cursor-target w-fit"
-              >
-                <div className="flex items-center justify-center">
-                  <FaXTwitter />
-                </div>
-                <p>Twitter @ EugerBonete</p>
-              </a>
-              <a
-                href="https://www.facebook.com/euger.bonete.9/"
-                target="_blank"
-                className="flex gap-5 subheading external-link cursor-target w-fit"
-              >
-                <div className="flex items-center justify-center">
-                  <FaFacebookMessenger />
-                </div>
-                <p>Facebook @ euger.bonete.9</p>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/euger-bonete/"
-                target="_blank"
-                className="flex gap-5 subheading external-link cursor-target w-fit"
-              >
-                <div className="flex items-center justify-center">
-                  <FaLinkedinIn />
-                </div>
-                <p>LinkedIn @ euger.bonete.9</p>
-              </a>
-              <a
-                href="mailto:eugerbone@email.com"
-                target="_blank"
-                className="flex gap-5 subheading external-link cursor-target w-fit"
-              >
-                <div className="flex items-center justify-center">
-                  <FaEnvelope />
-                </div>
-                <p>Email @ euger.bonete.9</p>
-              </a>
-            </div>
           </div>
         </div>
-        <div className="flex-1 relative">
+        <div className="flex-1 relative hover:grayscale-0 md:grayscale transition duration-300">
           <Lanyard />
         </div>
       </section>

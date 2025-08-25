@@ -4,51 +4,7 @@ import { FadeIn } from "@/animations/fade-in";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import Link from "next/link";
-
-const projectsData = [
-  {
-    slug: "portfolio-website",
-    title: "Portfolio Website",
-    description: "A modern portfolio built with Next.js + Tailwind",
-    category: "frontend",
-    src: "/modern-portfolio-website-desktop-mockup.png",
-  },
-  {
-    slug: "anime-app",
-    title: "Anime Discovery App",
-    description: "Discover and stream anime effortlessly",
-    category: "fullstack",
-    src: "/anime-discovery-app-desktop-interface.png",
-  },
-  {
-    slug: "ai-assistant",
-    title: "AI Assistant Chatbot",
-    description: "Chatbot powered by OpenAI GPT",
-    category: "backend",
-    src: "/ai-chatbot-interface-desktop.png",
-  },
-  {
-    slug: "design-system",
-    title: "Component Design System",
-    description: "Reusable components with Shadcn/UI",
-    category: "frontend",
-    src: "/design-system-component-library-desktop.png",
-  },
-  {
-    slug: "e-commerce-platform",
-    title: "E-Commerce Platform",
-    description: "Fullstack shop with payments",
-    category: "fullstack",
-    src: "/e-commerce-platform-desktop-interface.png",
-  },
-  {
-    slug: "api-service",
-    title: "REST & GraphQL API Service",
-    description: "REST + GraphQL backend",
-    category: "backend",
-    src: "/api-documentation-interface-desktop.png",
-  },
-];
+import { projectsData } from "@/constants/projects";
 
 // --- Available filters ---
 const categories = ["all", "frontend", "fullstack", "backend"];
@@ -59,7 +15,9 @@ export const ProjectsSection = () => {
   const filteredProjects =
     activeCategory === "all"
       ? projectsData
-      : projectsData.filter((p) => p.category === activeCategory);
+      : projectsData.filter(
+          (p) => p.category.toLowerCase().replace(/\s+/g, "") === activeCategory
+        );
 
   return (
     <FadeIn>
@@ -82,8 +40,15 @@ export const ProjectsSection = () => {
 
         {/* --- Project Grid --- */}
         <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-5">
-          {filteredProjects.map((project, i) => (
-            <ProjectCard key={i} {...project} />
+          {filteredProjects.map((project) => (
+            <ProjectCard
+              key={project.slug}
+              slug={project.slug}
+              title={project.title}
+              description={project.description}
+              desktop={project.images.desktop}
+              gif={project.images.gif}
+            />
           ))}
         </div>
       </section>
@@ -92,12 +57,14 @@ export const ProjectsSection = () => {
 };
 
 function ProjectCard({
-  src,
+  desktop,
+  gif,
   title,
   description,
   slug,
 }: {
-  src: string;
+  desktop: string;
+  gif?: string;
   title: string;
   description: string;
   slug: string;
@@ -105,17 +72,26 @@ function ProjectCard({
   return (
     <Link
       href={`/projects/${slug}`}
-      className="col-span-2 aspect-square border-2 rounded-md overflow-hidden relative group cursor-pointer block"
+      className="col-span-2 border-2 rounded-md overflow-hidden relative group cursor-pointer block aspect-video"
     >
-      {/* Image */}
+      {/* Default static image */}
       <img
         src={
-          src ||
+          desktop ||
           "/placeholder.svg?height=400&width=400&query=project placeholder"
         }
         alt={title}
-        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 group-hover:blur-sm"
+        className="w-full h-full object-cover scale-105 transition-transform duration-500 group-hover:scale-105"
       />
+
+      {/* GIF overlay (hidden until hover) */}
+      {gif && (
+        <img
+          src={gif}
+          alt={`${title} preview`}
+          className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        />
+      )}
 
       {/* Overlay text (desktop hover) */}
       <div className="hidden md:flex absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 items-center justify-center text-center text-white p-4">

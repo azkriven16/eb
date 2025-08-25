@@ -6,6 +6,7 @@ import {
   FaXTwitter,
 } from "react-icons/fa6";
 import Image from "next/image";
+import { socialLinks } from "@/constants/projects";
 
 export const CtaSection = () => {
   return (
@@ -26,39 +27,17 @@ export const CtaSection = () => {
 
             <div className="space-y-2">
               <h3 className="text-xl font-bold">On the web</h3>
-
-              <a
-                href="https://x.com/EugerBonete"
-                target="_blank"
-                className="flex gap-5 subheading external-link cursor-target w-fit"
-              >
-                <FaXTwitter />
-                <p>Twitter @ EugerBonete</p>
-              </a>
-              <a
-                href="https://www.facebook.com/euger.bonete.9/"
-                target="_blank"
-                className="flex gap-5 subheading external-link cursor-target w-fit"
-              >
-                <FaFacebookMessenger />
-                <p>Facebook @ euger.bonete.9</p>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/euger-bonete/"
-                target="_blank"
-                className="flex gap-5 subheading external-link cursor-target w-fit"
-              >
-                <FaLinkedinIn />
-                <p>LinkedIn @ euger.bonete.9</p>
-              </a>
-              <a
-                href="mailto:eugerbone@email.com"
-                target="_blank"
-                className="flex gap-5 subheading external-link cursor-target w-fit"
-              >
-                <FaEnvelope />
-                <p>Email @ euger.bonete.9</p>
-              </a>
+              {socialLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  className="flex items-center gap-5 subheading external-link cursor-target w-fit"
+                >
+                  {link.icon}
+                  <p>{link.label}</p>
+                </a>
+              ))}
             </div>
           </div>
           <p className="subheading md:max-w-2xl">

@@ -12,10 +12,10 @@ export const HeroSection = () => {
         <Hero />
         <div className="md:flex-1 space-y-5 lg:pt-20 lg:mt-[350px] xl:mt-0">
           <Compare
-            firstImage="https://assets.aceternity.com/code-problem.png"
-            secondImage="https://assets.aceternity.com/code-solution.png"
+            firstImage="/images/code-1.png"
+            secondImage="/images/code-2.png"
             firstImageClassName="object-cover object-left-top"
-            secondImageClassname="object-cover object-left-top"
+            secondImageClassname="object-cover object-right-top"
             className="md:h-full md:w-full aspect-video hover:shadow-[16px_16px_32px_#bebebe,-16px_-16px_32px_#ffffff] transition-all duration-500 ease-out rounded-2xl"
             slideMode="hover"
           />

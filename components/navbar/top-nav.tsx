@@ -23,27 +23,30 @@ import { cn } from "@/lib/utils";
 import { MessageCircle, Moon, SunDim } from "lucide-react";
 import { useTheme } from "next-themes";
 import {
+  FaBriefcase,
+  FaEnvelope,
   FaFolderOpen,
   FaHome,
   FaPhone,
   FaSearch,
   FaUser,
 } from "react-icons/fa";
+import { FiMessageCircle } from "react-icons/fi";
 
 export const TopNav = () => {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [chatOpen, setChatOpen] = useState(false);
   const { theme, setTheme } = useTheme();
 
   const navItems = [
     { name: "All", href: "/", icon: <FaHome /> },
-    { name: "Projects", href: "/projects", icon: <FaFolderOpen /> },
+    { name: "Experience", href: "/experience", icon: <FaBriefcase /> },
     { name: "About", href: "/about", icon: <FaUser /> },
-    { name: "Contact", href: "/contact", icon: <FaPhone /> },
+    { name: "Projects", href: "/projects", icon: <FaFolderOpen /> },
+    { name: "Contact", href: "/contact", icon: <FaEnvelope /> },
+    // { name: "Chatbot", href: "/chat", icon: <FiMessageCircle /> },
   ];
-
   // Detect scroll
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 0);
@@ -51,7 +54,7 @@ export const TopNav = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Open Command Palette with Ctrl+K / ⌘+K
+  // Command Palette shortcut
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
@@ -65,82 +68,87 @@ export const TopNav = () => {
 
   return (
     <>
+      {/* Top Header */}
       <header
         className={clsx(
-          "fixed top-4 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-200 w-[95%] max-w-6xl px-4",
+          "fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-6xl px-4 transition-all duration-200",
           scrolled
-            ? "bg-secondary/90 backdrop-blur-md rounded-full shadow-md px-4 py-2"
-            : "bg-transparent px-4 py-2"
+            ? "bg-secondary/90 backdrop-blur-md rounded-full shadow-md py-2"
+            : "bg-transparent py-2"
         )}
       >
         <div className="flex items-center justify-between gap-4">
-          {/* Left Side: Avatar + Nav */}
-          <div className="flex items-center gap-4">
-            <Avatar className="size-10">
-              <AvatarImage
-                draggable={false}
-                src="https://pbs.twimg.com/profile_images/1897311929028255744/otxpL-ke_400x400.jpg"
-              />
-              <AvatarFallback>AK</AvatarFallback>
-            </Avatar>
+          {/* Avatar */}
+          <Avatar className="w-10 h-10">
+            <AvatarImage
+              draggable={false}
+              src="https://pbs.twimg.com/profile_images/1897311929028255744/otxpL-ke_400x400.jpg"
+            />
+            <AvatarFallback>AK</AvatarFallback>
+          </Avatar>
 
-            {/* Nav (always visible, icons only on mobile) */}
-            <nav className="flex gap-4 sm:gap-6">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={clsx(
-                    "flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary",
-                    pathname === item.href
-                      ? "text-primary font-semibold"
-                      : "text-muted-foreground"
-                  )}
-                >
-                  <span className="text-lg">{item.icon}</span>
-                  {/* Hide labels on mobile */}
-                  <span className="hidden md:inline">{item.name}</span>
-                </Link>
-              ))}
-            </nav>
-          </div>
+          <nav className="hidden md:flex gap-4">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={clsx(
+                  "flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary",
+                  pathname === item.href
+                    ? "text-primary font-semibold"
+                    : "text-muted-foreground"
+                )}
+              >
+                <span>{item.name}</span>
+              </Link>
+            ))}
+          </nav>
 
-          {/* Right Side: Actions */}
+          {/* Right side: Search + Mode Toggle */}
           <div className="flex items-center gap-3">
-            {/* Fake search button (desktop only) */}
+            {/* Desktop: search with label */}
             <button
               onClick={() => setOpen(true)}
               className={cn(
-                open ? "" : "border",
                 "hidden sm:flex items-center gap-2 text-sm text-muted-foreground px-3 py-1.5 rounded-lg hover:bg-accent transition"
               )}
             >
-              <FaSearch className="text-muted-foreground" />
-              <span className="text-sm">Search…</span>
-              <kbd className="ml-20 rounded bg-none px-1.5 py-0.5 text-sm">
+              <FaSearch />
+              <span>Search…</span>
+              <kbd className="ml-2 rounded bg-none px-1.5 py-0.5 text-sm">
                 ⌘ K
               </kbd>
             </button>
 
-            {/* Mobile: just show search icon */}
+            {/* Mobile: just search icon */}
             <button
               onClick={() => setOpen(true)}
               className="sm:hidden p-2 rounded-lg hover:bg-accent transition"
             >
               <FaSearch className="text-lg" />
             </button>
-            {/* 
-            <Link href="/chat">
-              <Button variant="ghost" size="sm">
-                <MessageCircle className="size-5" />
-                <span className="sr-only">Open Chat</span>
-              </Button>
-            </Link> */}
 
             <ModeToggle />
           </div>
         </div>
       </header>
+
+      {/* Bottom Nav for Mobile */}
+      <nav className="fixed bottom-0 left-0 right-0 z-50 flex justify-around bg-secondary/90 backdrop-blur-md border-t border-border p-2 sm:hidden">
+        {navItems.map((item) => (
+          <Link
+            key={item.name}
+            href={item.href}
+            className={clsx(
+              "flex flex-col items-center justify-center text-muted-foreground transition-colors",
+              pathname === item.href && "text-primary"
+            )}
+          >
+            <span className="text-xl">{item.icon}</span>
+            <span className="text-xs mt-1">{item.name}</span> {/* Add label */}
+          </Link>
+        ))}
+      </nav>
 
       {/* Command Palette */}
       <CommandDialog open={open} onOpenChange={setOpen}>
@@ -167,17 +175,9 @@ export const TopNav = () => {
               onSelect={() => setTheme(theme === "dark" ? "light" : "dark")}
             >
               <span className="mr-2 text-lg">
-                {theme === "dark" ? (
-                  <SunDim className="size-5" />
-                ) : (
-                  <Moon className="size-5" />
-                )}
+                {theme === "dark" ? <SunDim /> : <Moon />}
               </span>
               Toggle Theme
-            </CommandItem>
-            <CommandItem onSelect={() => setChatOpen(true)}>
-              <MessageCircle className="mr-2 size-5" />
-              Open Chat
             </CommandItem>
           </CommandGroup>
         </CommandList>
