@@ -4,8 +4,8 @@ import TiltedCard from "./ui/tilted-card";
 export const ChatbotCard = () => {
   return (
     <Link
-      href="/chatbot"
-      className="flex-1 flex flex-col items-center justify-center rounded-xl grayscale"
+      href="/chat"
+      className="flex-1 bg-secondary flex flex-col items-center justify-center rounded-xl grayscale"
     >
       <TiltedCard
         imageSrc="https://media.tenor.com/JqjtUxrkuzsAAAAi/robot-dance.gif"

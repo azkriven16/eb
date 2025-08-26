@@ -67,7 +67,7 @@ export const Navbar = () => {
           <Avatar className="w-10 h-10">
             <AvatarImage
               draggable={false}
-              src="https://pbs.twimg.com/profile_images/1897311929028255744/otxpL-ke_400x400.jpg"
+              src="https://github.com/azkriven16.png"
             />
             <AvatarFallback>AK</AvatarFallback>
           </Avatar>

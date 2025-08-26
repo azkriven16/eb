@@ -1,8 +1,6 @@
 import { Providers } from "@/components/providers";
 import type { Metadata } from "next";
 import "./globals.css";
-import Preloader from "@/components/preloader";
-import { ASSETS } from "@/constants/assets";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="relative antialiased">
-        <Preloader assets={ASSETS} />
+        {/* <Preloader assets={ASSETS} /> */}
 
         <Providers>{children}</Providers>
       </body>

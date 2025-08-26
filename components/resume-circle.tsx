@@ -7,7 +7,7 @@ export const ResumeCircle = () => {
       href="/resume.pdf"
       target="_blank"
       rel="noopener noreferrer"
-      className="flex-1 flex items-center justify-center p-2 rounded-xl cursor-pointer pt-10"
+      className="flex-1 flex items-center justify-center md:justify-left p-2 rounded-xl cursor-pointer pt-10"
     >
       <CircularRevealHeading
         items={[

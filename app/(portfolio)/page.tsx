@@ -10,18 +10,18 @@ import { TechStackSection } from "@/components/sections/techstack";
 
 export default function Page() {
   return (
-    <main className="shell mt-10 space-y-10 md:space-y-20">
+    <main className="shell mt-10 space-y-10 md:space-y-20 mb-10 md:mb-20">
       <HeroSection />
       <ProjectsSection />
       <TechStackSection />
       <ProfileSection />
-      <OthersSection />
       <div className="flex flex-col md:flex-row gap-6">
-        <ResumeCircle />
         <ChatbotCard />
+        <ResumeCircle />
       </div>
-      <GuestbookSection />
       <CtaSection />
+      <GuestbookSection />
+      <OthersSection />
     </main>
   );
 }

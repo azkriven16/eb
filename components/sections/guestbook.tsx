@@ -87,7 +87,7 @@ export function GuestbookSection() {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-5 max-w-7xl mx-auto mt-10 md:mt-20">
+    <div className="flex flex-col lg:flex-row gap-5 max-w-7xl mx-auto">
       {/* Input Form - Left side on large screens */}
       <div className="lg:w-1/3">
         <Card>
@@ -126,7 +126,7 @@ export function GuestbookSection() {
         </Card>
         <div className="h-40 mt-3 hidden md:flex items-center justify-center bg-secondary rounded-2xl">
           <Image
-            src="https://media.tenor.com/Qm68f5zQrakAAAAj/dance-cute.gif"
+            src="https://media.tenor.com/FtskoCrIAt8AAAAj/toothless-dance.gif"
             alt="Dancing Gif"
             width={200}
             height={200}

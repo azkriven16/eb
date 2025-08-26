@@ -12,11 +12,10 @@ export const CtaSection = () => {
           <SectionHeader
             icon="📬"
             title="Get in Touch"
-            highlight="side projects"
-            description=" I’d love to hear from you — whether it’s about projects, ideas, or
-              just to say hi. Drop me a message or follow me on my socials
-              below!"
+            highlight="Facebook or LinkedIn"
+            description="I’d love to connect — whether you want to chat about projects, share ideas, or just say hello. Feel free to reach out through my socials below, preferably via Facebook or LinkedIn!"
           />
+
           <div className="flex gap-10">
             <Image
               src="https://media.tenor.com/8qupEQSIsCsAAAAi/hidamari-sketch-miyako.gif"

@@ -2,6 +2,7 @@
 
 import { FadeIn } from "@/animations/fade-in";
 import { techStack } from "@/constants/techstack";
+import { SectionHeader } from "../section-header";
 
 export function TechStackSection() {
   return (
@@ -9,22 +10,14 @@ export function TechStackSection() {
       <section className="space-y-10">
         <div className="flex flex-col-reverse lg:flex-row">
           <div className="space-y-5">
-            <div className="space-y-3">
-              {/* Heading with icon */}
-              <div className="flex items-center space-x-2">
-                <span className="heading">🪔</span>
-                <span className="heading">
-                  A bit of my <strong>craft</strong>
-                </span>
-              </div>
-
-              {/* Description paragraph */}
-              <p className="subheading max-w-2xl">
-                These are the core tools and technologies I use to build,
+            <SectionHeader
+              icon="🪔"
+              title="A bit of my craftsmanship"
+              highlight="tools and technologies"
+              description=" These are the core tools and technologies I use to build,
                 design, and ship projects—from frontend experiences to backend
-                systems.
-              </p>
-            </div>
+                systems."
+            />
 
             <div className="flex flex-col md:flex-row gap-5 mt-5 md:mt-10">
               {Object.entries(techStack).map(([category, items]) => (

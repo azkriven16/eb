@@ -50,7 +50,7 @@ export const ProjectsSection = () => {
 function ProjectCard({ project }: { project: (typeof projectsData)[0] }) {
   return (
     <Link href={`/projects/${project.slug}`}>
-      <div className="bg-card rounded-2xl overflow-hidden group cursor-pointer aspect-square">
+      <div className="bg-card rounded-2xl overflow-hidden group cursor-pointer h-[400px] md:h-[500px]">
         <div className="relative p-4">
           <div className="relative overflow-hidden rounded-xl">
             {/* Static image */}
@@ -75,7 +75,7 @@ function ProjectCard({ project }: { project: (typeof projectsData)[0] }) {
         </div>
 
         {/* Project Info */}
-        <div className="p-6 space-y-4">
+        <div className="px-6 space-y-4">
           <div>
             <h2 className="text-xl font-semibold text-foreground mb-2">
               {project.title}

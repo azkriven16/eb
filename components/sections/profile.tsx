@@ -1,21 +1,14 @@
 "use client";
 
 import { FadeIn } from "@/animations/fade-in";
-import {
-  FaEnvelope,
-  FaFacebookMessenger,
-  FaLinkedinIn,
-  FaXTwitter,
-} from "react-icons/fa6";
-import { Highlighter } from "../ui/highlighter";
-import Lanyard from "../ui/lanyard";
 import { SectionHeader } from "../section-header";
+import Lanyard from "../ui/lanyard";
 
 export function ProfileSection() {
   return (
     <FadeIn>
       <section className="flex flex-col-reverse lg:flex-row h-full w-full">
-        <div className="flex-1 pt-[350px] sm:pt-[450px] md:pt-[700px] lg:pt-20">
+        <div className="flex-1 pt-[350px] sm:pt-[450px] md:pt-[700px] lg:pt-0">
           <div className="space-y-5">
             <SectionHeader
               icon="🙋‍♂️"

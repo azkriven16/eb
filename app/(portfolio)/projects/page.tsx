@@ -5,7 +5,7 @@ import { TechStackSection } from "@/components/sections/techstack";
 
 export default function Projects() {
   return (
-    <main className="shell mt-20 md:mt-30 space-y-10 mb-10 md:mb-20">
+    <main className="shell mt-20 md:mt-30 space-y-10 md:space-y-20 mb-10 md:mb-20">
       <SectionHeader
         icon="📂"
         title="Projects"

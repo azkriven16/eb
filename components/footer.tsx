@@ -94,24 +94,6 @@ export const Footer = () => {
 
           <CommandSeparator />
 
-          {/* Socials */}
-          <CommandGroup heading="Socials">
-            {socialLinks.map((social) => (
-              <CommandItem
-                key={social.href}
-                onSelect={() => {
-                  window.open(social.href, "_blank");
-                  setOpen(false);
-                }}
-              >
-                <span className="mr-2 text-lg">{social.icon}</span>
-                {social.label}
-              </CommandItem>
-            ))}
-          </CommandGroup>
-
-          <CommandSeparator />
-
           {/* Actions */}
           <CommandGroup heading="Actions">
             <CommandItem
@@ -137,6 +119,33 @@ export const Footer = () => {
               <span className="mr-2 text-base grayscale">🤖</span>
               Chatbot
             </CommandItem>
+
+            {/* Resume Action */}
+            <CommandItem
+              onSelect={() => {
+                window.open("/resume.pdf", "_blank");
+                setOpen(false);
+              }}
+            >
+              <span className="mr-2 text-base grayscale">📄</span>
+              Resume
+            </CommandItem>
+          </CommandGroup>
+          <CommandSeparator />
+          {/* Socials */}
+          <CommandGroup heading="Socials">
+            {socialLinks.map((social) => (
+              <CommandItem
+                key={social.href}
+                onSelect={() => {
+                  window.open(social.href, "_blank");
+                  setOpen(false);
+                }}
+              >
+                <span className="mr-2 text-lg">{social.icon}</span>
+                {social.label}
+              </CommandItem>
+            ))}
           </CommandGroup>
         </CommandList>
       </CommandDialog>
