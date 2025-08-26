@@ -8,7 +8,7 @@ export const FadeIn = ({ children }: PropsWithChildren) => {
       variants={fadeIn}
       viewOptions={{
         margin: "0px 0px -150px 0px",
-        // once: true,
+        once: true,
       }}
       transition={{
         type: "spring",

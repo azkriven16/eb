@@ -1,13 +1,11 @@
 "use client";
 import { PropsWithChildren, useEffect, useState } from "react";
-import { TopNav } from "./navbar/top-nav";
 import ClickSpark from "./ui/click-spark";
 import Noise from "./ui/noise";
 import { ScrollProgress } from "./ui/scroll-progress";
 import TargetCursor from "./ui/target-cursor";
 import { ThemeProvider } from "./ui/theme-provider";
 import ClickSfx from "./ui/click-sfx";
-import { Footer } from "./footer";
 import { Toaster } from "./ui/sonner";
 
 export const Providers = ({ children }: PropsWithChildren) => {
@@ -28,9 +26,7 @@ export const Providers = ({ children }: PropsWithChildren) => {
           sparkCount={8}
           duration={400}
         >
-          <TopNav />
           {children}
-          <Footer />
         </ClickSpark>
         <Noise
           patternSize={250}

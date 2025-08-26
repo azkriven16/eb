@@ -32,10 +32,10 @@ export function Highlighter({
   children,
   action = "highlight",
   color = "#ffd1dc", // Default pink color
-  strokeWidth = 1.5,
-  animationDuration = 5000,
-  iterations = 2,
-  padding = 2,
+  strokeWidth = 1,
+  animationDuration = 2000,
+  iterations = 1,
+  padding = 1,
   multiline = true,
   className,
 }: HighlighterProps) {
