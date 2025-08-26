@@ -20,7 +20,7 @@ interface GuestbookEntry {
   timestamp: Date;
 }
 
-export function Guestbook() {
+export function GuestbookSection() {
   const [entries, setEntries] = useState<GuestbookEntry[]>([
     {
       id: "1",

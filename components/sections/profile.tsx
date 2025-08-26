@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa6";
 import { Highlighter } from "../ui/highlighter";
 import Lanyard from "../ui/lanyard";
+import { SectionHeader } from "../section-header";
 
 export function ProfileSection() {
   return (
@@ -16,25 +17,17 @@ export function ProfileSection() {
       <section className="flex flex-col-reverse lg:flex-row h-full w-full">
         <div className="flex-1 pt-[350px] sm:pt-[450px] md:pt-[700px] lg:pt-20">
           <div className="space-y-5">
-            <h1 className="heading bg-secondary w-fit p-4">
-              A short <strong>introduction</strong>
-            </h1>
-            <p className="subheading">
-              I started coding about{" "}
-              <Highlighter
-                action="underline"
-                padding={4}
-                multiline={false}
-                color="oklch(79.5% 0.184 86.047)"
-                className="text-foreground"
-              >
-                {new Date().getFullYear() - 2021} years ago
-              </Highlighter>{" "}
-              — and recently graduated with a Bachelor of Science in Information
-              Technology degree in 2025. Over the years, I’ve gained hands-on
-              experience through internships and part-time roles at various tech
-              companies and startups.
-            </p>
+            <SectionHeader
+              icon="🙋‍♂️"
+              title="A bit about myself"
+              highlight="4 years ago"
+              description="  I started coding about 4 years ago
+                — and recently graduated with a Bachelor of Science in
+                Information Technology degree in 2025. Over the years, I’ve
+                gained hands-on experience through internships and part-time
+                roles at various tech companies and startups."
+            />
+            <div className="space-y-3"></div>
 
             <div className="space-y-2">
               <h3 className="text-xl font-bold">Bio</h3>

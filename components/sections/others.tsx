@@ -1,11 +1,8 @@
-import { CtaSection } from "@/components/sections/cta";
-import { ProfileSection } from "@/components/sections/profile";
 import Image from "next/image";
 
-export default function AboutPage() {
+export const OthersSection = () => {
   return (
-    <main className="shell pt-10">
-      <ProfileSection />
+    <div>
       <div className="space-y-5 pt-10 md:pt-20">
         <p className="subheading max-w-2xl">
           Places I learn from, stay updated, and discover fresh ideas—whether
@@ -111,16 +108,13 @@ export default function AboutPage() {
 
         {/* Programming Podcast */}
         <div className="p-5 rounded-2xl bg-secondary shadow-lg w-full space-y-4 items-center justify-center relative text-muted-foreground hidden md:flex">
-          <p className="absolute top-4 left-4 text-xs">
-            just some random text ❓
-          </p>
+          <p className="absolute top-4 left-4 text-xs">my favorite quote</p>
           <div className="text-4xl leading-relaxed tracking-wide">
             L̴͈̻̆̈̎͜͝ḯ̸͉̼̔̀f̶̜̭̘͖̹͆͋́̊̓͗̈́̋̕ͅe̶̯̦̮̙̹̰̎̌̿͛͊̚͜ ̸͕̮͖͐̄̈́̾͐͛ḅ̴̨̏͒ȇ̵̢̻̱̋̉͂̉͆͝͝͝f̴̢̥̼͓͍͍̳̘̌͒̓o̶̭̮̺͔͕͎̍͌͌͜͝ͅͅŕ̴̨͚͎̹̮̠̙̲̾̈̓̋̓̕e̵̛͚̪̘͇̗͓͕̗͆̓͊̿̃͘ ̸̛͉̮̬̿̽͒͑̂̍͝d̴̹̟͓̑̈́͌̑̀͐̇̚͝͝ê̷͇̣͌̍a̶̡͙͗͛̒͊̏̍t̶̥͖͔̰̋̐̿̔̊̈́h̵̹͈̬̥̮͇͙̑͊̑̇͛͘͜͝,̶̡̛̣̗̠͕̗̦̠̈ ̵̧̦͈̜͇̥̩͔̯̮̄͋͌̄̌̔s̶̡͖̩̝͚̖̔͛͋̉̓͒̔̈͑͐t̸̰̩̄̌ͅr̶̲͉͉͔̬͓͑̎̅̐̈́e̴͎̓̐̓̀̽̃̕ͅn̸͖̣̼͕͒͋g̵̻̱̭̟͋̐͑͗̈́͝t̷̙͙̍̈̕͜h̷̜̭̗̞͊͆̀̀́̀ ̷̬͍͚̗̩̭̺̤̮͖͂̐͋̇͌b̵̨͉͙̝̱͖̤̋̉́͑̓̓̐̆̑͘ͅe̵͖̤̱̙̲͓͚͖̱̱͌̄ḟ̵̰̋̈́̀o̷͖̲̟̍͐͊̇͂̍̚ͅr̸̗͈̈́̇̌̑̒͒͘͠è̷̘̮̻͖̹̔̋͋̽̋͘͜͝ ̴̟̠̭̟͇̼͔̤̹͒́̋̇̎̓̈́̑̕ẅ̴̡̨͍̙̙̱̪̼̱͔́͂̓̅́͌̂͌̃͠e̸̡̥͂̋̌̾͝a̸̘̬̪̻̫̳̻̮̩͐̇̈́̅͋ķ̴̝̣̖̗̮̊̽n̵̡̧̪͖̼̆̋͐̈́͊̏̌̄͘͜͝ë̴̦́͛̍̓͛̈́̋̚͝ş̸̦͚͓̩͇͚̩̟͔̔̍s̴͙̦̩̬͝,̶̟̻͂̌͋͒̈̉͆͠͝ ̷̨̪͎͔̠͋͆̿́͑͛͋̏j̸͓̳̺̝͍̩̅o̸͔̹̩̾̉̒͌̈́̏̈́͜ṷ̷̧͙̹̎́͘r̵̨̯̆͛͌̋n̸̢̛̪̯̊̄ȩ̷̨̧̘̤͍̲̘͇͔̈́y̴̥̙̪͇̎̊͗̈̎̀̈́̋ͅ ̷̘͍̰̭̳̮̉̽͊̆̐̆̏̓͠b̶͕̯̮͂͂͒̔́͐̓̔̕é̷͎̱̻̦ͅf̷̧̡̳̺̗̟̥͇͔̳͋̈͆̊̈͊̓͂͝͝ő̷̧̧͓̼̜̖̤̳r̸̰̤̈́̌̂̑ȩ̵̝̺̬͔̈́͛́̀̐͠ͅ ̷̛̖̬̀̉̾̈́͊̓͝ ̶̱̗̪̽̔̇̉̅ ̷̛̖̯͍̈́̈́̈͠͠͠ ̵̦͔̥͙̉̎̐̋̓͒̐͛ ̸̖͉̞̥̠̖̂͂͑̋̏͑͋̚̕ ̵̬͙͑̇̈́̿͋̾̒̋̕͠ ̴̧̪̙̀ ̷̡̫͖̳̗̀͛͂̌̐̏͝ ̷͎̹̟̀̉͐͆͠
             ̷̧̱̠̦̞̻̺͉̳̒͑͋͝ͅ ̸̠̋̋̓̉̉͘ ̸̱͈̝͎̻̱̯̖͈̏̾̑̎̊̊́̏͐ ̶̢̳̖̖̱͙͓͖̬̋̓̈́̐̈́͠ ̷̡̲̥̟͖͈̩̅̊̐͜ ̶̢̧͖͇̰̼͕̘̎̾̉͊̋͊̽̍d̸̬͎̝̲̘̞̠͖̗̂̑̌̒̚̚͠͝ḛ̴̛̗̰̭̊̿s̷̘̘̳̭̺̖̽̈̀̈́̐̌̕͠t̸͍̉̓̉̈͊͝i̶̥̐͒̈́̽̍̋̊͑̚͝n̴̜̖͚̝͛͜ͅà̴̹̎͐t̵̨̤̜͇̦͇̩̮̞̥̏̓̎́i̴̢̧͓̎o̵̹̊͝n̸̦͉͈̤̖̣̖̱̿̂͌͋͗͂̿̇̕͝
           </div>
         </div>
       </div>
-      <CtaSection />
-    </main>
+    </div>
   );
-}
+};
