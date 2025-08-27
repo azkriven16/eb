@@ -72,7 +72,10 @@ function Hero() {
                   showCursor={true}
                   cursorCharacter="|"
                 />
-                <span className="ml-1">Developer || Coder</span>
+                <span className="ml-1">
+                  Developer{" "}
+                  <span className="hidden md:inline-block">|| Coder</span>
+                </span>
               </span>
             </div>
           </div>

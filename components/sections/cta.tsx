@@ -2,6 +2,7 @@ import { FadeIn } from "@/animations/fade-in";
 import { socialLinks } from "@/constants/socials";
 import Image from "next/image";
 import { SectionHeader } from "../section-header";
+import Link from "next/link";
 
 export const CtaSection = () => {
   return (
@@ -30,7 +31,7 @@ export const CtaSection = () => {
             <div className="space-y-2">
               <h3 className="text-xl font-bold">On the web</h3>
               {socialLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
                   href={link.href}
                   target="_blank"
@@ -38,7 +39,7 @@ export const CtaSection = () => {
                 >
                   {link.icon}
                   <p>{link.label}</p>
-                </a>
+                </Link>
               ))}
             </div>
           </div>

@@ -20,6 +20,7 @@ import { socialLinks } from "@/constants/socials";
 import { Moon, SunDim } from "lucide-react";
 import { useTheme } from "next-themes";
 import { navItems } from "@/constants/nav-items";
+import Link from "next/link";
 export const Footer = () => {
   const { theme, setTheme } = useTheme();
   const [showButton, setShowButton] = useState(false);
@@ -38,9 +39,9 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="shell mb-10 md:mb-20 border-t relative">
+    <footer className="shell mb-24 md:mb-20 border-t relative">
       <div className="flex items-center flex-col-reverse md:flex-row justify-between">
-        <p className="text-sm md:text-base text-muted-foreground mt-10 md:mt-20">
+        <p className="text-sm md:text-base text-muted-foreground mt-5 md:mt-20">
           © 2025 Euger Bonete Jr. All rights reserved.
         </p>
         <div className="text-sm md:text-base text-muted-foreground mt-10 md:mt-20 space-x-5">
@@ -50,13 +51,20 @@ export const Footer = () => {
           >
             Quick Links
           </button>
-          <a
+          <Link
             target="_blank"
             href="https://github.com/azkriven16/eb"
             className="cursor-pointer hover:text-foreground"
           >
             Source Code
-          </a>
+          </Link>
+          <Link
+            target="_blank"
+            href="/chat"
+            className="cursor-pointer hover:text-foreground"
+          >
+            Chatbot
+          </Link>
         </div>
       </div>
 

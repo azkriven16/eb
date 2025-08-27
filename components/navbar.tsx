@@ -63,14 +63,15 @@ export const Navbar = () => {
         )}
       >
         <div className="flex items-center justify-between gap-4">
-          {/* Avatar */}
-          <Avatar className="w-10 h-10">
-            <AvatarImage
-              draggable={false}
-              src="https://github.com/azkriven16.png"
-            />
-            <AvatarFallback>AK</AvatarFallback>
-          </Avatar>
+          <Link href="/">
+            <Avatar className="w-10 h-10">
+              <AvatarImage
+                draggable={false}
+                src="https://github.com/azkriven16.png"
+              />
+              <AvatarFallback>AK</AvatarFallback>
+            </Avatar>
+          </Link>
 
           <nav className="hidden md:flex gap-4">
             {navItems.map((item) => (

@@ -87,26 +87,26 @@ export default async function ProjectPage({
           <div className="flex gap-3">
             {project.liveUrl && (
               <Button asChild>
-                <a
+                <Link
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <ExternalLink className="w-4 h-4 mr-2" />
                   Live Demo
-                </a>
+                </Link>
               </Button>
             )}
             {project.githubUrl && (
               <Button variant="outline" asChild>
-                <a
+                <Link
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <Github className="w-4 h-4 mr-2" />
                   GitHub
-                </a>
+                </Link>
               </Button>
             )}
           </div>

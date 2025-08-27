@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { SectionHeader } from "../section-header";
+import Link from "next/link";
 
 export const OthersSection = () => {
   return (
@@ -134,14 +135,14 @@ function ResourceLink({ href, label }: ResourceLinkProps) {
   return (
     <div className="flex gap-5 subheading">
       {href ? (
-        <a
+        <Link
           href={href}
           target="_blank"
           rel="noopener noreferrer"
           className="text-sm text-muted-foreground hover:text-blue-500 font-semibold cursor-pointer"
         >
           {label}
-        </a>
+        </Link>
       ) : (
         <p className="font-semibold">{label}</p>
       )}

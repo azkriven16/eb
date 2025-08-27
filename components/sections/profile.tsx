@@ -3,6 +3,7 @@
 import { FadeIn } from "@/animations/fade-in";
 import { SectionHeader } from "../section-header";
 import Lanyard from "../ui/lanyard";
+import Link from "next/link";
 
 export function ProfileSection() {
   return (
@@ -34,13 +35,13 @@ export function ProfileSection() {
                 <p className="font-medium">2022</p>
                 <p>
                   Software Engineering Intern at{" "}
-                  <a
+                  <Link
                     target="_blank"
                     href="https://www.digipay.ph/"
                     className="cursor-target external-link"
                   >
                     Digipay
-                  </a>
+                  </Link>
                 </p>
               </div>
 
@@ -48,13 +49,13 @@ export function ProfileSection() {
                 <p className="font-medium">2024</p>
                 <p>
                   Part-time Software Developer at{" "}
-                  <a
+                  <Link
                     target="_blank"
                     href="https://rocketshyft.com/"
                     className="cursor-target external-link"
                   >
                     Rocketshyft
-                  </a>
+                  </Link>
                 </p>
               </div>
 
@@ -63,13 +64,13 @@ export function ProfileSection() {
                 <p>
                   Graduated with a Bachelor of Science in Information Technology
                   at{" "}
-                  <a
+                  <Link
                     target="_blank"
                     href="https://rocketshyft.com/"
                     className="cursor-target external-link"
                   >
                     Northern Iloilo State University
-                  </a>
+                  </Link>
                 </p>
               </div>
             </div>
