@@ -1,6 +1,8 @@
-# New Portfolio (Next.js)
+# Euger Portfolio (Next.js)
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app). It showcases a portfolio with desktop, mobile, and GIF previews.
+Welcome to Euger Bonete's portfolio! This project is built with Next.js
+using create-next-app
+and features a showcase of desktop, mobile, and GIF previews of my work.
 
 ## Screenshots
 
