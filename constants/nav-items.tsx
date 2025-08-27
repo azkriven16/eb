@@ -5,4 +5,5 @@ export const navItems = [
   { name: "About", href: "/about", icon: <FaUser /> },
   { name: "Projects", href: "/projects", icon: <FaFolderOpen /> },
   { name: "Contact", href: "/contact", icon: <FaEnvelope /> },
+  { name: "Chatbot", href: "/chat", icon: <FaEnvelope /> },
 ];

@@ -77,6 +77,7 @@ export const Navbar = () => {
             {navItems.map((item) => (
               <Link
                 key={item.name}
+                target={item.href === "/chat" ? "_blank" : "_self"}
                 href={item.href}
                 className={clsx(
                   "flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary",

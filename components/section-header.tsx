@@ -34,7 +34,7 @@ export function SectionHeader({
               <span key={i}>
                 {part}
                 <Highlighter
-                  action="underline"
+                  action="box"
                   padding={4}
                   multiline={false}
                   color="oklch(79.5% 0.184 86.047)"

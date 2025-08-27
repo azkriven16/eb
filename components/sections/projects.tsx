@@ -7,7 +7,7 @@ import Link from "next/link";
 import { FadeIn } from "@/animations/fade-in";
 
 // Available filters
-const categories = ["all", "frontend", "fullstack", "backend"];
+const categories = ["all", "frontend", "fullstack"];
 
 export const ProjectsSection = () => {
   const [activeCategory, setActiveCategory] = useState("all");

@@ -4,16 +4,24 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useChat } from "@ai-sdk/react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useRef, useState } from "react";
-import { FiAlertCircle, FiRotateCcw, FiSend } from "react-icons/fi";
+import { useRef, useState, useEffect } from "react";
+import {
+  FiAlertCircle,
+  FiRotateCcw,
+  FiSend,
+  FiMoon,
+  FiSun,
+  FiExternalLink,
+} from "react-icons/fi";
+import { useTheme } from "next-themes";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Input } from "./ui/input";
 
-// --- Typing Indicator Component ---
+// --- Typing Indicator ---
 function TypingIndicator() {
   return (
-    <div className="flex items-center gap-1 px-3 py-2 bg-muted rounded-lg w-fit">
+    <div className="flex items-center gap-1 px-3 py-2 bg-muted/60 rounded-full w-fit">
       {[0, 1, 2].map((i) => (
         <motion.span
           key={i}
@@ -21,7 +29,7 @@ function TypingIndicator() {
           animate={{ opacity: [0.2, 1, 0.2] }}
           transition={{
             duration: 1.2,
-            repeat: Number.POSITIVE_INFINITY,
+            repeat: Infinity,
             delay: i * 0.2,
           }}
         />
@@ -40,24 +48,69 @@ export function ChatBot() {
     status,
     stop,
     regenerate,
-    setMessages,
     resumeStream,
   } = useChat();
   const [paused, setPaused] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
+  const inputRef = useRef<HTMLInputElement>(null);
   const isLoading = status === "streaming" || status === "submitted";
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isLoading]);
+
+  // Auto-focus input field when component mounts
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
+  // Handle keypress anywhere on the page to focus input
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      // Don't interfere with keyboard shortcuts or special keys
+      if (
+        e.ctrlKey ||
+        e.metaKey ||
+        e.altKey ||
+        e.key === "Tab" ||
+        e.key === "Escape"
+      ) {
+        return;
+      }
+
+      // Don't focus if already focused or if typing in another input
+      if (
+        document.activeElement === inputRef.current ||
+        document.activeElement?.tagName === "INPUT" ||
+        document.activeElement?.tagName === "TEXTAREA"
+      ) {
+        return;
+      }
+
+      // Focus input for printable characters
+      if (e.key.length === 1 && inputRef.current) {
+        inputRef.current.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+    return () => document.removeEventListener("keydown", handleKeyPress);
+  }, []);
 
   const handleStopResume = () => {
     if (!paused) {
-      stop(); // stop the stream
+      stop();
       setPaused(true);
     } else {
-      resumeStream(); // resume the stream
+      resumeStream();
       setPaused(false);
     }
   };
+
   const suggestions = [
     "Tell me about your experience",
     "Show me your projects",
@@ -65,97 +118,91 @@ export function ChatBot() {
     "Give me a summary about you",
   ];
 
-  const handleSuggestionClick = (text: string) => {
-    if (!isLoading) {
-      sendMessage({ text });
-      setInput("");
-    }
-  };
-
   return (
-    <div className="container mx-auto px-2 sm:px-4 max-w-6xl h-screen flex flex-col rounded-lg">
-      {/* Error */}
+    <div className="flex flex-col h-screen bg-background">
+      {/* Header */}
+      <header className="fixed w-full z-10 top-0 border-b p-4 flex items-center justify-between bg-background/70 backdrop-blur">
+        <a
+          href="/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+        >
+          <FiExternalLink className="w-4 h-4" />
+          <span className="hidden sm:inline">Euger's Portfolio</span>
+        </a>
+
+        <h1 className="text-xl sm:text-2xl font-bold tracking-tight">
+          <span className="text-primary">Euger</span>GPT
+        </h1>
+
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          className="p-2"
+        >
+          <FiSun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+          <FiMoon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <span className="sr-only">Toggle theme</span>
+        </Button>
+      </header>
+
+      {/* Error Banner */}
       <AnimatePresence>
         {error && (
-          <ScrollArea className="flex-1 p-4 h-[200px]">
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              className="m-3 rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive"
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            className="m-3 rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive"
+          >
+            <div className="flex items-center gap-2 font-medium">
+              <FiAlertCircle className="w-4 h-4" />
+              Error
+            </div>
+            <p className="mt-1 break-words">{error.message}</p>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={clearError}
+              className="mt-2"
             >
-              <div className="flex items-center gap-2 font-medium">
-                <FiAlertCircle className="w-4 h-4" />
-                Error
-              </div>
-              <p className="mt-1 break-words overflow-wrap-anywhere">
-                {error.message}
-              </p>
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={clearError}
-                className="mt-2"
-              >
-                Dismiss
-              </Button>
-            </motion.div>
-          </ScrollArea>
+              Dismiss
+            </Button>
+          </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Messages */}
-      <ScrollArea className="flex-1 p-2 sm:p-4">
-        <div className="space-y-4 min-h-full">
+      {/* Chat Area */}
+      <ScrollArea className="flex-1 p-4 mt-20">
+        <div className="space-y-6 max-w-3xl mx-auto">
           {messages.length === 0 ? (
-            <div className="flex flex-col items-center justify-center min-h-[calc(100vh-200px)] gap-4 sm:gap-6 text-muted-foreground px-2">
-              <div className="text-center space-y-2 sm:space-y-4 max-w-2xl">
-                <h1 className="text-2xl sm:text-4xl font-bold text-foreground">
-                  Portfolio Assistant
-                </h1>
-                <p className="text-sm sm:text-lg text-muted-foreground">
-                  Ask me anything about Euger&apos;s experience, projects, and
-                  skills.
+            <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground gap-6">
+              <div>
+                <h2 className="text-2xl sm:text-4xl font-semibold text-foreground">
+                  Welcome to <span className="text-primary">EugerGPT</span>
+                </h2>
+                <p className="text-sm sm:text-lg mt-2">
+                  Your personal portfolio assistant. Ask me about Euger&apos;s
+                  skills, projects, or experience.
                 </p>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full max-w-md sm:max-w-none sm:flex sm:flex-wrap sm:justify-center">
+
+              {/* Improved suggestions layout for mobile */}
+              <div className="flex flex-col gap-3 w-full max-w-lg px-4 sm:px-0">
                 {suggestions.map((s, i) => (
                   <Button
                     key={i}
-                    variant="secondary"
+                    variant="outline"
                     size="sm"
-                    className="rounded-full text-xs sm:text-sm whitespace-nowrap"
-                    onClick={() => handleSuggestionClick(s)}
+                    className="rounded-full text-xs sm:text-sm py-2 px-4 h-auto whitespace-normal text-center leading-relaxed"
+                    onClick={() => sendMessage({ text: s })}
                   >
                     {s}
                   </Button>
                 ))}
               </div>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  if (input.trim() && !isLoading) {
-                    sendMessage({ text: input });
-                    setInput("");
-                  }
-                }}
-                className="hidden sm:flex w-full gap-2 mt-2 sm:mt-4"
-              >
-                <Input
-                  className="flex-1 resize-none rounded-md border bg-background px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                  placeholder="Ask me anything..."
-                  value={input}
-                  onChange={(e) => setInput(e.currentTarget.value)}
-                  disabled={isLoading}
-                />
-                <Button
-                  type="submit"
-                  disabled={!input.trim() || isLoading}
-                  size="icon"
-                >
-                  <FiSend className="w-4 h-4 sm:w-5 sm:h-5" />
-                </Button>
-              </form>
             </div>
           ) : (
             <>
@@ -170,53 +217,44 @@ export function ChatBot() {
                   }`}
                 >
                   <div
-                    className={`max-w-[90%] sm:max-w-[80%] ${
-                      message.role === "user" ? "order-2" : "order-1"
+                    className={`max-w-[85%] rounded-xl px-4 py-3 text-sm shadow-sm ${
+                      message.role === "user"
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-muted text-foreground"
                     }`}
                   >
-                    <div
-                      className={`rounded-lg px-3 sm:px-4 py-2 text-sm ${
-                        message.role === "user"
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-muted text-foreground"
-                      }`}
-                    >
-                      {message.parts.map((part, i) =>
-                        part.type === "text" ? (
-                          <ReactMarkdown
-                            key={`${message.id}-${i}`}
-                            remarkPlugins={[remarkGfm]}
-                          >
-                            {part.text}
-                          </ReactMarkdown>
-                        ) : null
-                      )}
-                    </div>
-
-                    {/* Regenerate button */}
-                    {message.role === "assistant" &&
-                      index === messages.length - 1 && (
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => regenerate()}
-                          disabled={isLoading}
-                          className="mt-1 text-xs text-muted-foreground hover:text-foreground"
+                    {message.parts.map((part, i) =>
+                      part.type === "text" ? (
+                        <ReactMarkdown
+                          key={`${message.id}-${i}`}
+                          remarkPlugins={[remarkGfm]}
                         >
-                          <FiRotateCcw className="w-3 h-3 mr-1" />
-                          Regenerate
-                        </Button>
-                      )}
+                          {part.text}
+                        </ReactMarkdown>
+                      ) : null
+                    )}
                   </div>
+
+                  {/* Regenerate button */}
+                  {message.role === "assistant" &&
+                    index === messages.length - 1 && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => regenerate()}
+                        disabled={isLoading}
+                        className="mt-1 text-xs text-muted-foreground hover:text-foreground"
+                      >
+                        <FiRotateCcw className="w-3 h-3 mr-1" />
+                        Regenerate
+                      </Button>
+                    )}
                 </motion.div>
               ))}
-              {/* Typing Indicator + Stop/Resume */}
+
+              {/* Typing Indicator */}
               {isLoading && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="flex items-center gap-2 justify-start"
-                >
+                <div className="flex items-center gap-3 mt-2">
                   <TypingIndicator />
                   <Button
                     variant="ghost"
@@ -224,22 +262,19 @@ export function ChatBot() {
                     onClick={handleStopResume}
                     className="text-xs"
                   >
-                    {paused ? "Resume" : "Stop"}
+                    Stop
+                    {/* "{paused ? "Resume" : "Stop"}" */}
                   </Button>
-                </motion.div>
+                </div>
               )}
-
               <div ref={messagesEndRef} />
             </>
           )}
         </div>
       </ScrollArea>
 
-      <div
-        className={`border-t p-2 sm:p-3 ${
-          messages.length === 0 ? "sm:hidden" : ""
-        }`}
-      >
+      {/* Input Box */}
+      <footer className="border-t bg-background p-3">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -248,19 +283,12 @@ export function ChatBot() {
               setInput("");
             }
           }}
-          className="flex gap-2"
+          className="flex gap-2 max-w-3xl mx-auto"
         >
           <Input
-            className={`flex-1 resize-none rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent ${
-              messages.length === 0
-                ? "px-4 py-4 text-base placeholder:text-base" // Larger input when no messages
-                : "px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base" // Normal size with messages
-            }`}
-            placeholder={
-              messages.length === 0
-                ? "Ask me anything..."
-                : "Type your message..."
-            }
+            ref={inputRef}
+            className="flex-1 resize-none rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="Message EugerGPT..."
             value={input}
             onChange={(e) => setInput(e.currentTarget.value)}
             disabled={isLoading}
@@ -277,13 +305,15 @@ export function ChatBot() {
           <Button
             type="submit"
             disabled={!input.trim() || isLoading}
-            size={messages.length === 0 ? "default" : "icon"}
-            className={messages.length === 0 ? "px-4" : ""}
+            className="rounded-xl px-4"
           >
-            <FiSend className="w-4 h-4 sm:w-5 sm:h-5" />
+            <FiSend className="w-5 h-5" />
           </Button>
         </form>
-      </div>
+        <p className="text-center text-[11px] text-muted-foreground mt-2">
+          EugerGPT may make mistakes. Consider verifying important information.
+        </p>
+      </footer>
     </div>
   );
 }
