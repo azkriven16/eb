@@ -16,13 +16,11 @@ import {
 } from "@/components/ui/command";
 
 // Icons
-import { socialLinks } from "@/constants/socials";
-import { Moon, SunDim } from "lucide-react";
-import { useTheme } from "next-themes";
 import { navItems } from "@/constants/nav-items";
+import { socialLinks } from "@/constants/socials";
+import { useTheme } from "next-themes";
 import Link from "next/link";
 export const Footer = () => {
-  const { theme, setTheme } = useTheme();
   const [showButton, setShowButton] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -53,10 +51,10 @@ export const Footer = () => {
           </button>
           <Link
             target="_blank"
-            href="https://github.com/azkriven16/eb"
+            href="/guestbook"
             className="cursor-pointer hover:text-foreground"
           >
-            Source Code
+            Leave a note
           </Link>
           <Link
             target="_blank"
@@ -104,19 +102,6 @@ export const Footer = () => {
 
           {/* Actions */}
           <CommandGroup heading="Actions">
-            <CommandItem
-              onSelect={() => setTheme(theme === "dark" ? "light" : "dark")}
-            >
-              <span className="mr-2 text-lg">
-                {theme === "dark" ? (
-                  <SunDim className="size-4" />
-                ) : (
-                  <Moon className="size-4" />
-                )}
-              </span>
-              Toggle Theme
-            </CommandItem>
-
             {/* Chatbot Action */}
             <CommandItem
               onSelect={() => {

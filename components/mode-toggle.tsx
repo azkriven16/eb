@@ -13,6 +13,7 @@ type props = {
 export const ModeToggle = ({ className }: props) => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
+
   const changeTheme = async () => {
     if (!buttonRef.current) return;
 
@@ -46,6 +47,7 @@ export const ModeToggle = ({ className }: props) => {
       }
     );
   };
+
   return (
     <Button variant="ghost" size="sm" ref={buttonRef} onClick={changeTheme}>
       {isDarkMode ? (

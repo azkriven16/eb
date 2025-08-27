@@ -136,7 +136,6 @@ export const Navbar = () => {
           </Link>
         ))}
       </nav>
-
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput placeholder="Type a command or search…" />
         <CommandList>
@@ -160,6 +159,31 @@ export const Navbar = () => {
 
           <CommandSeparator />
 
+          {/* Actions */}
+          <CommandGroup heading="Actions">
+            {/* Chatbot Action */}
+            <CommandItem
+              onSelect={() => {
+                window.location.href = "/chat";
+                setOpen(false);
+              }}
+            >
+              <span className="mr-2 text-base grayscale">🤖</span>
+              Chatbot
+            </CommandItem>
+
+            {/* Resume Action */}
+            <CommandItem
+              onSelect={() => {
+                window.open("/resume.pdf", "_blank");
+                setOpen(false);
+              }}
+            >
+              <span className="mr-2 text-base grayscale">📄</span>
+              Resume
+            </CommandItem>
+          </CommandGroup>
+          <CommandSeparator />
           {/* Socials */}
           <CommandGroup heading="Socials">
             {socialLinks.map((social) => (
@@ -174,35 +198,6 @@ export const Navbar = () => {
                 {social.label}
               </CommandItem>
             ))}
-          </CommandGroup>
-
-          <CommandSeparator />
-
-          {/* Actions */}
-          <CommandGroup heading="Actions">
-            <CommandItem
-              onSelect={() => setTheme(theme === "dark" ? "light" : "dark")}
-            >
-              <span className="mr-2 text-lg">
-                {theme === "dark" ? (
-                  <SunDim className="size-4" />
-                ) : (
-                  <Moon className="size-4" />
-                )}
-              </span>
-              Toggle Theme
-            </CommandItem>
-
-            {/* Chatbot Action */}
-            <CommandItem
-              onSelect={() => {
-                window.location.href = "/chat";
-                setOpen(false);
-              }}
-            >
-              <span className="mr-2 text-base grayscale">🤖</span>
-              Chatbot
-            </CommandItem>
           </CommandGroup>
         </CommandList>
       </CommandDialog>
