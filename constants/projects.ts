@@ -41,9 +41,9 @@ export const projectsData = [
       "AI SDK",
     ],
     images: {
-      desktop: "/images/new-portfolio-desktop.png",
-      mobile: "/images/new-portfolio-mobile.png",
-      gif: "/images/new-portfolio.gif",
+      desktop: "/images/chatbot-desktop.png",
+      mobile: "/images/chatbot-mobile.png",
+      gif: "/images/chatbot.gif",
     },
     liveUrl: "/chat",
     githubUrl: "https://github.com/azkriven16/eb/",
