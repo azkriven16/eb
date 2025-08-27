@@ -1,8 +1,7 @@
 # Euger Portfolio (Next.js)
 
-Welcome to Euger Bonete's portfolio! This project is built with Next.js
-using create-next-app
-and features a showcase of desktop, mobile, and GIF previews of my work.
+Euger Bonete's portfolio, built with Next.js
+and TypeScript, featuring Tailwind CSS, shadcn-ui components, Three.js for 3D visuals, and AI chatbot using @ai-sdk/google and @openrouter/ai-sdk-provider.
 
 ## Screenshots
 
