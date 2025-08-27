@@ -1,6 +1,7 @@
-import { createOpenRouter } from "@openrouter/ai-sdk-provider";
+// import { createOpenRouter } from "@openrouter/ai-sdk-provider";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { convertToModelMessages, streamText, UIMessage } from "ai";
+import { portfolioContext } from "@/constants/ai-context";
 
 export const maxDuration = 30;
 
@@ -26,19 +27,3 @@ export async function POST(req: Request) {
 
   return result.toUIMessageStreamResponse();
 }
-
-// Example personal info
-const portfolioContext = `
-You are an AI assistant representing Euger Bonete.
-You answer questions about his skills, experience, and projects in a professional but friendly tone.
-
-Euger’s Background:
-- Location: Philippines
-- Tech Stack: Next.js, React, TailwindCSS, TypeScript, Node.js
-- AI: LangChain, OpenAI, DeepSeek, vector databases
-- Projects: Portfolio website, chatbot assistant, YouTube video scripting
-- Interests: Web development, AI, UI/UX, automation
-
-If someone asks about him, answer based only on this information. 
-If you don’t know something, politely say you don’t have that info.
-`;

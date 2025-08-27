@@ -4,6 +4,7 @@ import { FadeIn } from "@/animations/fade-in";
 import { SectionHeader } from "../section-header";
 import Lanyard from "../ui/lanyard";
 import Link from "next/link";
+import { profileHeader, bioTimeline } from "@/constants/profile";
 
 export function ProfileSection() {
   return (
@@ -12,70 +13,39 @@ export function ProfileSection() {
         <div className="flex-1 pt-[350px] sm:pt-[450px] md:pt-[700px] lg:pt-0">
           <div className="space-y-5">
             <SectionHeader
-              icon="🙋‍♂️"
-              title="A bit about myself"
-              highlight="4 years ago"
-              description="  I started coding about 4 years ago
-                — and recently graduated with a Bachelor of Science in
-                Information Technology degree in 2025. Over the years, I’ve
-                gained hands-on experience through internships and part-time
-                roles at various tech companies and startups."
+              icon={profileHeader.icon}
+              title={profileHeader.title}
+              highlight={profileHeader.highlight}
+              description={profileHeader.description}
             />
-            <div className="space-y-3"></div>
 
             <div className="space-y-2">
               <h3 className="text-xl font-bold">Bio</h3>
-
-              <div className="flex gap-5 subheading">
-                <p className="font-medium">2003</p>
-                <p>Born in Roxas City, Philippines</p>
-              </div>
-
-              <div className="flex gap-5 subheading">
-                <p className="font-medium">2022</p>
-                <p>
-                  Software Engineering Intern at{" "}
-                  <Link
-                    target="_blank"
-                    href="https://www.digipay.ph/"
-                    className="cursor-target external-link"
-                  >
-                    Digipay
-                  </Link>
-                </p>
-              </div>
-
-              <div className="flex gap-5 subheading">
-                <p className="font-medium">2024</p>
-                <p>
-                  Part-time Software Developer at{" "}
-                  <Link
-                    target="_blank"
-                    href="https://rocketshyft.com/"
-                    className="cursor-target external-link"
-                  >
-                    Rocketshyft
-                  </Link>
-                </p>
-              </div>
-
-              <div className="flex gap-5 subheading">
-                <p className="font-medium">2025</p>
-                <p>
-                  Graduated with a Bachelor of Science in Information Technology
-                  at{" "}
-                  <Link
-                    target="_blank"
-                    href="https://rocketshyft.com/"
-                    className="cursor-target external-link"
-                  >
-                    Northern Iloilo State University
-                  </Link>
-                </p>
-              </div>
+              {bioTimeline.map((item, index) => (
+                <div key={index} className="flex gap-5 subheading">
+                  <p className="font-medium">{item.year}</p>
+                  <p>
+                    {item.link ? (
+                      <>
+                        {item.description.replace(item.link.label, "")}{" "}
+                        <Link
+                          target="_blank"
+                          href={item.link.href}
+                          className="cursor-target external-link"
+                        >
+                          {item.link.label}
+                        </Link>
+                      </>
+                    ) : (
+                      item.description
+                    )}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
+
         <div className="flex-1 relative hover:grayscale-0 md:grayscale transition duration-300">
           <Lanyard />
         </div>

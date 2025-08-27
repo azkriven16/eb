@@ -13,7 +13,6 @@ export const projectsData = [
       "TailwindCSS",
       "shadcn/ui",
       "Motion",
-      "GSAP",
       "Three.js",
     ],
     images: {
@@ -22,6 +21,31 @@ export const projectsData = [
       gif: "/images/new-portfolio.gif",
     },
     liveUrl: "https://euger.vercel.app/",
+    githubUrl: "https://github.com/azkriven16/eb/",
+    year: "2025",
+  },
+  {
+    slug: "chat-bot",
+    title: "EugerGPT",
+    description:
+      "An AI-powered chatbot built with Next.js, TypeScript, Tailwind CSS, and Gemini via AI SDK streaming",
+    longDescription:
+      "EugerGPT is an AI-driven chatbot built with Next.js 15, TypeScript, Tailwind CSS, and shadcn/ui. It leverages Google's Gemini model with real-time data streaming using the AI SDK, delivering fast and dynamic conversations. The app features a sleek UI with smooth animations and dark/light themes—optimized with lazy loading for performance.",
+    category: "Frontend",
+    techStack: [
+      "Next.js",
+      "TypeScript",
+      "TailwindCSS",
+      "shadcn/ui",
+      "Google Gemini",
+      "AI SDK",
+    ],
+    images: {
+      desktop: "/images/new-portfolio-desktop.png",
+      mobile: "/images/new-portfolio-mobile.png",
+      gif: "/images/new-portfolio.gif",
+    },
+    liveUrl: "/chat",
     githubUrl: "https://github.com/azkriven16/eb/",
     year: "2025",
   },

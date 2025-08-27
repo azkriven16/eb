@@ -1,8 +1,7 @@
 "use client";
 
 import type React from "react";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -17,78 +16,80 @@ interface GuestbookEntry {
   id: string;
   name: string;
   message: string;
-  timestamp: Date;
+  createdAt: string; // matches db schema (timestamp)
 }
 
 export function GuestbookSection() {
-  const [entries, setEntries] = useState<GuestbookEntry[]>([
-    {
-      id: "1",
-      name: "Alice Johnson",
-      message:
-        "Great website! Really enjoying the clean design and user experience.",
-      timestamp: new Date("2024-01-15T10:30:00"),
-    },
-    {
-      id: "2",
-      name: "Bob Smith",
-      message:
-        "Thanks for creating this. Looking forward to seeing more updates!",
-      timestamp: new Date("2024-01-14T15:45:00"),
-    },
-    {
-      id: "3",
-      name: "Carol Davis",
-      message:
-        "This is exactly what I was looking for. Keep up the excellent work!",
-      timestamp: new Date("2024-01-13T09:20:00"),
-    },
-  ]);
-
+  const [entries, setEntries] = useState<GuestbookEntry[]>([]);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Fetch entries on mount
+  useEffect(() => {
+    const fetchEntries = async () => {
+      try {
+        const res = await fetch("/api/guestbook", { cache: "no-store" });
+        if (!res.ok) throw new Error("Failed to fetch guestbook entries");
+        const data: GuestbookEntry[] = await res.json();
+        setEntries(data);
+      } catch (err) {
+        console.error(err);
+        toast.error("Could not load guestbook messages");
+      }
+    };
+    fetchEntries();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!name.trim() || !message.trim()) return;
+    setLoading(true);
 
-    const newEntry: GuestbookEntry = {
-      id: Date.now().toString(),
-      name: name.trim(),
-      message: message.trim(),
-      timestamp: new Date(),
-    };
+    try {
+      const res = await fetch("/api/guestbook", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, message }),
+      });
 
-    setEntries((prev) => [newEntry, ...prev]);
-    setName("");
-    setMessage("");
+      if (!res.ok) throw new Error("Failed to post entry");
 
-    toast.success("Thank you for signing the guestbook!");
+      const newEntry: GuestbookEntry = await res.json();
+      setEntries((prev) => [newEntry, ...prev]);
+      setName("");
+      setMessage("");
+      toast.success("Thank you for signing the guestbook!");
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to submit entry");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const getInitials = (name: string) => {
-    return name
+  const getInitials = (name: string) =>
+    name
       .split(" ")
       .map((word) => word[0])
       .join("")
       .toUpperCase()
       .slice(0, 2);
-  };
 
-  const formatDate = (date: Date) => {
+  const formatDate = (dateString: string) => {
     return new Intl.DateTimeFormat("en-US", {
       month: "short",
       day: "numeric",
       year: "numeric",
       hour: "2-digit",
       minute: "2-digit",
-    }).format(date);
+    }).format(new Date(dateString));
   };
 
   return (
     <div className="flex flex-col lg:flex-row gap-5 max-w-7xl mx-auto">
-      {/* Input Form - Left side on large screens */}
+      {/* Input Form */}
       <div className="lg:w-1/3">
         <Card>
           <CardHeader>
@@ -118,8 +119,8 @@ export function GuestbookSection() {
                   required
                 />
               </div>
-              <Button type="submit" className="w-full">
-                Sign Guestbook
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading ? "Submitting..." : "Sign Guestbook"}
               </Button>
             </form>
           </CardContent>
@@ -136,7 +137,7 @@ export function GuestbookSection() {
         </div>
       </div>
 
-      {/* Guestbook Entries - Right side on large screens */}
+      {/* Guestbook Entries */}
       <div className="lg:w-2/3">
         <Card>
           <CardHeader>
@@ -166,7 +167,7 @@ export function GuestbookSection() {
                             {entry.name}
                           </h4>
                           <span className="text-xs text-muted-foreground">
-                            {formatDate(entry.timestamp)}
+                            {formatDate(entry.createdAt)}
                           </span>
                         </div>
                         <p className="text-sm text-foreground leading-relaxed">
