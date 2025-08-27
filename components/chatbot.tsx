@@ -129,7 +129,7 @@ export function ChatBot() {
           className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           <FiExternalLink className="w-4 h-4" />
-          <span className="hidden sm:inline">Euger's Portfolio</span>
+          <span className="hidden sm:inline">Euger&apos;s Portfolio</span>
         </a>
 
         <h1 className="text-xl sm:text-2xl font-bold tracking-tight">

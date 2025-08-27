@@ -12,6 +12,7 @@
     "@ai-sdk/google": "^2.0.11",
     "@ai-sdk/react": "^2.0.22",
     "@nanostores/react": "ai/react",
+    "@neondatabase/serverless": "^1.0.1",
     "@openrouter/ai-sdk-provider": "^1.1.2",
     "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-dialog": "^1.1.15",
@@ -33,6 +34,8 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "dotenv": "^17.2.1",
+    "drizzle-orm": "^0.44.5",
     "gsap": "^3.13.0",
     "i": "^0.3.7",
     "lucide-react": "^0.539.0",
@@ -59,8 +62,10 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "drizzle-kit": "^0.31.4",
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
+    "tsx": "^4.20.5",
     "tw-animate-css": "^1.3.7",
     "typescript": "^5"
   }
