@@ -61,7 +61,7 @@ export const Navbar = () => {
       >
         <div className="flex items-center justify-between gap-4">
           <Link href="/">
-            <Avatar className="w-10 h-10">
+            <Avatar className="size-8">
               <AvatarImage
                 draggable={false}
                 src="/assets/logo.png"
