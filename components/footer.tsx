@@ -116,7 +116,7 @@ export const Footer = () => {
             {/* Resume Action */}
             <CommandItem
               onSelect={() => {
-                window.open("/resume.pdf", "_blank");
+                window.open("/EUGER-C.-BONETE-JR-RESUME-CV.pdf", "_blank");
                 setOpen(false);
               }}
             >

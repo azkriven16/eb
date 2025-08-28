@@ -4,7 +4,7 @@ import { CircularRevealHeading } from "@/components/ui/circular-reveal";
 export const ResumeCircle = () => {
   return (
     <Link
-      href="/resume.pdf"
+      href="/EUGER-C.-BONETE-JR-RESUME-CV.pdf"
       target="_blank"
       rel="noopener noreferrer"
       className="flex-1 flex items-center justify-center md:justify-left p-2 rounded-xl cursor-pointer pt-10"
