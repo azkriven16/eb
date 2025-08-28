@@ -1,6 +1,9 @@
 import { CtaSection } from "@/components/sections/cta";
 import { OthersSection } from "@/components/sections/others";
 import { ProfileSection } from "@/components/sections/profile";
+import { pageMetadata } from "@/constants/metadata";
+
+export const metadata = pageMetadata.about;
 
 export default function AboutPage() {
   return (

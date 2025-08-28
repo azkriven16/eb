@@ -2,6 +2,9 @@ import { ChatbotCard } from "@/components/chatbot-card";
 import { GuestbookSection } from "@/components/sections/guestbook";
 import { ResumeCircle } from "@/components/resume-circle";
 import { CtaSection } from "@/components/sections/cta";
+import { pageMetadata } from "@/constants/metadata";
+
+export const metadata = pageMetadata.contact;
 
 export default function ContactPage() {
   return (

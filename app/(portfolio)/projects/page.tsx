@@ -2,6 +2,9 @@ import { SectionHeader } from "@/components/section-header";
 import { CtaSection } from "@/components/sections/cta";
 import { ProjectsSection } from "@/components/sections/projects";
 import { TechStackSection } from "@/components/sections/techstack";
+import { pageMetadata } from "@/constants/metadata";
+
+export const metadata = pageMetadata.projects;
 
 export default function Projects() {
   return (

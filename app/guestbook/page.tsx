@@ -1,6 +1,9 @@
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { GuestbookSection } from "@/components/sections/guestbook";
+import { pageMetadata } from "@/constants/metadata";
+
+export const metadata = pageMetadata.guestbook;
 
 export default function GuestbookPage() {
   return (

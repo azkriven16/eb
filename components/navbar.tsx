@@ -65,11 +65,8 @@ export const Navbar = () => {
         <div className="flex items-center justify-between gap-4">
           <Link href="/">
             <Avatar className="w-10 h-10">
-              <AvatarImage
-                draggable={false}
-                src="https://github.com/azkriven16.png"
-              />
-              <AvatarFallback>AK</AvatarFallback>
+              <AvatarImage draggable={false} src="/assets/logo.png" />
+              <AvatarFallback>Eu</AvatarFallback>
             </Avatar>
           </Link>
 
