@@ -83,8 +83,8 @@ export function ProfileSection() {
             </div>
           </div>
           <div className="relative rounded-2xl overflow-hidden bg-secondary p-4 mx-auto flex-1">
-            <h3 className="text-lg font-bold mb-4 text-gray-900">
-              Certifications
+            <h3 className="text-lg font-bold mb-4 text-muted-foreground">
+              Certificates
             </h3>
 
             <div className="space-y-3 text-sm">
@@ -93,7 +93,7 @@ export function ProfileSection() {
                   <div className="text-xs font-medium text-gray-500 min-w-12 pt-0.5">
                     {cert.date}
                   </div>
-                  <div className="text-gray-900 leading-relaxed">
+                  <div className="text-muted-foreground leading-relaxed">
                     <span
                       className="font-semibold cursor-pointer hover:text-blue-600 hover:underline transition-colors"
                       onClick={() => window.open(cert.url, "_blank")}
