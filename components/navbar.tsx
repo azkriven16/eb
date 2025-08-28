@@ -19,18 +19,15 @@ import { ModeToggle } from "./mode-toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 // Icons
+import { navItems } from "@/constants/nav-items";
 import { socialLinks } from "@/constants/socials";
 import { cn } from "@/lib/utils";
-import { Moon, SunDim } from "lucide-react";
-import { useTheme } from "next-themes";
-import { navItems } from "@/constants/nav-items";
 import { FaSearch } from "react-icons/fa";
 
 export const Navbar = () => {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
 
   // Detect scroll
   useEffect(() => {
@@ -65,7 +62,11 @@ export const Navbar = () => {
         <div className="flex items-center justify-between gap-4">
           <Link href="/">
             <Avatar className="w-10 h-10">
-              <AvatarImage draggable={false} src="/assets/logo.png" />
+              <AvatarImage
+                draggable={false}
+                src="/assets/logo.png"
+                className="dark:invert"
+              />
               <AvatarFallback>Eu</AvatarFallback>
             </Avatar>
           </Link>
