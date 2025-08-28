@@ -15,7 +15,7 @@ export const bioTimeline = [
   },
   {
     year: "2022",
-    description: `Software Engineering Intern at Digipay`,
+    description: `Software Engineering Intern at Digipay, building React features while collaborating in an Agile team and handling Jira tasks.`,
     link: {
       href: "https://www.digipay.ph/",
       label: "Digipay",
@@ -23,12 +23,13 @@ export const bioTimeline = [
   },
   {
     year: "2024",
-    description: `Part-time Software Developer at Rocketshyft`,
+    description: `Part-time Software Developer at Rocketshyft, focusing on TypeScript-based frontend development and UI enhancements.`,
     link: {
       href: "https://rocketshyft.com/",
       label: "Rocketshyft",
     },
   },
+
   {
     year: "2025",
     description: `Graduated with a Bachelor of Science in Information Technology at Northern Iloilo State University`,

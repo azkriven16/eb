@@ -27,7 +27,7 @@ export function ProfileSection() {
                   <p>
                     {item.link ? (
                       <>
-                        {item.description.replace(item.link.label, "")}{" "}
+                        {item.description.split(item.link.label)[0]}
                         <Link
                           target="_blank"
                           href={item.link.href}
@@ -35,6 +35,7 @@ export function ProfileSection() {
                         >
                           {item.link.label}
                         </Link>
+                        {item.description.split(item.link.label)[1]}
                       </>
                     ) : (
                       item.description
