@@ -3,10 +3,10 @@ export const projectsData = [
     slug: "new-portfolio",
     title: "New Portfolio Website",
     description:
-      "A sleek portfolio built with Next.js, TypeScript, and Tailwind CSS",
+      "A sleek portfolio built with Next.js, TypeScript, shadcn/ui and NeonDB",
     longDescription:
-      "My latest portfolio built with Next.js 15, TypeScript, Tailwind CSS, and shadcn/ui. It showcases my projects and skills through a clean design with smooth animations powered by Motion and GSAP. Features include command menus, dark/light themes, and interactive 3D visuals with Three.js—optimized with lazy loading for performance.",
-    category: "Frontend",
+      "My latest portfolio built with Next.js 15, TypeScript, Tailwind CSS, and shadcn/ui. It showcases my projects and skills through a clean design with smooth animations powered by Motion and GSAP. Features include command menus, dark/light themes, interactive 3D visuals with Three.js, AI-powered content generation with Gemini API, and a robust database layer using NeonDB with Drizzle ORM for efficient data management—optimized with lazy loading for performance.",
+    category: "Full Stack",
     techStack: [
       "Next.js",
       "TypeScript",
@@ -14,6 +14,8 @@ export const projectsData = [
       "shadcn/ui",
       "Motion",
       "Three.js",
+      "NeonDB",
+      "Drizzle ORM",
     ],
     images: {
       desktop: "/images/new-portfolio-desktop.png",
@@ -47,6 +49,33 @@ export const projectsData = [
     },
     liveUrl: "/chat",
     githubUrl: "https://github.com/azkriven16/eb/",
+    year: "2025",
+  },
+  {
+    slug: "chatapp",
+    title: "Birdie - ChatApp",
+    description:
+      "A full-stack real-time chat application with user authentication, image sharing, and message status tracking",
+    longDescription:
+      "ChatApp is a comprehensive real-time messaging platform built with React (Vite), Node.js, Express, and MongoDB. It features Socket.io for instant messaging, JWT authentication for secure login/register, Cloudinary integration for seamless image uploads, and advanced message status tracking with seen/delivered functionality. The application offers a responsive design that works flawlessly across desktop and mobile devices, providing users with a modern chat experience complete with profile management and real-time notifications.",
+    category: "Full Stack",
+    techStack: [
+      "React",
+      "Vite",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Socket.io",
+      "JWT",
+      "Cloudinary",
+    ],
+    images: {
+      desktop: "/images/chatapp-desktop.png",
+      mobile: "/images/chatapp-mobile.png",
+      gif: "/images/chatapp.gif",
+    },
+    liveUrl: "https://birdie-chatapp.vercel.app",
+    githubUrl: "https://github.com/azkriven16/chatapp",
     year: "2025",
   },
   {
@@ -124,7 +153,7 @@ export const projectsData = [
       "A modern blog app with MDX support, built using Next.js and Tailwind CSS.",
     longDescription:
       "A lightweight blog app built with Next.js 14, TypeScript, and Tailwind CSS. It supports MDX for posts with both Markdown and React components. Features include light/dark mode, responsive design, and clean typography for a flexible publishing experience.",
-    category: "Full Stack",
+    category: "Frontend",
     techStack: ["Next.js", "TypeScript", "TailwindCSS", "MDX", "Next Themes"],
     images: {
       desktop: "/images/blog-app-desktop.png",
