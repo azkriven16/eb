@@ -2,7 +2,7 @@ name: Deploy to Cloudflare Workers
 
 on:
   push:
-    branches: ['**']
+    branches: ["**"]
 
 jobs:
   deploy:
@@ -10,6 +10,7 @@ jobs:
     permissions:
       contents: read
       deployments: write
+    timeout-minutes: 15 # Whole job max 15 mins
 
     steps:
       - name: Checkout code
@@ -23,14 +24,19 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'pnpm'
+          node-version: "20"
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build with OpenNext
-        run: pnpm build
+      - name: Build with OpenNext (with logs)
+        timeout-minutes: 10 # Max 10 mins for build
+        env:
+          DEBUG: "opennext*"
+        run: |
+          echo "Starting build with full logs..."
+          pnpm build || (echo "Build failed. Showing last 100 lines:" && tail -100 .open-next/build.log && exit 1)
 
       - name: Deploy to Cloudflare
         id: deploy
