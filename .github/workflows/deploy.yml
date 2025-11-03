@@ -22,24 +22,24 @@ jobs:
         with:
           fetch-depth: 0
 
-      # 2. Set up Node (npm cache)
+      # 2. Setup Node (npm cache works even without lockfile)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm" # <-- npm cache (no lock-file required for cache)
+          cache: "npm"
 
-      # 3. Install deps (npm ci will create package-lock.json if missing)
+      # 3. Install deps — NO LOCKFILE NEEDED
       - name: Install dependencies
-        run: npm ci || npm install # fallback to npm install if lock missing
+        run: npm install
 
-      # 4. Build + Preview (fails if build breaks)
+      # 4. Build + Preview
       - name: Build and preview
         run: npm run preview
         env:
           CI: true
 
-      # 5. Deploy to production (only main)
+      # 5. Deploy to production (main only)
       - name: Deploy to Cloudflare (main)
         if: github.ref == 'refs/heads/main'
         run: npm run deploy
@@ -47,7 +47,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
-      # 6. Deploy branch preview (any other branch)
+      # 6. Deploy branch preview
       - name: Deploy branch version
         if: github.ref != 'refs/heads/main' && github.event_name == 'push'
         run: |
