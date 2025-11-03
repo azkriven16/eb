@@ -26,10 +26,10 @@ jobs:
           node-version: "20"
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Build and preview
-        run: pnpm run preview
+        run: npm run preview
         env:
           CI: true
 
