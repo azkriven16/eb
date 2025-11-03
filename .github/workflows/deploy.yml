@@ -15,17 +15,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Build with OpenNext
-        run: npx opennextjs-cloudflare build
+        run: pnpm build
 
       - name: Deploy to Cloudflare
         id: deploy
@@ -34,7 +39,6 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: .open-next
-          # Use built-in preview for branches, full deploy for main
           command: >-
             ${{ github.ref == 'refs/heads/main' 
                 && 'deploy --name eb' 
@@ -43,9 +47,9 @@ jobs:
       - name: Output URLs
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-            echo "Production LIVE: https://portfolio.euger.workers.dev"
+            echo "PRODUCTION LIVE: https://portfolio.euger.workers.dev"
           else
             BRANCH="${{ github.ref_name }}"
-            echo "Preview: https://$BRANCH.portfolio.euger.workers.dev"
-            echo "Cloudflare Dashboard: https://dash.cloudflare.com/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/workers/services/view/eb/versions"
+            echo "PREVIEW URL: https://$BRANCH.portfolio.euger.workers.dev"
+            echo "Dashboard: https://dash.cloudflare.com/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/workers/services/view/eb/versions"
           fi
