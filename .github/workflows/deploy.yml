@@ -24,10 +24,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build project
-        run: npm run build
-        # If you use OpenNext, this should be: npx open-next build
-        # Confirm your package.json has: "build": "open-next build"
+      - name: Build with OpenNext
+        run: npx opennextjs-cloudflare build
 
       - name: Deploy to Cloudflare
         id: deploy
@@ -35,15 +33,19 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # For main → full deploy, else → preview version
+          workingDirectory: .open-next
+          # Use built-in preview for branches, full deploy for main
           command: >-
-            ${{ github.ref == 'refs/heads/main' && 'deploy' || 'versions upload --branch ${{ github.ref_name }}' }}
+            ${{ github.ref == 'refs/heads/main' 
+                && 'deploy --name eb' 
+                || 'versions upload --branch ${{ github.ref_name }} --name eb' }}
 
-      - name: Output Deployment URL
+      - name: Output URLs
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-            echo "🚀 Production deployed: https://portfolio.euger.workers.dev"
+            echo "Production LIVE: https://portfolio.euger.workers.dev"
           else
-            echo "Preview: https://${{ github.ref_name }}.portfolio.euger.workers.dev"
-            echo "View logs: https://dash.cloudflare.com/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/workers/services/view/eb/versions"
+            BRANCH="${{ github.ref_name }}"
+            echo "Preview: https://$BRANCH.portfolio.euger.workers.dev"
+            echo "Cloudflare Dashboard: https://dash.cloudflare.com/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/workers/services/view/eb/versions"
           fi
