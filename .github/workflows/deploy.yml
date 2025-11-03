@@ -1,59 +1,57 @@
-name: CI/CD
+name: Deploy to Cloudflare Workers
 
 on:
   push:
-    branches: [main, "**"]
+    branches: [main, "**"] # all branches
   pull_request:
-    branches: [main]
+    branches: [main] # PRs to main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  preview-deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    environment: production
+    environment: production # protects secrets
 
     steps:
-      # 1. Checkout
+      # 1. Checkout code
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # 2. Setup Node — NO CACHE
+      # 2. Setup Node (no cache → no lockfile error)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          # REMOVED: cache: 'npm'  ← This was causing the error!
 
-      # 3. Install deps — works without lockfile
+      # 3. Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # 4. Build + Preview
+      # 4. Build & Preview (fails if build breaks)
       - name: Build and preview
         run: npm run preview
         env:
           CI: true
 
-      # 5. Deploy to production (main only)
-      - name: Deploy to Cloudflare (main)
+      # 5. Deploy to Production (main only)
+      - name: Deploy to Production
         if: github.ref == 'refs/heads/main'
-        run: npm run deploy
+        run: npx wrangler deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
-      # 6. Deploy branch preview
-      - name: Deploy branch version
+      # 6. Upload Preview Version (non-main branches, push only)
+      - name: Upload Preview Version
         if: github.ref != 'refs/heads/main' && github.event_name == 'push'
         run: |
           PROJECT_NAME=$(node -p "require('./package.json').name")
-          npx wrangler versions upload --name "$PROJECT_NAME"
+          npx wrangler versions upload --name "$PROJECT_NAME" --tag "${{ github.ref_name }}"
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          WRANGLER_VERSION_NAME: ${{ github.ref_name }}
