@@ -10,7 +10,7 @@ jobs:
     permissions:
       contents: read
       deployments: write
-    timeout-minutes: 15 # Whole job max 15 mins
+    timeout-minutes: 15
 
     steps:
       - name: Checkout code
@@ -30,13 +30,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build with OpenNext (with logs)
-        timeout-minutes: 10 # Max 10 mins for build
+      - name: Build with OpenNext
+        timeout-minutes: 10
         env:
           DEBUG: "opennext*"
         run: |
-          echo "Starting build with full logs..."
-          pnpm build || (echo "Build failed. Showing last 100 lines:" && tail -100 .open-next/build.log && exit 1)
+          echo "Starting build..."
+          pnpm build || (echo "Build failed. Last 100 lines:" && tail -100 .open-next/build.log && exit 1)
+
+      - name: Install jq (for preview URLs)
+        if: github.ref != 'refs/heads/main'
+        run: sudo apt-get update && sudo apt-get install -y jq
 
       - name: Deploy to Cloudflare
         id: deploy
@@ -44,18 +48,28 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: .open-next
           command: >-
             ${{ github.ref == 'refs/heads/main' 
                 && 'deploy --name eb' 
-                || 'versions upload --branch ${{ github.ref_name }} --name eb' }}
+                || 'versions upload --branch ${{ github.ref_name }} --name eb --message \"Deploy from GitHub Actions\"' }}
+
+      - name: Save deploy output
+        if: github.ref != 'refs/heads/main'
+        run: |
+          echo '${{ steps.deploy.outputs.stdout }}' > deploy-output.json
+          cat deploy-output.json
 
       - name: Output URLs
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
             echo "PRODUCTION LIVE: https://portfolio.euger.workers.dev"
+            echo "Dashboard: https://dash.cloudflare.com/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/workers/services/view/eb/production"
           else
-            BRANCH="${{ github.ref_name }}"
-            echo "PREVIEW URL: https://$BRANCH.portfolio.euger.workers.dev"
+            VERSION_ID=$(jq -r '.version_id // empty' deploy-output.json)
+            if [ -n "$VERSION_ID" ]; then
+              echo "PREVIEW URL: https://$VERSION_ID.eb.${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.workers.dev"
+            else
+              echo "PREVIEW URL: Not available"
+            fi
             echo "Dashboard: https://dash.cloudflare.com/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/workers/services/view/eb/versions"
           fi
