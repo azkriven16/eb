@@ -13,6 +13,7 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
       - name: Checkout
@@ -24,18 +25,21 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build
-        run: npm run build
+        run: |
+          npm run build:next
+          npm run build
         env:
           CI: true
 
       - name: Deploy to Production
         if: github.ref == 'refs/heads/main'
-        run: opennextjs-cloudflare build && opennextjs-cloudflare deploy
+        run: npx opennextjs-cloudflare deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
