@@ -1,75 +1,85 @@
-name: Deploy to Cloudflare Workers
+name: CI/CD
 
 on:
   push:
-    branches: ["**"]
+    branches: [main, "**"] # All branches including main
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  deploy:
+  lint-preview-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      deployments: write
-    timeout-minutes: 15
+    environment: production # Optional: protect secrets
 
     steps:
-      - name: Checkout code
+      # 1. Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
         with:
-          version: 9
+          fetch-depth: 0 # Needed for Wrangler versions
 
+      # 2. Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "pnpm"
 
+      # 3. Install pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: latest
+          run_install: false
+
+      # 4. Get pnpm store path
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      # 5. Cache pnpm store
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      # 6. Install dependencies
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build with OpenNext
-        timeout-minutes: 10
+      # 7. Lint
+      - name: Run lint
+        run: pnpm lint
+
+      # 8. Build & Preview (simulate local preview)
+      - name: Build and preview
+        run: pnpm preview
         env:
-          DEBUG: "opennext*"
-        run: |
-          echo "Starting build..."
-          pnpm build || (echo "Build failed. Last 100 lines:" && tail -100 .open-next/build.log && exit 1)
+          # Prevent interactive prompts
+          CI: true
 
-      - name: Install jq (for preview URLs)
-        if: github.ref != 'refs/heads/main'
-        run: sudo apt-get update && sudo apt-get install -y jq
+      # 9. Deploy logic
+      - name: Deploy to Cloudflare (main branch)
+        if: github.ref == 'refs/heads/main'
+        run: pnpm deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
-      - name: Deploy to Cloudflare
-        id: deploy
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: >-
-            ${{ github.ref == 'refs/heads/main' 
-                && 'deploy --name eb' 
-                || 'versions upload --branch ${{ github.ref_name }} --name eb --message \"Deploy from GitHub Actions\"' }}
-
-      - name: Save deploy output
-        if: github.ref != 'refs/heads/main'
-        run: |
-          echo '${{ steps.deploy.outputs.stdout }}' > deploy-output.json
-          cat deploy-output.json
-
-      - name: Output URLs
-        run: |
-          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-            echo "PRODUCTION LIVE: https://portfolio.euger.workers.dev"
-            echo "Dashboard: https://dash.cloudflare.com/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/workers/services/view/eb/production"
-          else
-            VERSION_ID=$(jq -r '.version_id // empty' deploy-output.json)
-            if [ -n "$VERSION_ID" ]; then
-              echo "PREVIEW URL: https://$VERSION_ID.eb.${{ secrets.CLOUDFLARE_ACCOUNT_ID }}.workers.dev"
-            else
-              echo "PREVIEW URL: Not available"
-            fi
-            echo "Dashboard: https://dash.cloudflare.com/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/workers/services/view/eb/versions"
-          fi
+      - name: Deploy branch version (non-main branches)
+        if: github.ref != 'refs/heads/main' && github.event_name == 'push'
+        run: pnpm deploy:branch
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # Optional: tag with branch name
+          WRANGLER_VERSION_NAME: ${{ github.ref_name }}
