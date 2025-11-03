@@ -26,16 +26,16 @@ jobs:
           node-version: "20"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Build and preview
-        run: npm run preview
+      - name: Build
+        run: opennextjs-cloudflare build
         env:
           CI: true
 
       - name: Deploy to Production
         if: github.ref == 'refs/heads/main'
-        run: npx wrangler deploy
+        run: opennextjs-cloudflare build && opennextjs-cloudflare deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
