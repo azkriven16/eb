@@ -22,14 +22,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      # 2. Setup Node (npm cache works even without lockfile)
+      # 2. Setup Node — NO CACHE
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
+          # REMOVED: cache: 'npm'  ← This was causing the error!
 
-      # 3. Install deps — NO LOCKFILE NEEDED
+      # 3. Install deps — works without lockfile
       - name: Install dependencies
         run: npm install
 
