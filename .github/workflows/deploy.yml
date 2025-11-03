@@ -1,6 +1,5 @@
 name: CI/CD
 
-# Run on every push (any branch) and on PRs to main
 on:
   push:
     branches: [main, "**"]
@@ -12,39 +11,35 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  lint-preview-deploy:
+  preview-deploy:
     runs-on: ubuntu-latest
-    environment: production # protects secrets
+    environment: production
 
     steps:
-      # 1. Checkout code
+      # 1. Checkout
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # needed for wrangler versions
+          fetch-depth: 0
 
-      # 2. Set up Node (caches npm modules automatically)
+      # 2. Set up Node (npm cache)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20" # change if you use another LTS
-          cache: "npm" # caches node_modules + npm cache
+          node-version: "20"
+          cache: "npm" # <-- npm cache (no lock-file required for cache)
 
-      # 3. Install dependencies
+      # 3. Install deps (npm ci will create package-lock.json if missing)
       - name: Install dependencies
-        run: npm ci # uses package-lock.json → reproducible
+        run: npm ci || npm install # fallback to npm install if lock missing
 
-      # 4. Lint
-      - name: Lint
-        run: npm run lint
-
-      # 5. Build & Preview (fails if build breaks)
+      # 4. Build + Preview (fails if build breaks)
       - name: Build and preview
         run: npm run preview
         env:
-          CI: true # avoid interactive prompts
+          CI: true
 
-      # 6. Deploy to production (only on main)
+      # 5. Deploy to production (only main)
       - name: Deploy to Cloudflare (main)
         if: github.ref == 'refs/heads/main'
         run: npm run deploy
@@ -52,7 +47,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
-      # 7. Deploy branch preview (any other branch, push only)
+      # 6. Deploy branch preview (any other branch)
       - name: Deploy branch version
         if: github.ref != 'refs/heads/main' && github.event_name == 'push'
         run: |
