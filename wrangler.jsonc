@@ -4,11 +4,10 @@
  */
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "euger",
+  "name": "eb",
   "main": ".open-next/worker.js",
   "compatibility_date": "2025-03-01",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
-  "routes": [{ "pattern": "euger.workers.dev", "zone_id": "" }],
   "assets": {
     "binding": "ASSETS",
     "directory": ".open-next/assets"
