@@ -53,7 +53,7 @@ jobs:
 
       - name: Deploy to Production (for main)
         if: github.ref == 'refs/heads/main'
-        run: npx wrangler deploy --name "euger"
+        run: npx wrangler deploy"
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
