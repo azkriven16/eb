@@ -16,6 +16,9 @@ jobs:
       - name: Install PNPM
         run: npm i -g pnpm
 
+      - name: Install dependencies # Optional: Add this if your project needs `pnpm install before deploy`
+        run: pnpm install
+
       - name: Build & Deploy Worker
         uses: cloudflare/wrangler-action@v3
         with:
