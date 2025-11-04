@@ -27,8 +27,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build project
-        run: pnpm run build
+      - name: Build OpenNext Cloudflare Worker
+        run: pnpm opennextjs-cloudflare build
+        env:
+          NODE_ENV: production
+
+      - name: Verify build output
+        run: ls -R .open-next || echo "No .open-next folder found"
 
       - name: Deploy Worker manually
         run: npx wrangler deploy
