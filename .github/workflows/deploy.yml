@@ -1,54 +1,16 @@
-name: Deploy to Cloudflare Workers
-
+name: Deploy Worker
 on:
   push:
-    branches: [main, "**"]
-  pull_request:
-    branches: [main]
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
+    branches:
+      - main
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-
+    timeout-minutes: 60
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - name: Build & Deploy Worker
+        uses: cloudflare/wrangler-action@v3
         with:
-          fetch-depth: 0
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "npm"
-          cache-dependency-path: "./pnpm-lock.yaml"
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build
-        run: |
-          npm run build:next
-          npm run build
-        env:
-          CI: true
-
-      - name: Deploy to Production
-        if: github.ref == 'refs/heads/main'
-        run: npx opennextjs-cloudflare deploy
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-
-      - name: Upload Preview Version
-        if: github.ref != 'refs/heads/main' && github.event_name == 'push'
-        run: |
-          PROJECT_NAME=$(node -p "require('./package.json').name")
-          npx wrangler versions upload --name "$PROJECT_NAME" --tag "${{ github.ref_name }}"
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
