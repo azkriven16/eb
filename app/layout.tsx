@@ -1,4 +1,3 @@
-import { type Metadata } from "next";
 import {
   ClerkProvider,
   SignInButton,
@@ -7,17 +6,23 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
-import { Geist, Geist_Mono } from "next/font/google";
+import { type Metadata } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const apparat = localFont({
+  src: "./fonts/apparat-semi-condensed-regular.otf",
+  variable: "--font-apparat",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const ppfraktion = localFont({
+  src: "./fonts/PPFraktionMono-Bold.otf",
+  variable: "--font-ppfraktion",
+});
+
+const sohnebreit = localFont({
+  src: "./fonts/SohneBreit-Buch.otf",
+  variable: "--font-sohnebreit",
 });
 
 export const metadata: Metadata = {
@@ -34,7 +39,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${apparat.variable} ${ppfraktion.variable} ${sohnebreit.variable} antialiased`}
         >
           <header className="flex justify-end items-center p-4 gap-4 h-16">
             <SignedOut>
