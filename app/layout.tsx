@@ -1,12 +1,12 @@
 import { type Metadata } from "next";
-// import {
-//   ClerkProvider,
-//   SignInButton,
-//   SignUpButton,
-//   SignedIn,
-//   SignedOut,
-//   UserButton,
-// } from "@clerk/nextjs";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -31,12 +31,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // <ClerkProvider publishableKey="pk_test_ZGVmaW5pdGUtY2xhbS05NC5jbGVyay5hY2NvdW50cy5kZXYk">
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {/* <header className="flex justify-end items-center p-4 gap-4 h-16">
+    <ClerkProvider publishableKey="pk_test_ZGVmaW5pdGUtY2xhbS05NC5jbGVyay5hY2NvdW50cy5kZXYk">
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <header className="flex justify-end items-center p-4 gap-4 h-16">
             <SignedOut>
               <SignInButton />
               <SignUpButton>
@@ -48,10 +48,10 @@ export default function RootLayout({
             <SignedIn>
               <UserButton />
             </SignedIn>
-          </header> */}
-        {children}
-      </body>
-    </html>
-    // </ClerkProvider>
+          </header>
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
