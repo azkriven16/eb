@@ -15,7 +15,7 @@
   "dependencies": {
     "@clerk/nextjs": "^6.34.4",
     "@opennextjs/cloudflare": "^1.11.0",
-    "babel-plugin-reazzct-compiler": "^1.0.0",
+    "babel-plugin-react-compiler": "^1.0.0",
     "next": "15.4.6",
     "react": "19.1.0",
     "react-dom": "19.1.0"
