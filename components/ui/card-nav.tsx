@@ -202,14 +202,14 @@ const CardNav: React.FC<CardNavProps> = ({
           </div>
 
           {/* Logo */}
-          <div className="uppercase font-franktion hidden md:inline-flex logo-container items-center md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 order-1 md:order-0 font-semibold text-foreground">
+          {/* <div className="uppercase font-franktion hidden md:inline-flex logo-container items-center md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 order-1 md:order-0 font-semibold text-foreground">
             <BoxIcon className="mr-2" /> Euger Bonete
-          </div>
+          </div> */}
 
           {/* Auth Buttons */}
           <div className="flex items-center flex-row-reverse gap-5">
             <ModeToggle />
-            <ClerkLoading>
+            {/* <ClerkLoading>
               <button className="bg-primary text-primary-foreground font-medium text-sm h-10 px-5 hover:bg-primary/90 transition-colors uppercase">
                 Loading...
               </button>
@@ -231,7 +231,7 @@ const CardNav: React.FC<CardNavProps> = ({
                   }}
                 />
               </SignedIn>
-            </ClerkLoaded>
+            </ClerkLoaded> */}
           </div>
         </div>
 

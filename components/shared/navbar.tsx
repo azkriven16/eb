@@ -1,10 +1,3 @@
-import {
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
 import CardNav from "../ui/card-nav";
 
 export default function Navbar() {
