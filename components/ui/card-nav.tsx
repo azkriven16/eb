@@ -10,10 +10,11 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { gsap } from "gsap";
-import { BoxIcon, DotIcon, SquareDotIcon } from "lucide-react";
+import { BoxIcon, DotIcon, Loader2Icon, SquareDotIcon } from "lucide-react";
 import React, { useLayoutEffect, useRef, useState } from "react";
 import { GoArrowUpRight } from "react-icons/go";
 import { ModeToggle } from "../shared/mode-toggle";
+import { Button } from "./button";
 
 type CardNavLink = {
   label: string;
@@ -207,19 +208,21 @@ const CardNav: React.FC<CardNavProps> = ({
           </div> */}
 
           {/* Auth Buttons */}
-          <div className="flex items-center flex-row-reverse gap-5">
-            <ModeToggle />
-            {/* <ClerkLoading>
-              <button className="bg-primary text-primary-foreground font-medium text-sm h-10 px-5 hover:bg-primary/90 transition-colors uppercase">
-                Loading...
-              </button>
+          <div className="flex items-center gap-5">
+            <Button variant="ghost" className="hidden md:inline-block">
+              Contact
+            </Button>
+            <ClerkLoading>
+              <Button>
+                <Loader2Icon className="animate-spin mr-2" /> Loading
+              </Button>
             </ClerkLoading>
             <ClerkLoaded>
               <SignedOut>
                 <SignUpButton mode="modal">
-                  <button className="flex items-center gap-2 bg-teal-500 dark:bg-teal-400 text-primary-foreground font-medium text-sm h-10 px-5 hover:bg-primary/90 transition-colors uppercase font-franktion">
-                    <span>Contact</span> <DotIcon />
-                  </button>
+                  <Button>
+                    <span>Ask AI</span>
+                  </Button>
                 </SignUpButton>
               </SignedOut>
               <SignedIn>
@@ -231,7 +234,8 @@ const CardNav: React.FC<CardNavProps> = ({
                   }}
                 />
               </SignedIn>
-            </ClerkLoaded> */}
+            </ClerkLoaded>
+            <ModeToggle />
           </div>
         </div>
 
