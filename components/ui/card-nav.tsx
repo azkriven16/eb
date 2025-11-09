@@ -10,12 +10,14 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { gsap } from "gsap";
-import { BoxIcon, DotIcon, Loader2Icon, SquareDotIcon } from "lucide-react";
+import { motion } from "motion/react";
+import { Loader2Icon } from "lucide-react";
+import Link from "next/link";
 import React, { useLayoutEffect, useRef, useState } from "react";
 import { GoArrowUpRight } from "react-icons/go";
 import { ModeToggle } from "../shared/mode-toggle";
 import { Button } from "./button";
-import Link from "next/link";
+import { MusicToggleButton } from "./music-button";
 
 type CardNavLink = {
   label: string;
@@ -176,38 +178,38 @@ const CardNav: React.FC<CardNavProps> = ({
         )}
       >
         {/* Top Bar */}
-        <div className="card-nav-top absolute inset-x-0 top-0 h-[60px] flex flex-row-reverse md:flex-row items-center justify-between p-2 pl-[1.1rem] z-2">
-          {/* Hamburger */}
-          <div
-            className={cn(
-              "hamburger-menu group h-full flex flex-col items-center justify-center cursor-pointer gap-1.5 order-2 md:order-0 transition-colors",
-              isHamburgerOpen ? "open" : ""
-            )}
-            onClick={toggleMenu}
-            onKeyDown={(e) => e.key === "Enter" && toggleMenu()}
-            role="button"
-            aria-label={isExpanded ? "Close menu" : "Open menu"}
-            tabIndex={0}
-          >
+        <div className="card-nav-top absolute inset-x-0 top-0 h-[60px] flex flex-row items-center justify-between p-2 z-2">
+          <div className="flex items-center gap-5">
             <div
               className={cn(
-                "hamburger-line w-[30px] h-0.5 bg-foreground transition-[transform,opacity,margin] duration-300 ease-linear origin-[50%_50%] group-hover:opacity-75",
-                isHamburgerOpen && "translate-y-1 rotate-45"
+                "hamburger-menu group h-full flex flex-col items-center justify-center cursor-pointer gap-1.5 order-0 transition-colors",
+                isHamburgerOpen ? "open" : ""
               )}
-            />
-            <div
-              className={cn(
-                "hamburger-line w-[30px] h-0.5 bg-foreground transition-[transform,opacity,margin] duration-300 ease-linear origin-[50%_50%] group-hover:opacity-75",
-                isHamburgerOpen && "-translate-y-1 -rotate-45"
-              )}
-            />
+              onClick={toggleMenu}
+              onKeyDown={(e) => e.key === "Enter" && toggleMenu()}
+              role="button"
+              aria-label={isExpanded ? "Close menu" : "Open menu"}
+              tabIndex={0}
+            >
+              <div
+                className={cn(
+                  "hamburger-line w-[30px] h-0.5 bg-foreground transition-[transform,opacity,margin] duration-300 ease-linear origin-[50%_50%] group-hover:opacity-75",
+                  isHamburgerOpen && "translate-y-1 rotate-45"
+                )}
+              />
+              <div
+                className={cn(
+                  "hamburger-line w-[30px] h-0.5 bg-foreground transition-[transform,opacity,margin] duration-300 ease-linear origin-[50%_50%] group-hover:opacity-75",
+                  isHamburgerOpen && "-translate-y-1 -rotate-45"
+                )}
+              />
+            </div>
+            <MusicToggleButton />
           </div>
+          {/* Hamburger */}
 
           {/* Auth Buttons */}
           <div className="flex items-center gap-5">
-            <Button variant="ghost" className="hidden md:inline-block">
-              Contact
-            </Button>
             <ClerkLoading>
               <Button>
                 <Loader2Icon className="animate-spin mr-2" /> Loading
@@ -216,9 +218,7 @@ const CardNav: React.FC<CardNavProps> = ({
             <ClerkLoaded>
               <SignedOut>
                 <SignUpButton mode="modal">
-                  <Button>
-                    <span>Ask AI</span>
-                  </Button>
+                  <Button>Ask AI</Button>
                 </SignUpButton>
               </SignedOut>
               <SignedIn>
