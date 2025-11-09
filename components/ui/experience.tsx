@@ -1,19 +1,12 @@
 /* eslint-disable react/no-unknown-property */
 "use client";
-import {
-  Html,
-  OrbitControls,
-  useAnimations,
-  useGLTF,
-  useProgress,
-} from "@react-three/drei";
+import { Html, OrbitControls, useAnimations, useGLTF } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Loader2 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
 
-// Replace with your model path (static in Next.js public folder)
 const modelPath = "/models/bee.glb";
 
 interface SmolModelProps {
@@ -23,7 +16,7 @@ interface SmolModelProps {
   rotationSpeed?: number;
 }
 
-export function SmolModel({
+export function Experience({
   position = [100, 0, 0],
   fov = 1,
   transparent = true,
@@ -126,18 +119,23 @@ function RotatingModel() {
   const { scene, animations } = useGLTF(modelPath);
   const modelRef = useRef<THREE.Group>(null!);
   const { actions } = useAnimations(animations, modelRef);
-  const { mouse } = useThree();
 
-  // Traverse the loaded GLTF and enable shadow casting for every mesh
+  const spinProgress = useRef(0);
+  const introDone = useRef(false);
+
+  // Easing function (easeOutCubic)
+  const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+
+  // Enable shadows
   useEffect(() => {
     scene.traverse((child) => {
       if ((child as THREE.Mesh).isMesh) {
         child.castShadow = true;
-        // optional: child.receiveShadow = true;
       }
     });
   }, [scene]);
 
+  // Play first animation if present
   useEffect(() => {
     if (actions && Object.keys(actions).length > 0) {
       const action = Object.values(actions)[0];
@@ -145,13 +143,25 @@ function RotatingModel() {
     }
   }, [actions]);
 
-  // useFrame(() => {
-  //   if (modelRef.current) {
-  //     const initialX = 5;
-  //     const rotationInfluence = mouse.x * 0.5;
-  //     modelRef.current.rotation.x = initialX + rotationInfluence;
-  //   }
-  // });
+  // Intro spin with easing
+  useFrame((_, delta) => {
+    if (!introDone.current && modelRef.current) {
+      spinProgress.current += delta; // elapsed time
+      const duration = 0.7; // spin duration in seconds
+      const t = Math.min(spinProgress.current / duration, 1);
+      const easedT = easeOutCubic(t);
+
+      // Smooth horizontal (x-axis) spin
+      const rotationX = THREE.MathUtils.lerp(0, Math.PI * 4, easedT);
+      modelRef.current.rotation.x = rotationX;
+
+      // End after one full eased rotation
+      if (t >= 1) {
+        introDone.current = true;
+      }
+    }
+  });
+
   return (
     <primitive
       ref={modelRef}
@@ -164,7 +174,6 @@ function RotatingModel() {
 }
 
 function Loader() {
-  const { progress } = useProgress();
   return (
     <Html fullscreen position={[0, 0, -5]}>
       <div

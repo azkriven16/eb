@@ -5,13 +5,13 @@ import {
   AvatarIndicator,
   AvatarStatus,
 } from "@/components/ui/avatar";
-import { SmolModel } from "@/components/ui/smol";
+import { Experience } from "@/components/ui/experience";
 import { TextLoop } from "@/components/ui/text-loop";
 
 export default async function IndexPage() {
   return (
     <main className="container mx-auto min-h-screen max-w-xl p-4 flex flex-col">
-      <SmolModel />
+      <Experience />
       <div className="mx-auto space-y-6 w-full">
         {/* Name and Roles */}
         <div className="flex flex-col md:flex-row  md:items-center justify-between gap-4">
@@ -30,7 +30,10 @@ export default async function IndexPage() {
           </div>
           {/* Avatar */}
           <Avatar className="size-20 self-center">
-            <AvatarImage src="/media/avatars/2.png" alt="Takuya Matsuyama" />
+            <AvatarImage
+              src="https://github.com/azkriven16.png"
+              alt="Takuya Matsuyama"
+            />
             <AvatarFallback>EB</AvatarFallback>
             <AvatarIndicator className="-end-px -top-px">
               <AvatarStatus variant="online" className="size-3" />
