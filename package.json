@@ -15,6 +15,8 @@
   "dependencies": {
     "@clerk/nextjs": "^6.34.4",
     "@opennextjs/cloudflare": "^1.11.0",
+    "@radix-ui/react-label": "^2.1.8",
+    "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-slot": "^1.2.4",
     "@react-three/drei": "^10.7.6",
     "@react-three/fiber": "^9.4.0",
@@ -34,7 +36,8 @@
     "react-icons": "^5.5.0",
     "tailwind-merge": "^3.3.1",
     "three": "^0.181.0",
-    "three-globe": "^2.45.0"
+    "three-globe": "^2.45.0",
+    "use-sound": "^5.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -4,10 +4,11 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/shared/navbar";
 import { ThemeProvider } from "@/components/shared/theme-provider";
+import ClickSpark from "@/components/ui/click-spark";
 
-const apparat = localFont({
-  src: "./fonts/apparat-semi-condensed-regular.otf",
-  variable: "--font-apparat",
+const workSans = localFont({
+  src: "./fonts/worksans.ttf",
+  variable: "--font-work-sans",
 });
 
 const franktion = localFont({
@@ -34,7 +35,7 @@ export default function RootLayout({
     <ClerkProvider publishableKey="pk_test_ZGVmaW5pdGUtY2xhbS05NC5jbGVyay5hY2NvdW50cy5kZXYk">
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`${apparat.variable} ${franktion.variable} ${sohne.variable} antialiased`}
+          className={`${workSans.variable} ${franktion.variable} ${sohne.variable} antialiased`}
         >
           <ThemeProvider
             attribute="class"
@@ -42,8 +43,15 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Navbar />
-            <main>{children}</main>
+            <ClickSpark
+              sparkSize={10}
+              sparkRadius={15}
+              sparkCount={8}
+              duration={400}
+            >
+              <Navbar />
+              {children}
+            </ClickSpark>
           </ThemeProvider>
         </body>
       </html>

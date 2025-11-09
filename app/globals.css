@@ -1,12 +1,17 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+* {
+  --scroll-behavior: smooth !important;
+  scroll-behavior: smooth !important;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-apparat: var(--font-apparat);
+  --font-work-sans: var(--font-work-sans);
   --font-franktion: var(--font-franktion);
   --font-sohne: var(--font-sohne);
   --color-sidebar-ring: var(--sidebar-ring);
