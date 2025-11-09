@@ -15,6 +15,7 @@ import React, { useLayoutEffect, useRef, useState } from "react";
 import { GoArrowUpRight } from "react-icons/go";
 import { ModeToggle } from "../shared/mode-toggle";
 import { Button } from "./button";
+import Link from "next/link";
 
 type CardNavLink = {
   label: string;
@@ -202,11 +203,6 @@ const CardNav: React.FC<CardNavProps> = ({
             />
           </div>
 
-          {/* Logo */}
-          {/* <div className="uppercase font-franktion hidden md:inline-flex logo-container items-center md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 order-1 md:order-0 font-semibold text-foreground">
-            <BoxIcon className="mr-2" /> Euger Bonete
-          </div> */}
-
           {/* Auth Buttons */}
           <div className="flex items-center gap-5">
             <Button variant="ghost" className="hidden md:inline-block">
@@ -265,18 +261,19 @@ const CardNav: React.FC<CardNavProps> = ({
                 </div>
                 <div className="nav-card-links mt-auto flex flex-col gap-1">
                   {item.links?.map((lnk, i) => (
-                    <a
+                    <Link
                       key={`${lnk.label}-${i}`}
                       className="nav-card-link inline-flex items-center gap-2 no-underline cursor-pointer text-sm md:text-base transition-opacity hover:opacity-80"
                       href={lnk.href}
                       aria-label={lnk.ariaLabel}
+                      onClick={() => toggleMenu()}
                     >
                       <GoArrowUpRight
                         className="w-4 h-4 shrink-0"
                         aria-hidden="true"
                       />
                       {lnk.label}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -290,31 +287,34 @@ const CardNav: React.FC<CardNavProps> = ({
 
 export default CardNav;
 
-// Default themed items
 const defaultItems: CardNavItem[] = [
   {
     label: "About",
     variant: "primary",
     links: [
-      { label: "Company", ariaLabel: "About Company", href: "#" },
-      { label: "Careers", ariaLabel: "About Careers", href: "#" },
+      { label: "Company", ariaLabel: "About Company", href: "#about" },
+      { label: "Careers", ariaLabel: "About Careers", href: "#about" },
     ],
   },
   {
     label: "Projects",
     variant: "secondary",
     links: [
-      { label: "Featured", ariaLabel: "Featured Projects", href: "#" },
-      { label: "Case Studies", ariaLabel: "Project Case Studies", href: "#" },
+      { label: "Featured", ariaLabel: "Featured Projects", href: "#projects" },
+      {
+        label: "Case Studies",
+        ariaLabel: "Project Case Studies",
+        href: "#projects",
+      },
     ],
   },
   {
     label: "Contact",
     variant: "accent",
     links: [
-      { label: "Email", ariaLabel: "Email us", href: "#" },
-      { label: "Twitter", ariaLabel: "Twitter", href: "#" },
-      { label: "LinkedIn", ariaLabel: "LinkedIn", href: "#" },
+      { label: "Email", ariaLabel: "Email us", href: "#contact" },
+      { label: "Twitter", ariaLabel: "Twitter", href: "#contact" },
+      { label: "LinkedIn", ariaLabel: "LinkedIn", href: "#contact" },
     ],
   },
 ];

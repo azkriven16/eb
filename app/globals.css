@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+* {
+  --scroll-behavior: smooth !important;
+  scroll-behavior: smooth !important;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
