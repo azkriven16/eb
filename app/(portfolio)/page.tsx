@@ -14,7 +14,7 @@ export default async function IndexPage() {
       <SmolModel />
       <div className="mx-auto space-y-6 w-full">
         {/* Name and Roles */}
-        <div className="flex justify-between items-center gap-4">
+        <div className="flex flex-col md:flex-row  md:items-center justify-between gap-4">
           <div>
             <h1 className="text-4xl font-bold font-apparat">
               Euger Bonete Jr.
@@ -29,9 +29,9 @@ export default async function IndexPage() {
             </div>
           </div>
           {/* Avatar */}
-          <Avatar className="size-20">
+          <Avatar className="size-20 self-center">
             <AvatarImage src="/media/avatars/2.png" alt="Takuya Matsuyama" />
-            <AvatarFallback>TM</AvatarFallback>
+            <AvatarFallback>EB</AvatarFallback>
             <AvatarIndicator className="-end-px -top-px">
               <AvatarStatus variant="online" className="size-3" />
             </AvatarIndicator>

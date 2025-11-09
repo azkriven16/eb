@@ -9,11 +9,12 @@ import {
 } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Loader2 } from "lucide-react";
+import { useTheme } from "next-themes";
 import { Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
 
 // Replace with your model path (static in Next.js public folder)
-const modelPath = "/models/smol.glb";
+const modelPath = "/models/bee.glb";
 
 interface SmolModelProps {
   position?: [number, number, number];
@@ -23,10 +24,10 @@ interface SmolModelProps {
 }
 
 export function SmolModel({
-  position = [0, 0, 5],
-  fov = 25,
+  position = [100, 0, 0],
+  fov = 1,
   transparent = true,
-  rotationSpeed = 1,
+  rotationSpeed = 2,
 }: SmolModelProps) {
   return (
     <div className="relative z-0 w-full aspect-video flex justify-center items-center transform scale-100 origin-center">
@@ -44,6 +45,7 @@ export function SmolModel({
           <ShadowGround />
           <DirectionalLight />
           <CameraSetup />
+          <ambientLight />
           <OrbitControls
             autoRotate
             autoRotateSpeed={rotationSpeed}
@@ -61,6 +63,7 @@ export function SmolModel({
 /* --------------------------------------------------------------- */
 /* 1. Ground plane that *receives* shadows                         */
 function ShadowGround() {
+  const { theme } = useTheme();
   return (
     <mesh
       receiveShadow
@@ -68,7 +71,11 @@ function ShadowGround() {
       rotation={[0, Math.PI / 2, 0]}
     >
       <planeGeometry args={[200, 200]} />
-      <shadowMaterial transparent opacity={0.1} />
+      <shadowMaterial
+        transparent
+        opacity={theme === "dark" ? 1 : 0.4}
+        color={"#000000"}
+      />
     </mesh>
   );
 }
@@ -138,11 +145,18 @@ function RotatingModel() {
     }
   }, [actions]);
 
+  // useFrame(() => {
+  //   if (modelRef.current) {
+  //     const initialX = 5;
+  //     const rotationInfluence = mouse.x * 0.5;
+  //     modelRef.current.rotation.x = initialX + rotationInfluence;
+  //   }
+  // });
   return (
     <primitive
       ref={modelRef}
       object={scene}
-      scale={0.6}
+      scale={2.5}
       position={[-0.5, -1.3, 0]}
       rotation={[5, -0.001, -Math.PI / 2]}
     />
