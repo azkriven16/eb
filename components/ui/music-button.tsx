@@ -1,5 +1,6 @@
 "use client";
 
+import { MusicIcon, Volume1Icon, Volume2Icon } from "lucide-react";
 import { motion } from "motion/react";
 import React, { useEffect, useState } from "react";
 import useSound from "use-sound";
@@ -29,7 +30,6 @@ export const MusicToggleButton = () => {
     onstop: () => setIsPlaying(false),
     soundEnabled: true,
   });
-
   useEffect(() => {
     if (isPlaying) {
       const waveformIntervalId = setInterval(() => {
@@ -72,8 +72,14 @@ export const MusicToggleButton = () => {
           }}
           exit={{ opacity: 0, filter: "blur(4px)" }}
           transition={{ type: "spring", bounce: 0.35 }}
-          className="flex h-4 w-full items-center gap-1 rounded-full"
+          className="flex h-2.5 w-full items-center gap-1 rounded-full"
         >
+          {isPlaying ? (
+            <Volume2Icon className="size-4 invert dark:invert-0" />
+          ) : (
+            <Volume1Icon className="size-4 invert dark:invert-0" />
+          )}
+
           {/* Waveform visualization */}
           {heights.map((height, index) => (
             <motion.div
