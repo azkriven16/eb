@@ -1,19 +1,13 @@
 /* eslint-disable react/no-unknown-property */
 "use client";
-import {
-  Html,
-  OrbitControls,
-  useAnimations,
-  useGLTF,
-  useProgress,
-} from "@react-three/drei";
+import { Html, OrbitControls, useAnimations, useGLTF } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Loader2 } from "lucide-react";
+import { useTheme } from "next-themes";
 import { Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
 
-// Replace with your model path (static in Next.js public folder)
-const modelPath = "/models/smol.glb";
+const modelPath = "/models/bee.glb";
 
 interface SmolModelProps {
   position?: [number, number, number];
@@ -22,11 +16,11 @@ interface SmolModelProps {
   rotationSpeed?: number;
 }
 
-export function SmolModel({
-  position = [0, 0, 5],
-  fov = 25,
+export function Experience({
+  position = [100, 0, 0],
+  fov = 1,
   transparent = true,
-  rotationSpeed = 1,
+  rotationSpeed = 2,
 }: SmolModelProps) {
   return (
     <div className="relative z-0 w-full aspect-video flex justify-center items-center transform scale-100 origin-center">
@@ -44,6 +38,7 @@ export function SmolModel({
           <ShadowGround />
           <DirectionalLight />
           <CameraSetup />
+          <ambientLight />
           <OrbitControls
             autoRotate
             autoRotateSpeed={rotationSpeed}
@@ -61,6 +56,7 @@ export function SmolModel({
 /* --------------------------------------------------------------- */
 /* 1. Ground plane that *receives* shadows                         */
 function ShadowGround() {
+  const { theme } = useTheme();
   return (
     <mesh
       receiveShadow
@@ -68,7 +64,11 @@ function ShadowGround() {
       rotation={[0, Math.PI / 2, 0]}
     >
       <planeGeometry args={[200, 200]} />
-      <shadowMaterial transparent opacity={0.1} />
+      <shadowMaterial
+        transparent
+        opacity={theme === "dark" ? 1 : 0.4}
+        color={"#000000"}
+      />
     </mesh>
   );
 }
@@ -119,18 +119,23 @@ function RotatingModel() {
   const { scene, animations } = useGLTF(modelPath);
   const modelRef = useRef<THREE.Group>(null!);
   const { actions } = useAnimations(animations, modelRef);
-  const { mouse } = useThree();
 
-  // Traverse the loaded GLTF and enable shadow casting for every mesh
+  const spinProgress = useRef(0);
+  const introDone = useRef(false);
+
+  // Easing function (easeOutCubic)
+  const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+
+  // Enable shadows
   useEffect(() => {
     scene.traverse((child) => {
       if ((child as THREE.Mesh).isMesh) {
         child.castShadow = true;
-        // optional: child.receiveShadow = true;
       }
     });
   }, [scene]);
 
+  // Play first animation if present
   useEffect(() => {
     if (actions && Object.keys(actions).length > 0) {
       const action = Object.values(actions)[0];
@@ -138,11 +143,30 @@ function RotatingModel() {
     }
   }, [actions]);
 
+  // Intro spin with easing
+  useFrame((_, delta) => {
+    if (!introDone.current && modelRef.current) {
+      spinProgress.current += delta; // elapsed time
+      const duration = 0.7; // spin duration in seconds
+      const t = Math.min(spinProgress.current / duration, 1);
+      const easedT = easeOutCubic(t);
+
+      // Smooth horizontal (x-axis) spin
+      const rotationX = THREE.MathUtils.lerp(0, Math.PI * 4, easedT);
+      modelRef.current.rotation.x = rotationX;
+
+      // End after one full eased rotation
+      if (t >= 1) {
+        introDone.current = true;
+      }
+    }
+  });
+
   return (
     <primitive
       ref={modelRef}
       object={scene}
-      scale={0.6}
+      scale={2.5}
       position={[-0.5, -1.3, 0]}
       rotation={[5, -0.001, -Math.PI / 2]}
     />
@@ -150,7 +174,6 @@ function RotatingModel() {
 }
 
 function Loader() {
-  const { progress } = useProgress();
   return (
     <Html fullscreen position={[0, 0, -5]}>
       <div
