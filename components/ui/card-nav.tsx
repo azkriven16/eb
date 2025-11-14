@@ -1,33 +1,31 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import {
-  ClerkLoaded,
-  ClerkLoading,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+// import {
+//   ClerkLoaded,
+//   ClerkLoading,
+//   SignUpButton,
+//   SignedIn,
+//   SignedOut,
+//   UserButton,
+// } from "@clerk/nextjs";
+import { useTabStore } from "@/store/use-tab-store";
 import { gsap } from "gsap";
-import { motion } from "motion/react";
-import { Loader2Icon } from "lucide-react";
 import Link from "next/link";
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { GoArrowUpRight } from "react-icons/go";
 import { ModeToggle } from "../shared/mode-toggle";
-import { Button } from "./button";
 import { MusicToggleButton } from "./music-button";
 
 type CardNavLink = {
   label: string;
   href: string;
   ariaLabel: string;
+  tab?: "home" | "works";
 };
 
 export type CardNavItem = {
   label: string;
-  // Now uses theme tokens instead of raw colors
   variant?: "primary" | "secondary" | "accent" | "destructive" | "card";
   links: CardNavLink[];
 };
@@ -56,7 +54,11 @@ const CardNav: React.FC<CardNavProps> = ({
   const navRef = useRef<HTMLDivElement | null>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const { setActiveTab } = useTabStore();
 
+  /* ----------------------------------------------------------- */
+  /*  calculateHeight – unchanged (void offsetHeight already added) */
+  /* ----------------------------------------------------------- */
   const calculateHeight = () => {
     const navEl = navRef.current;
     if (!navEl) return 260;
@@ -75,7 +77,7 @@ const CardNav: React.FC<CardNavProps> = ({
         contentEl.style.position = "static";
         contentEl.style.height = "auto";
 
-        contentEl.offsetHeight;
+        void contentEl.offsetHeight; // <-- forces reflow
 
         const topBar = 60;
         const padding = 16;
@@ -94,7 +96,10 @@ const CardNav: React.FC<CardNavProps> = ({
     return 260;
   };
 
-  const createTimeline = () => {
+  /* ----------------------------------------------------------- */
+  /*  createTimeline – memoised (depends only on `ease`)          */
+  /* ----------------------------------------------------------- */
+  const createTimeline = useCallback(() => {
     const navEl = navRef.current;
     if (!navEl) return null;
 
@@ -102,22 +107,18 @@ const CardNav: React.FC<CardNavProps> = ({
     gsap.set(cardsRef.current, { y: 50, opacity: 0 });
 
     const tl = gsap.timeline({ paused: true });
-
-    tl.to(navEl, {
-      height: calculateHeight,
-      duration: 0.2,
-      ease,
-    });
-
+    tl.to(navEl, { height: calculateHeight, duration: 0.2, ease });
     tl.to(
       cardsRef.current,
       { y: 0, opacity: 1, duration: 0.2, ease, stagger: 0.08 },
       "-=0.1"
     );
-
     return tl;
-  };
+  }, [ease]);
 
+  /* ----------------------------------------------------------- */
+  /*  1. Initial timeline creation                               */
+  /* ----------------------------------------------------------- */
   useLayoutEffect(() => {
     const tl = createTimeline();
     tlRef.current = tl;
@@ -126,8 +127,11 @@ const CardNav: React.FC<CardNavProps> = ({
       tl?.kill();
       tlRef.current = null;
     };
-  }, [ease, items]);
+  }, [createTimeline]); // <-- correct dep
 
+  /* ----------------------------------------------------------- */
+  /*  2. Re-create timeline on resize OR when `isExpanded` changes */
+  /* ----------------------------------------------------------- */
   useLayoutEffect(() => {
     const handleResize = () => {
       if (!tlRef.current || !navRef.current) return;
@@ -140,14 +144,19 @@ const CardNav: React.FC<CardNavProps> = ({
       }
     };
 
+    // also run once immediately so the timeline is rebuilt when `isExpanded` flips
+    handleResize();
+
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [isExpanded, items]);
+  }, [isExpanded, createTimeline]); // <-- both deps needed
 
+  /* ----------------------------------------------------------- */
+  /*  toggleMenu – unchanged                                      */
+  /* ----------------------------------------------------------- */
   const toggleMenu = () => {
     const tl = tlRef.current;
     if (!tl) return;
-
     if (!isExpanded) {
       setIsHamburgerOpen(true);
       setIsExpanded(true);
@@ -159,10 +168,16 @@ const CardNav: React.FC<CardNavProps> = ({
     }
   };
 
+  /* ----------------------------------------------------------- */
+  /*  setCardRef – unchanged                                      */
+  /* ----------------------------------------------------------- */
   const setCardRef = (i: number) => (el: HTMLDivElement | null) => {
     if (el) cardsRef.current[i] = el;
   };
 
+  /* ----------------------------------------------------------- */
+  /*  JSX – unchanged                                            */
+  /* ----------------------------------------------------------- */
   return (
     <div
       className={cn(
@@ -182,7 +197,7 @@ const CardNav: React.FC<CardNavProps> = ({
           <div className="flex items-center gap-5">
             <div
               className={cn(
-                "hamburger-menu group h-full flex flex-col items-center justify-center cursor-pointer gap-1.5 order-0 transition-colors",
+                "hamburger-menu group h-full flex flex-col items-center justify-center cursor-pointer gap-1.5 order-0 transition-colors py-3 px-2",
                 isHamburgerOpen ? "open" : ""
               )}
               onClick={toggleMenu}
@@ -204,33 +219,10 @@ const CardNav: React.FC<CardNavProps> = ({
                 )}
               />
             </div>
-            <MusicToggleButton />
           </div>
-          {/* Hamburger */}
 
-          {/* Auth Buttons */}
           <div className="flex items-center gap-5">
-            <ClerkLoading>
-              <Button>
-                <Loader2Icon className="animate-spin mr-2" /> Loading
-              </Button>
-            </ClerkLoading>
-            <ClerkLoaded>
-              <SignedOut>
-                <SignUpButton mode="modal">
-                  <Button>Ask AI</Button>
-                </SignUpButton>
-              </SignedOut>
-              <SignedIn>
-                <UserButton
-                  appearance={{
-                    elements: {
-                      avatarBox: "w-9 h-9",
-                    },
-                  }}
-                />
-              </SignedIn>
-            </ClerkLoaded>
+            <MusicToggleButton />
             <ModeToggle />
           </div>
         </div>
@@ -264,9 +256,12 @@ const CardNav: React.FC<CardNavProps> = ({
                     <Link
                       key={`${lnk.label}-${i}`}
                       className="nav-card-link inline-flex items-center gap-2 no-underline cursor-pointer text-sm md:text-base transition-opacity hover:opacity-80"
-                      href={lnk.href}
+                      href={"#"}
                       aria-label={lnk.ariaLabel}
-                      onClick={() => toggleMenu()}
+                      onClick={() => {
+                        if (lnk.tab) setActiveTab(lnk.tab);
+                        toggleMenu();
+                      }}
                     >
                       <GoArrowUpRight
                         className="w-4 h-4 shrink-0"
@@ -292,8 +287,8 @@ const defaultItems: CardNavItem[] = [
     label: "About",
     variant: "primary",
     links: [
-      { label: "Company", ariaLabel: "About Company", href: "#about" },
-      { label: "Careers", ariaLabel: "About Careers", href: "#about" },
+      { label: "Home", ariaLabel: "Go Home", href: "#home", tab: "home" },
+      { label: "Works", ariaLabel: "See Works", href: "#works", tab: "works" },
     ],
   },
   {

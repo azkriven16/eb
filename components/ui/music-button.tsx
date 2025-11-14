@@ -1,8 +1,8 @@
 "use client";
 
-import { MusicIcon, Volume1Icon, Volume2Icon } from "lucide-react";
+import { Volume1Icon, Volume2Icon } from "lucide-react";
 import { motion } from "motion/react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useSound from "use-sound";
 
 const Skiper25 = () => {
@@ -22,7 +22,7 @@ export const MusicToggleButton = () => {
 
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const [play, { pause, sound }] = useSound("/audio/bgm.m4a", {
+  const [play, { pause }] = useSound("/audio/bgm.m4a", {
     loop: true,
     onplay: () => setIsPlaying(true),
     onend: () => setIsPlaying(false),
@@ -75,9 +75,9 @@ export const MusicToggleButton = () => {
           className="flex h-2.5 w-full items-center gap-1 rounded-full"
         >
           {isPlaying ? (
-            <Volume2Icon className="size-4 invert dark:invert-0" />
+            <Volume2Icon className="size-4 invert" />
           ) : (
-            <Volume1Icon className="size-4 invert dark:invert-0" />
+            <Volume1Icon className="size-4 invert" />
           )}
 
           {/* Waveform visualization */}
