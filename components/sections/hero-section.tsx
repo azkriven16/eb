@@ -1,11 +1,9 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import { Experience } from "@/components/ui/experience";
-import { ArrowRightIcon } from "lucide-react";
 import { FaDiscord, FaGithub, FaInstagram, FaYoutube } from "react-icons/fa";
 import { SiBluesky, SiThreads } from "react-icons/si"; // Adding any other needed icons
-import { LinkPreview } from "../ui/link-preview";
 import { ContactModal } from "../contact-modal";
+import { LinkPreview } from "../ui/link-preview";
+import Image from "next/image";
 
 export function HeroSection() {
   return (
@@ -21,7 +19,9 @@ function HeroContent() {
     {
       name: "Digipay",
       icon: (
-        <img
+        <Image
+          height={4}
+          width={4}
           src="https://digipay.ph/wp-content/uploads/2024/06/cropped-digipay-favicon.png"
           alt="Digipay logo"
           className="w-4 h-4"
@@ -31,7 +31,9 @@ function HeroContent() {
     {
       name: "Rocketshyft",
       icon: (
-        <img
+        <Image
+          height={4}
+          width={4}
           src="https://unicorn-images.b-cdn.net/d7de9df6-ba94-4678-93b9-e4acc292cf4f?optimizer=gif"
           alt="Rocketshyft logo"
           className="w-4 h-4"

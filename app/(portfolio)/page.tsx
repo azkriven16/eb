@@ -1,7 +1,7 @@
 "use client";
 import { ContactModal } from "@/components/contact-modal";
 import { HeroSection } from "@/components/sections/hero-section";
-import WorkSection from "@/components/sections/work-section";
+// import WorkSection from "@/components/sections/work-section";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { useTabStore } from "@/store/use-tab-store";
 import { AnimatePresence, motion, Variants } from "framer-motion";

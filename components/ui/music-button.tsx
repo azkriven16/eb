@@ -22,7 +22,7 @@ export const MusicToggleButton = () => {
 
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const [play, { pause, sound }] = useSound("/audio/bgm.m4a", {
+  const [play, { pause }] = useSound("/audio/bgm.m4a", {
     loop: true,
     onplay: () => setIsPlaying(true),
     onend: () => setIsPlaying(false),
