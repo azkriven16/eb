@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Tooltip } from "@/components/ui/tooltip-card";
+import { Tooltip } from "@/components/ui/link-preview";
 import { ArrowRightIcon } from "lucide-react";
 
 export default function WorkSection() {

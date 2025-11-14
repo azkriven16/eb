@@ -9,6 +9,7 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
+import { motion } from "motion/react";
 import { gsap } from "gsap";
 import { Loader2Icon } from "lucide-react";
 import Link from "next/link";
@@ -168,7 +169,7 @@ const CardNav: React.FC<CardNavProps> = ({
           <div className="flex items-center gap-5">
             <div
               className={cn(
-                "hamburger-menu group h-full flex flex-col items-center justify-center cursor-pointer gap-1.5 order-0 transition-colors",
+                "hamburger-menu group h-full flex flex-col items-center justify-center cursor-pointer gap-1.5 order-0 transition-colors py-3 px-2",
                 isHamburgerOpen ? "open" : ""
               )}
               onClick={toggleMenu}
@@ -190,30 +191,51 @@ const CardNav: React.FC<CardNavProps> = ({
                 )}
               />
             </div>
-            <MusicToggleButton />
           </div>
 
           {/* Auth Buttons */}
           <div className="flex items-center gap-5">
-            <ClerkLoading>
-              <Button>
-                <Loader2Icon className="animate-spin mr-2" /> Loading
-              </Button>
-            </ClerkLoading>
-            <ClerkLoaded>
-              <SignedOut>
-                <SignUpButton mode="modal">
-                  <Button>Ask AI</Button>
-                </SignUpButton>
-              </SignedOut>
-              <SignedIn>
-                <UserButton
-                  appearance={{
-                    elements: { avatarBox: "w-9 h-9" },
-                  }}
-                />
-              </SignedIn>
-            </ClerkLoaded>
+            {/* <div className="hidden md:block">
+              <ClerkLoading>
+                <Button>
+                  <Loader2Icon className="animate-spin mr-2" /> Loading
+                </Button>
+              </ClerkLoading>
+              <ClerkLoaded>
+                <SignedOut>
+                  <SignUpButton mode="modal">
+                    <motion.div
+                      initial={{ padding: "14px 14px " }}
+                      whileHover={{ padding: "16px 18px " }}
+                      whileTap={{ padding: "16px 18px " }}
+                      transition={{ duration: 1, bounce: 0.6, type: "spring" }}
+                      className="bg-primary cursor-pointer px-2 rounded-full"
+                    >
+                      <motion.div
+                        initial={{ opacity: 0, filter: "blur(4px)" }}
+                        animate={{
+                          opacity: 1,
+                          filter: "blur(0px)",
+                        }}
+                        exit={{ opacity: 0, filter: "blur(4px)" }}
+                        transition={{ type: "spring", bounce: 0.35 }}
+                        className="flex h-2.5 w-full items-center gap-1 rounded-full text-primary-foreground font-franktion"
+                      >
+                        Ask AI
+                      </motion.div>
+                    </motion.div>
+                  </SignUpButton>
+                </SignedOut>
+                <SignedIn>
+                  <UserButton
+                    appearance={{
+                      elements: { avatarBox: "w-9 h-9" },
+                    }}
+                  />
+                </SignedIn>
+              </ClerkLoaded>
+            </div> */}
+            <MusicToggleButton />
             <ModeToggle />
           </div>
         </div>

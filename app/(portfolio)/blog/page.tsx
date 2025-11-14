@@ -17,7 +17,7 @@ export default async function IndexPage() {
           <ul className="flex flex-col gap-y-4">
             {posts.map((post) => (
               <li className="hover:underline" key={post._id}>
-                <Link href={`/${post.slug?.current}`}>
+                <Link href={`/blog/${post.slug?.current}`}>
                   <h2 className="text-xl font-semibold">{post.title}</h2>
                   <p>{new Date(post.publishedAt ?? "").toLocaleDateString()}</p>
                 </Link>
@@ -25,8 +25,7 @@ export default async function IndexPage() {
             ))}
           </ul>
         </div>
-        <div className="h-full w-full aspect-square invert dark:invert-0 saturate-100 dark:saturate-200 flex-1">
-        </div>
+        <div className="h-full w-full aspect-square invert dark:invert-0 saturate-100 dark:saturate-200 flex-1"></div>
       </div>
     </main>
   );

@@ -1,9 +1,14 @@
 "use client";
 
-import { useId } from "react";
 import Image from "next/image";
+import { useId } from "react";
 
 import { Button } from "@/components/ui/button";
+import {
+  ExpandableScreen,
+  ExpandableScreenContent,
+  ExpandableScreenTrigger,
+} from "@/components/ui/expandable-screen";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -14,19 +19,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  ExpandableScreen,
-  ExpandableScreenContent,
-  ExpandableScreenTrigger,
-} from "@/components/ui/expandable-screen";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-  AvatarIndicator,
-  AvatarStatus,
-} from "@/components/ui/avatar";
-import { ArrowRightIcon } from "lucide-react";
 
 export function ContactModal() {
   const nameId = useId();
@@ -40,19 +32,10 @@ export function ContactModal() {
       triggerRadius="100px"
       contentRadius="24px"
     >
-      <ExpandableScreenTrigger className="rounded-full pl-2 mt-10 w-fit self-center group">
-        <Button size="lg">
-          <Avatar className="size-6">
-            <AvatarImage
-              src="https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png"
-              alt="Hallie Richards"
-            />
-            <AvatarFallback className="text-foreground text-xs">
-              HR
-            </AvatarFallback>
-          </Avatar>
-          Lets Connect
-        </Button>
+      <ExpandableScreenTrigger className="rounded-ful w-fit self-center group">
+        <div className="ml-1 font-semibold text-foreground underline underline-offset-4 decoration-secondary">
+          this form.
+        </div>
       </ExpandableScreenTrigger>
 
       <ExpandableScreenContent className="bg-primary">

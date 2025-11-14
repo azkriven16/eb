@@ -2,7 +2,7 @@
 import { ContactModal } from "@/components/contact-modal";
 import { HeroSection } from "@/components/sections/hero-section";
 import WorkSection from "@/components/sections/work-section";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { useTabStore } from "@/store/use-tab-store";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 
@@ -26,47 +26,40 @@ export default function IndexPage() {
     <Tabs
       value={activeTab}
       onValueChange={setActiveTab}
-      className="container mx-auto max-w-xl p-4 flex flex-col"
+      className="container mx-auto max-w-2xl p-4 flex flex-col"
     >
-      <div>
-        <TabsContent value="home">
-          <AnimatePresence mode="wait">
-            <motion.div
-              className="space-y-4"
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              variants={listVariants}
-              key="home"
-            >
-              <HeroSection />
-              <WorkSection />
-              <section className="mt-10 flex flex-col">
-                <ContactModal />
-              </section>
-            </motion.div>
-          </AnimatePresence>
-        </TabsContent>
+      <TabsContent value="home">
+        <AnimatePresence mode="wait">
+          <motion.div
+            className="space-y-4"
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={listVariants}
+            key="home"
+          >
+            <HeroSection />
+          </motion.div>
+        </AnimatePresence>
+      </TabsContent>
 
-        <TabsContent value="works">
-          <AnimatePresence mode="wait">
-            <motion.div
-              className="space-y-4"
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              variants={listVariants}
-              key="works"
-            >
-              <HeroSection />
-              <WorkSection />
-              <section className="mt-10 flex flex-col">
-                <ContactModal />
-              </section>
-            </motion.div>
-          </AnimatePresence>
-        </TabsContent>
-      </div>
+      <TabsContent value="works">
+        <AnimatePresence mode="wait">
+          <motion.div
+            className="space-y-4"
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={listVariants}
+            key="works"
+          >
+            <HeroSection />
+            <section className="mt-10 flex flex-col">
+              <ContactModal />
+            </section>
+          </motion.div>
+        </AnimatePresence>
+      </TabsContent>
     </Tabs>
   );
 }
